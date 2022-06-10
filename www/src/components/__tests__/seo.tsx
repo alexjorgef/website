@@ -1,5 +1,20 @@
-/**
+/*
  * @jest-environment jsdom
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, version 3 of the License.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ *
+ * Copyright (C) 2022  Lennart Jörgens
+ * Copyright (C) 2022  Alexandre Ferreira
  */
 
 import * as React from "react"
@@ -106,27 +121,27 @@ describe(`SEO component`, () => {
             property="og:type"
           />
           <meta
-            content="https://github.com/LekoArts"
+            content="https://github.com/alexjorgef"
             data-rh={true}
             property="og:see_also"
           />
           <meta
-            content="https://www.behance.net/lekoarts"
+            content="https://www.behance.net/alexjorgef"
             data-rh={true}
             property="og:see_also"
           />
           <meta
-            content="https://dribbble.com/LekoArts"
+            content="https://dribbble.com/alexjorgef"
             data-rh={true}
             property="og:see_also"
           />
           <meta
-            content="https://youtube.de/LekoArtsDE"
+            content="https://youtube.com/AlexandreFerreiraJorge"
             data-rh={true}
             property="og:see_also"
           />
           <meta
-            content="https://twitter.com/lekoarts_de"
+            content="https://twitter.com/alexandrejorgef"
             data-rh={true}
             property="og:see_also"
           />
@@ -161,7 +176,7 @@ describe(`SEO component`, () => {
             name="twitter:creator"
           />
           <meta
-            content="LekoArts"
+            content="Alexandre Ferreira"
             data-rh={true}
             name="creator"
           />
@@ -251,27 +266,27 @@ describe(`SEO component`, () => {
             property="og:type"
           />
           <meta
-            content="https://github.com/LekoArts"
+            content="https://github.com/alexjorgef"
             data-rh={true}
             property="og:see_also"
           />
           <meta
-            content="https://www.behance.net/lekoarts"
+            content="https://www.behance.net/alexjorgef"
             data-rh={true}
             property="og:see_also"
           />
           <meta
-            content="https://dribbble.com/LekoArts"
+            content="https://dribbble.com/alexjorgef"
             data-rh={true}
             property="og:see_also"
           />
           <meta
-            content="https://youtube.de/LekoArtsDE"
+            content="https://youtube.com/AlexandreFerreiraJorge"
             data-rh={true}
             property="og:see_also"
           />
           <meta
-            content="https://twitter.com/lekoarts_de"
+            content="https://twitter.com/alexandrejorgef"
             data-rh={true}
             property="og:see_also"
           />
@@ -306,7 +321,7 @@ describe(`SEO component`, () => {
             name="twitter:creator"
           />
           <meta
-            content="LekoArts"
+            content="Alexandre Ferreira"
             data-rh={true}
             name="creator"
           />
@@ -318,7 +333,7 @@ describe(`SEO component`, () => {
           <script
             dangerouslySetInnerHTML={
               Object {
-                "__html": "{\\"@context\\":\\"https://schema.org\\",\\"@type\\":\\"BreadcrumbList\\",\\"description\\":\\"Breadcrumbs list\\",\\"itemListElement\\":[{\\"@type\\":\\"ListItem\\",\\"item\\":{\\"@id\\":\\"https://www.lekoarts.de\\",\\"name\\":\\"Homepage\\"},\\"position\\":1},{\\"@type\\":\\"ListItem\\",\\"item\\":{\\"@id\\":\\"https://www.lekoarts.de/granger\\",\\"name\\":\\"Hermione\\"},\\"position\\":2}],\\"name\\":\\"Breadcrumbs\\"}",
+                "__html": "{\\"@context\\":\\"https://schema.org\\",\\"@type\\":\\"BreadcrumbList\\",\\"description\\":\\"Breadcrumbs list\\",\\"itemListElement\\":[{\\"@type\\":\\"ListItem\\",\\"item\\":{\\"@id\\":\\"https://www.alexjorgef.com\\",\\"name\\":\\"Homepage\\"},\\"position\\":1},{\\"@type\\":\\"ListItem\\",\\"item\\":{\\"@id\\":\\"https://www.alexjorgef.com/granger\\",\\"name\\":\\"Hermione\\"},\\"position\\":2}],\\"name\\":\\"Breadcrumbs\\"}",
               }
             }
             data-rh={true}
@@ -399,27 +414,27 @@ describe(`SEO component`, () => {
             property="og:type"
           />
           <meta
-            content="https://github.com/LekoArts"
+            content="https://github.com/alexjorgef"
             data-rh={true}
             property="og:see_also"
           />
           <meta
-            content="https://www.behance.net/lekoarts"
+            content="https://www.behance.net/alexjorgef"
             data-rh={true}
             property="og:see_also"
           />
           <meta
-            content="https://dribbble.com/LekoArts"
+            content="https://dribbble.com/alexjorgef"
             data-rh={true}
             property="og:see_also"
           />
           <meta
-            content="https://youtube.de/LekoArtsDE"
+            content="https://youtube.com/AlexandreFerreiraJorge"
             data-rh={true}
             property="og:see_also"
           />
           <meta
-            content="https://twitter.com/lekoarts_de"
+            content="https://twitter.com/alexandrejorgef"
             data-rh={true}
             property="og:see_also"
           />
@@ -454,7 +469,7 @@ describe(`SEO component`, () => {
             name="twitter:creator"
           />
           <meta
-            content="LekoArts"
+            content="Alexandre Ferreira"
             data-rh={true}
             name="creator"
           />

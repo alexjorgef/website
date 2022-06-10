@@ -1,16 +1,16 @@
 {
-  "name": "portfolio-v2",
-  "description": "Home of lekoarts.de",
+  "name": "website",
+  "description": "Home of alexjorgef.com",
   "version": "1.0.0",
   "private": true,
-  "author": "LekoArts <hello@lekoarts.de>",
+  "author": "Alexandre Ferreira <hello@alexjorgef.com>",
   "license": "GPLv3",
   "workspaces": [
     "packages/*",
     "www"
   ],
   "scripts": {
-    "develop": "yarn workspace www develop",
+    "dev": "yarn workspace www dev",
     "clean": "yarn workspace www clean",
     "build": "yarn workspace www build",
     "serve": "yarn workspace www serve",
@@ -19,8 +19,6 @@
     "lint": "eslint . --ignore-path .gitignore --ignore-path .prettierignore --ext .ts,.tsx,.js",
     "lint:fix": "yarn lint --fix",
     "format": "prettier \"**/*.{md,mdx,json,yaml}\" --write",
-    "new-post": "./scripts/target/release/post",
-    "new-garden": "./scripts/target/release/garden",
     "prepare": "husky install",
     "test": "jest",
     "test:update": "jest --updateSnapshot",
@@ -32,8 +30,7 @@
     "playwright:init": "playwright install chromium",
     "e2e:develop": "yarn playwright:debug",
     "e2e:build": "cross-env IS_BUILD=y yarn playwright",
-    "spellcheck": "cspell lint www/content/**/**/*.mdx --show-suggestions",
-    "rs:build": "cd scripts && cargo build --release"
+    "spellcheck": "cspell lint www/content/**/**/*.mdx --show-suggestions"
   },
   "devDependencies": {
     "@babel/preset-typescript": "^7.16.7",
@@ -67,5 +64,21 @@
     "ts-jest": "^28.0.2",
     "typescript": "^4.6.4"
   },
-  "packageManager": "yarn@3.1.1"
+  "resolutions": {
+    "immer": "^9.0.6",
+    "minimist": "^1.2.6",
+    "async": "^2.6.4",
+    "cross-fetch": "^3.1.5",
+    "moment": "^2.29.2",
+    "nth-check": "^2.0.1",
+    "ansi-html": "^0.0.8",
+    "node-fetch": "^2.6.7",
+    "ws": "^7.4.6",
+    "browserslist": "^4.16.5",
+    "trim": "^0.0.3",
+    "ejs": "^3.1.7",
+    "sharp": "^0.30.5",
+    "busboy": "^1.0.0"
+  },
+  "packageManager": "yarn@3.2.1"
 }

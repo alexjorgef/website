@@ -1,3 +1,20 @@
+/*
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, version 3 of the License.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ *
+ * Copyright (C) 2022  Lennart Jörgens
+ * Copyright (C) 2022  Alexandre Ferreira
+ */
+
 import * as React from "react"
 import { PageProps, graphql } from "gatsby"
 import { CategoryHero } from "../components/writing/category-hero"
@@ -45,7 +62,7 @@ export const query = graphql`
       slug
     }
     posts: allPost(
-      filter: { published: { eq: true }, category: { name: { eq: $name } } }
+      filter: { published: { eq: true }, locale: { eq: "en" }, category: { name: { eq: $name } } }
       sort: { fields: date, order: DESC }
     ) {
       nodes {

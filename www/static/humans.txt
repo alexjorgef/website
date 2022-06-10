@@ -1,0 +1,29 @@
+/* the humans responsible & colophon */
+/* humanstxt.org */
+
+/* TEAM */
+	Sofware Developer: Alexandre Ferreira
+	Site: https://alexjorgef.com
+	GitHub: @alexjorgef
+	Location: Portugal
+
+/* THANKS */
+    Name: @LekoArts/portfolio-v2 - https://github.com/LekoArts/portfolio-v2
+    Name: @ljmf00/lsferreira.net - https://github.com/ljmf00/lsferreira.net
+    Name: @kremalicious/portfolio - https://github.com/kremalicious/portfolio
+    Name: @AbdaliDahir/gatsby-portfolio - https://github.com/AbdaliDahir/gatsby-portfolio
+
+/* SITE */
+	Typography: GT Walsheim Pro
+	Software: Gatsby.js, React, VS Code, Archlinux
+
+<!--
+	 ________     ___    ___ ________
+	|\   __  \   |\  \  /  /|\  _____\
+	\ \  \|\  \  \ \  \/  / | \  \__/
+	 \ \   __  \  \ \    / / \ \   __\
+	  \ \  \ \  \  /     \/   \ \  \_|
+	   \ \__\ \__\/  /\   \    \ \__\
+	    \|__|\|__/__/ /\ __\    \|__|
+	             |__|/ \|__|
+-->

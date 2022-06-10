@@ -1,3 +1,20 @@
+/*
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, version 3 of the License.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ *
+ * Copyright (C) 2022  Lennart Jörgens
+ * Copyright (C) 2022  Alexandre Ferreira
+ */
+
 import * as React from "react"
 import { Helmet } from "react-helmet-async"
 import { useLocation } from "@reach/router"
@@ -49,18 +66,18 @@ export const SEO: React.FC<React.PropsWithChildren<SEOProps>> = ({
       <meta property="og:description" content={seo.description} />
       <meta property="og:image" content={seo.image} />
       <meta property="og:type" content="website" />
-      <meta property="og:see_also" content="https://github.com/LekoArts" />
-      <meta property="og:see_also" content="https://www.behance.net/lekoarts" />
-      <meta property="og:see_also" content="https://dribbble.com/LekoArts" />
-      <meta property="og:see_also" content="https://youtube.de/LekoArtsDE" />
-      <meta property="og:see_also" content="https://twitter.com/lekoarts_de" />
+      <meta property="og:see_also" content="https://github.com/alexjorgef" />
+      <meta property="og:see_also" content="https://www.behance.net/alexjorgef" />
+      <meta property="og:see_also" content="https://dribbble.com/alexjorgef" />
+      <meta property="og:see_also" content="https://youtube.com/AlexandreFerreiraJorge" />
+      <meta property="og:see_also" content="https://twitter.com/alexandrejorgef" />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={seo.title} />
       <meta name="twitter:url" content={seo.url} />
       <meta name="twitter:description" content={seo.description} />
       <meta name="twitter:image" content={seo.image} />
       <meta name="twitter:creator" content={twitter} />
-      <meta name="creator" content="LekoArts" />
+      <meta name="creator" content="Alexandre Ferreira" />
       <link rel="icon" type="image/svg+xml" href={faviconSrc} />
       <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
       <meta name="msapplication-TileColor" content="#0f172a" />

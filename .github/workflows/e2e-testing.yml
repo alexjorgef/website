@@ -10,21 +10,25 @@ jobs:
   e2e-testing:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
         with:
           node-version: "16.x"
+
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
-      - uses: actions/cache@v2
+
+      - uses: actions/cache@v3
         id: yarn-cache
         with:
           path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
-      - uses: actions/cache@v2
+
+      - uses: actions/cache@v3
         id: playwright-cache
         with:
           path: |
@@ -32,7 +36,8 @@ jobs:
           key: ${{ runner.os }}-playwright-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-playwright-
-      - uses: actions/cache@v2
+
+      - uses: actions/cache@v3
         id: gatsby-cache
         env:
           files: >-
@@ -44,12 +49,30 @@ jobs:
           key: ${{ runner.os }}-gatsby-${{ env.files }}-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-gatsby-
+
       - name: Install dependencies
         run: yarn --immutable
+
       - name: Install Playwright
         if: steps.playwright-cache.outputs.cache-hit != 'true'
         run: npx playwright install chromium --with-deps
-      - name: Build Gatsby Site
+
+      - name: Build Gatsby Site 🔨
         run: yarn build
+        env:
+          GATSBY_GITHUB_TOKEN: ${{ secrets.GATSBY_GITHUB_TOKEN }}
+          GATSBY_GITLAB_TOKEN: ${{ secrets.GATSBY_GITLAB_TOKEN }}
+          GATSBY_FORMSPREE_ID: ${{ secrets.GATSBY_FORMSPREE_ID }}
+          GATSBY_RECAPTCHA_V2_SITE_KEY: ${{ secrets.GATSBY_RECAPTCHA_V2_SITE_KEY }}
+          GATSBY_DISQUS_NAME: ${{ secrets.GATSBY_DISQUS_NAME }}
+          GATSBY_PANELBEAR_SITE_ID: ${{ secrets.GATSBY_PANELBEAR_SITE_ID }}
+
       - name: Run Playwright
         run: yarn e2e:build
+        env:
+          GATSBY_GITHUB_TOKEN: ${{ secrets.GATSBY_GITHUB_TOKEN }}
+          GATSBY_GITLAB_TOKEN: ${{ secrets.GATSBY_GITLAB_TOKEN }}
+          GATSBY_FORMSPREE_ID: ${{ secrets.GATSBY_FORMSPREE_ID }}
+          GATSBY_RECAPTCHA_V2_SITE_KEY: ${{ secrets.GATSBY_RECAPTCHA_V2_SITE_KEY }}
+          GATSBY_DISQUS_NAME: ${{ secrets.GATSBY_DISQUS_NAME }}
+          GATSBY_PANELBEAR_SITE_ID: ${{ secrets.GATSBY_PANELBEAR_SITE_ID }}

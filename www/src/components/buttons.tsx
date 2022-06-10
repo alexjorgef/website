@@ -1,3 +1,20 @@
+/*
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, version 3 of the License.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ *
+ * Copyright (C) 2022  Lennart Jörgens
+ * Copyright (C) 2022  Alexandre Ferreira
+ */
+
 import * as React from "react"
 import { Link } from "gatsby"
 import { BsArrowRight } from "react-icons/bs"
@@ -89,7 +106,7 @@ const SubtleButton: React.FC<React.PropsWithChildren<{ to: string; isExternal?: 
 }
 
 const getTwitterShareLink = (link, message) =>
-  `https://twitter.com/intent/tweet/?text=${encodeURIComponent(message)}&via=lekoarts_de&url=${encodeURIComponent(
+  `https://twitter.com/intent/tweet/?text=${encodeURIComponent(message)}&via=alexandrejorgef&url=${encodeURIComponent(
     link
   )}`
 
@@ -114,7 +131,7 @@ const ShareAnywhereButton = ({ link, message, variant = `primary` }) => {
     navigator
       .share({
         title: message,
-        text: `${message} by Lennart Jörgens (@lekoarts_de)`,
+        text: `${message} by Alexandre Ferreira (@alexandrejorgef)`,
         url: link,
       })
       // eslint-disable-next-line no-console

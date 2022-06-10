@@ -1,0 +1,20 @@
+{
+  "name": "gatsby-source-mixcloud",
+  "version": "0.0.1",
+  "description": "Gatsby Mixcloud Api Source",
+  "repository": "https://github.com/alexjorgef/gatsby-source-mixcloud.git",
+  "main": "index.js",
+  "keywords": [
+    "mixcloud",
+    "gatsby",
+    "gatsby-plugin",
+    "gatsby-source-plugin",
+    "gatsby-mixcloud",
+    "gatsby-source-mixcloud"
+  ],
+  "author": "Alexandre Ferreira <contact@alexjorgef.com>",
+  "license": "MIT",
+  "dependencies": {
+    "mixjar": "^0.1.2"
+  }
+}
