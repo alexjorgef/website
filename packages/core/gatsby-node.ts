@@ -1,7 +1,25 @@
+/*
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, version 3 of the License.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ *
+ * Copyright (C) 2022  Lennart Jörgens
+ * Copyright (C) 2022  Alexandre Ferreira
+ */
+
 import { CreateNodeArgs, GatsbyNode, PluginOptions } from "gatsby"
+import path from "path"
 import Prando from "prando"
 import get from "lodash.get"
-import { mdxResolverPassthrough, slugify, withDefaults, shuffle } from "utils"
+import { mdxResolverPassthrough, slugify, withDefaults, shuffle, findKey } from "utils"
 
 export const createSchemaCustomization: GatsbyNode["createSchemaCustomization"] = ({ actions }): void => {
   const { createTypes, createFieldExtension } = actions
@@ -56,6 +74,8 @@ export const createSchemaCustomization: GatsbyNode["createSchemaCustomization"] 
       date: Date! @dateformat
       lastUpdated: Date! @dateformat
       description: String
+      locale: String
+      locales: [String]
       published: Boolean
       subtitle: String
       title: String!
@@ -74,6 +94,8 @@ export const createSchemaCustomization: GatsbyNode["createSchemaCustomization"] 
       date: Date! @dateformat
       lastUpdated: Date! @dateformat
       description: String
+      locale: String
+      locales: [String]
       published: Boolean
       subtitle: String
       title: String!
@@ -116,9 +138,80 @@ export const createSchemaCustomization: GatsbyNode["createSchemaCustomization"] 
       icon: String!
     }
 
+    type ProjectImage implements Node {
+      image: File! @fileByRelativePath
+      description: String!
+    }
+
+    interface Project implements Node {
+      id: ID!
+      slug: String! @slugify(fallback: "project")
+      excerpt(pruneLength: Int = 160): String!
+      body: String!
+      html: String
+      date: Date! @dateformat
+      lastUpdated: Date! @dateformat
+      title: String!
+      description: String
+      featureImage: File! @fileByRelativePath
+      images: [ProjectImage!]!
+      archived: Boolean
+      tags: [String!]!
+    }
+
+    type MdxProject implements Node & Project {
+      slug: String! @slugify(fallback: "project")
+      excerpt(pruneLength: Int = 140): String! @mdxpassthrough(fieldName: "excerpt")
+      body: String! @mdxpassthrough(fieldName: "body")
+      html: String! @mdxpassthrough(fieldName: "html")
+      date: Date! @dateformat
+      lastUpdated: Date! @dateformat
+      title: String!
+      description: String
+      featureImage: File! @fileByRelativePath
+      archived: Boolean
+      images: [ProjectImage!]!
+      tags: [String!]!
+    }
+
+    interface Awesome implements Node {
+      id: ID!
+      slug: String! @slugify(fallback: "awesome")
+      excerpt(pruneLength: Int = 160): String!
+      body: String!
+      html: String
+      tableOfContents: JSON
+      date: Date! @dateformat
+      lastUpdated: Date! @dateformat
+      title: String!
+      subtitle: String
+      description: String
+      published: Boolean
+      tags: [String!]!
+      icon: String!
+    }
+
+    type MdxAwesome implements Node & Awesome {
+      slug: String! @slugify(fallback: "awesome")
+      excerpt(pruneLength: Int = 140): String! @mdxpassthrough(fieldName: "excerpt")
+      body: String! @mdxpassthrough(fieldName: "body")
+      html: String! @mdxpassthrough(fieldName: "html")
+      tableOfContents: JSON @mdxpassthrough(fieldName: "tableOfContents")
+      date: Date! @dateformat
+      lastUpdated: Date! @dateformat
+      title: String!
+      subtitle: String
+      description: String
+      published: Boolean
+      tags: [String!]!
+      icon: String!
+    }
+
     type CoreConfig implements Node {
       writingSource: String
       gardenSource: String
+      workSource: String
+      awesomeSource: String
     }
 
     type github implements Node {
@@ -131,6 +224,7 @@ export const createSchemaCustomization: GatsbyNode["createSchemaCustomization"] 
       name: String
       url: String
     }
+
   `)
 }
 
@@ -143,6 +237,7 @@ export const sourceNodes: GatsbyNode["sourceNodes"] = ({ actions, createContentD
     id: `gatsby-theme-core-config`,
     parent: null,
     children: [],
+    fileAbsolutePath: null,
     internal: {
       type: `CoreConfig`,
       contentDigest: createContentDigest(defaultOptions),
@@ -153,14 +248,17 @@ export const sourceNodes: GatsbyNode["sourceNodes"] = ({ actions, createContentD
 }
 
 type WritingNode = {
+  fileAbsolutePath: string
   frontmatter: {
     slug?: string
     image?: string
-    category: "Community" | "Design" | "Gatsby" | "JavaScript" | "React"
+    category: "JavaScript" | "Environment"
     date: string
     lastUpdated?: string
     description: string
     published: boolean
+    locale: string
+    locales: string[]
     subtitle?: string
     title: string
     type: "prose" | "tutorial"
@@ -168,6 +266,7 @@ type WritingNode = {
 }
 
 type GardenNode = {
+  fileAbsolutePath: string
   frontmatter: {
     slug?: string
     date: string
@@ -178,27 +277,88 @@ type GardenNode = {
   }
 }
 
-type MdxNode = WritingNode | GardenNode
+type ProjectNode = {
+  fileAbsolutePath: string
+  frontmatter: {
+    slug?: string
+    featureImage: string
+    date: string
+    lastUpdated?: string
+    description: string
+    archived: boolean
+    tags: string[]
+    images: {
+      image: string
+      description: string
+    }[]
+    title: string
+  }
+}
+
+type AwesomeNode = {
+  fileAbsolutePath: string
+  frontmatter: {
+    slug?: string
+    image?: string
+    date: string
+    lastUpdated?: string
+    description: string
+    published: boolean
+    subtitle?: string
+    title: string
+    tags: string[]
+    icon: string
+  }
+}
+
+type MdxNode = WritingNode | GardenNode | ProjectNode | AwesomeNode
 
 export const onCreateNode = (
-  { node, actions, getNode, createNodeId, createContentDigest }: CreateNodeArgs<MdxNode>,
+  { node, actions, getNode, createNodeId, createContentDigest, getNodesByType }: CreateNodeArgs<MdxNode>,
   themeOptions: PluginOptions
 ): void => {
   if (node.internal.type !== `Mdx`) {
     return
   }
 
-  const { createNode, createParentChildLink } = actions
-  const { writingSource, gardenSource } = withDefaults(themeOptions)
+  const { createNode, createParentChildLink, createNodeField } = actions
+  const { writingSource, gardenSource, portfolioSource, awesomeSource, locales } = withDefaults(themeOptions)
 
   const fileNode = getNode(node.parent)
   const source = fileNode.sourceInstanceName
 
   if (source === writingSource) {
+    const name = path.basename(node.fileAbsolutePath, `.mdx`)
+    const isDefault = name === `index`
+    const defaultKey = findKey(locales, (o) => o.default === true)
+    const lang = isDefault ? defaultKey : name.split(`.`)[1]
+
+    let langs: string[] = []
+    if (!isDefault || isDefault) {
+      const nodes = getNodesByType(`File`)
+      nodes.forEach((n) => {
+        if (fileNode.id !== n.id) {
+          if (n.sourceInstanceName === writingSource) {
+            if (n.extension === 'mdx') {
+              if (fileNode.relativeDirectory === n.relativeDirectory) {
+                const name = path.basename(`${n.absolutePath}`, `.mdx`)
+                const isDefault = name === `index`
+                const defaultKey = findKey(locales, (o) => o.default === true)
+                const lang = isDefault ? defaultKey : name.split(`.`)[1]
+                langs.push(lang)
+              }
+            }
+          }
+        }
+      })
+    }
+
     const f = node.frontmatter as WritingNode["frontmatter"]
     const fieldData: WritingNode["frontmatter"] = {
       slug: f.slug ? f.slug : undefined,
       title: f.title,
+      locale: lang,
+      locales: langs,
       subtitle: f.subtitle ? f.subtitle : undefined,
       date: f.date,
       lastUpdated: f.lastUpdated ? f.lastUpdated : f.date,
@@ -208,6 +368,9 @@ export const onCreateNode = (
       published: f.published ?? true,
       type: f.type,
     }
+
+    createNodeField({ node, name: `locale`, value: lang })
+    createNodeField({ node, name: `isDefault`, value: isDefault })
 
     const mdxPostId = createNodeId(`${node.id} >>> MdxPost`)
 
@@ -254,6 +417,66 @@ export const onCreateNode = (
     })
 
     createParentChildLink({ parent: node, child: getNode(mdxGardenId) })
+  }
+
+  if (source === portfolioSource) {
+    const f = node.frontmatter as ProjectNode["frontmatter"]
+    const fieldData: ProjectNode["frontmatter"] = {
+      slug: f.slug ? f.slug : undefined,
+      title: f.title,
+      description: f.description,
+      lastUpdated: f.lastUpdated ? f.lastUpdated : f.date,
+      archived: f.archived ?? true,
+      images: f.images,
+      date: f.date,
+      featureImage: f.featureImage ? f.featureImage : undefined,
+      tags: f.tags,
+    }
+
+    const mdxProjectId = createNodeId(`${node.id} >>> MdxProject`)
+
+    createNode({
+      ...fieldData,
+      id: mdxProjectId,
+      parent: node.id,
+      children: [],
+      internal: {
+        type: `MdxProject`,
+        contentDigest: createContentDigest(fieldData),
+        content: JSON.stringify(fieldData),
+        description: `Mdx implementation of the Project interface`,
+      },
+    })
+  }
+
+  if (source === awesomeSource) {
+    const f = node.frontmatter as AwesomeNode["frontmatter"]
+    const fieldData: AwesomeNode["frontmatter"] = {
+      slug: f.slug ? f.slug : undefined,
+      title: f.title,
+      subtitle: f.subtitle ? f.subtitle : undefined,
+      description: f.description,
+      lastUpdated: f.lastUpdated ? f.lastUpdated : f.date,
+      published: f.published ?? true,
+      date: f.date,
+      icon: f.icon,
+      tags: f.tags,
+    }
+
+    const mdxAwesomeId = createNodeId(`${node.id} >>> MdxAwesome`)
+
+    createNode({
+      ...fieldData,
+      id: mdxAwesomeId,
+      parent: node.id,
+      children: [],
+      internal: {
+        type: `MdxAwesome`,
+        contentDigest: createContentDigest(fieldData),
+        content: JSON.stringify(fieldData),
+        description: `Mdx implementation of the Awesome interface`,
+      },
+    })
   }
 }
 

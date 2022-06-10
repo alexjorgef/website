@@ -1,3 +1,20 @@
+/*
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, version 3 of the License.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ *
+ * Copyright (C) 2022  Lennart Jörgens
+ * Copyright (C) 2022  Alexandre Ferreira
+ */
+
 import sindresorhusSlugify, { Options } from "@sindresorhus/slugify"
 
 export const slugifyOptions: Options = {
@@ -69,5 +86,23 @@ export const shuffle = <T>(array: T[], seed: number, count = 2): T[] => {
 }
 
 export const capitalize = (s: string): string => s.charAt(0).toUpperCase() + s.slice(1)
+
+// From lodash:
+// https://github.com/lodash/lodash/blob/750067f42d3aa5f927604ece2c6df0ff2b2e9d72/findKey.js
+export const findKey = (object, predicate) => {
+  let result
+  if (object == null) {
+    return result
+  }
+  Object.keys(object).some((key) => {
+    const value = object[key]
+    if (predicate(value, key, object)) {
+      result = key
+      return true
+    }
+    return false
+  })
+  return result
+}
 
 export { withDefaults } from "./with-defaults"

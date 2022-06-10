@@ -5,14 +5,14 @@ Object {
   "@type": "Article",
   "articleSection": "Digital Garden",
   "author": Object {
-    "@id": "https://www.lekoarts.de/#identity",
+    "@id": "https://www.alexjorgef.com/#identity",
   },
   "copyrightHolder": Object {
-    "@id": "https://www.lekoarts.de/#identity",
+    "@id": "https://www.alexjorgef.com/#identity",
   },
   "copyrightYear": "2021",
   "creator": Object {
-    "@id": "https://www.lekoarts.de/#creator",
+    "@id": "https://www.alexjorgef.com/#creator",
   },
   "dateModified": "2021-07-17",
   "datePublished": "2021-07-17",
@@ -21,15 +21,15 @@ Object {
   "headline": "The Expanse",
   "image": Object {
     "@type": "ImageObject",
-    "url": "https://www.lekoarts.de/path-to-image.png",
+    "url": "https://www.alexjorgef.com/path-to-image.png",
   },
   "inLanguage": "en-US",
-  "mainEntityOfPage": "https://www.lekoarts.de/the-expanse",
+  "mainEntityOfPage": "https://www.alexjorgef.com/the-expanse",
   "name": "The Expanse",
   "publisher": Object {
-    "@id": "https://www.lekoarts.de/#creator",
+    "@id": "https://www.alexjorgef.com/#creator",
   },
-  "url": "https://www.lekoarts.de/the-expanse",
+  "url": "https://www.alexjorgef.com/the-expanse",
 }
 `;
 
@@ -42,7 +42,7 @@ Object {
     Object {
       "@type": "ListItem",
       "item": Object {
-        "@id": "https://www.lekoarts.de",
+        "@id": "https://www.alexjorgef.com",
         "name": "Homepage",
       },
       "position": 1,
@@ -50,7 +50,7 @@ Object {
     Object {
       "@type": "ListItem",
       "item": Object {
-        "@id": "https://www.lekoarts.de/james",
+        "@id": "https://www.alexjorgef.com/james",
         "name": "James",
       },
       "position": 2,
@@ -58,7 +58,7 @@ Object {
     Object {
       "@type": "ListItem",
       "item": Object {
-        "@id": "https://www.lekoarts.de/naomi",
+        "@id": "https://www.alexjorgef.com/naomi",
         "name": "Naomi",
       },
       "position": 3,

@@ -1,3 +1,20 @@
+/*
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, version 3 of the License.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ *
+ * Copyright (C) 2022  Lennart Jörgens
+ * Copyright (C) 2022  Alexandre Ferreira
+ */
+
 import { test, expect } from "@playwright/test"
 
 test.describe(`Kitchen Sink`, () => {
@@ -7,13 +24,13 @@ test.describe(`Kitchen Sink`, () => {
     await page.locator(`[aria-label="Primary navigation"] >> text=Writing`).click()
     await expect(page).toHaveURL(`/writing`)
 
-    await page.locator(`[aria-label="Primary navigation"] >> text=Art`).click()
-    await expect(page).toHaveURL(`/art`)
+    await page.locator(`[aria-label="Primary navigation"] >> text=Portfolio`).click()
+    await expect(page).toHaveURL(`/about/portfolio`)
 
     await page.locator(`[aria-label="Primary navigation"] >> text=About`).click()
     await expect(page).toHaveURL(`/about`)
 
-    await page.locator(`[aria-label="lekoarts\\.de\\, Back to homepage"] svg`).click()
+    await page.locator(`[aria-label="alexjorgef\\.com\\, Back to homepage"] svg`).click()
     await expect(page).toHaveURL(`/`)
   })
   test(`visiting writing subnavigation`, async ({ page }) => {
@@ -22,30 +39,24 @@ test.describe(`Kitchen Sink`, () => {
     await page.locator(`text=Tutorials`).first().click()
     await expect(page).toHaveURL(`/tutorials`)
 
-    await page.locator(`text=Community`).first().click()
-    await expect(page).toHaveURL(`/community`)
-
-    await page.locator(`text=Design`).first().click()
-    await expect(page).toHaveURL(`/design`)
-
-    await page.locator(`text=Gatsby`).first().click()
-    await expect(page).toHaveURL(`/gatsby`)
-
     await page.locator(`text=JavaScript`).first().click()
     await expect(page).toHaveURL(`/javascript`)
 
-    await page.locator(`text=React`).first().click()
-    await expect(page).toHaveURL(`/react`)
+    await page.locator(`text=Environment`).first().click()
+    await expect(page).toHaveURL(`/environment`)
   })
   test(`footer navigation`, async ({ page }) => {
     await page.goto(`/`)
 
-    await page.locator(`footer[role="contentinfo"] >> text=Digital Garden`).click()
-    await expect(page).toHaveURL(`/garden`)
+    await page.locator(`footer[role="contentinfo"] >> text=Notebook`).click()
+    await expect(page).toHaveURL(`/notebook`)
+
+    await page.locator(`footer[role="contentinfo"] >> text=Awesomes`).click()
+    await expect(page).toHaveURL(`/awesomes`)
   })
   test(`content pages`, async ({ page }) => {
-    await page.goto(`/gatsby/using-deferred-static-generation-with-analytics-tools`)
-    await page.goto(`/design/introducing-the-theme-ui-plugin-for-figma`)
-    await page.goto(`/garden/running-cypress-tests-with-github-actions-in-parallel`)
+    await page.goto(`/javascript/demo-tutorial-1`)
+    await page.goto(`/javascript/demo-tutorial-2`)
+    await page.goto(`/javascript/demo-prose`)
   })
 })

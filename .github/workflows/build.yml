@@ -1,0 +1,139 @@
+name: Build & Deploy
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - "*"
+  workflow_dispatch: {}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Checkout private data 🔨
+        uses: actions/checkout@v3
+        with:
+          repository: alexjorgef/website-data
+          token: ${{ secrets.DATA_GITHUB_TOKEN }}
+          path: website-data
+
+      - name: Inject private data 🔨
+        run: |
+          rm -rf www/content/
+          cp -rp website-data/www/* www/
+          cp -rp website-data/playwright/ .
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "16.x"
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - name: Cache node modules
+        uses: actions/cache@v3
+        id: yarn-cache
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - uses: actions/cache@v3
+        id: playwright-cache
+        with:
+          path: |
+            ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-playwright-
+
+      - uses: actions/cache@v3
+        id: gatsby-cache
+        env:
+          files: >-
+            ${{ hashFiles('www/gatsby-config.ts', 'www/gatsby-node.ts') }}
+        with:
+          path: |
+            public
+            .cache
+          key: ${{ runner.os }}-gatsby-${{ env.files }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gatsby-
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Run Jest
+        run: yarn test:ci
+
+      - name: Install Playwright
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: npx playwright install chromium --with-deps
+
+      - name: Build Gatsby Site 🔨
+        run: yarn build
+        env:
+          GATSBY_GITHUB_TOKEN: ${{ secrets.GATSBY_GITHUB_TOKEN }}
+          GATSBY_GITLAB_TOKEN: ${{ secrets.GATSBY_GITLAB_TOKEN }}
+          GATSBY_FORMSPREE_ID: ${{ secrets.GATSBY_FORMSPREE_ID }}
+          GATSBY_RECAPTCHA_V2_SITE_KEY: ${{ secrets.GATSBY_RECAPTCHA_V2_SITE_KEY }}
+          GATSBY_DISQUS_NAME: ${{ secrets.GATSBY_DISQUS_NAME }}
+          GATSBY_PANELBEAR_SITE_ID: ${{ secrets.GATSBY_PANELBEAR_SITE_ID }}
+
+      - name: Run Playwright
+        run: yarn e2e:build
+        env:
+          GATSBY_GITHUB_TOKEN: ${{ secrets.GATSBY_GITHUB_TOKEN }}
+          GATSBY_GITLAB_TOKEN: ${{ secrets.GATSBY_GITLAB_TOKEN }}
+          GATSBY_FORMSPREE_ID: ${{ secrets.GATSBY_FORMSPREE_ID }}
+          GATSBY_RECAPTCHA_V2_SITE_KEY: ${{ secrets.GATSBY_RECAPTCHA_V2_SITE_KEY }}
+          GATSBY_DISQUS_NAME: ${{ secrets.GATSBY_DISQUS_NAME }}
+          GATSBY_PANELBEAR_SITE_ID: ${{ secrets.GATSBY_PANELBEAR_SITE_ID }}
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        if: github.ref == 'refs/heads/main'
+        with:
+          name: public
+          path: www/public
+
+  deploy:
+    needs:
+      - build
+    if: success() && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Download artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: public
+          path: public
+
+      - name: Upload and pin to Web3-Storage 🚀
+        uses: web3-storage/add-to-web3@59774ff5ca3e7fd57fbd25ad62557a408a6122fc
+        id: web3storage
+        with:
+          web3_token: ${{ secrets.WEB3STORAGE_TOKEN }}
+          path_to_add: public
+          wrap_with_directory: false
+
+      - name: Deploy _dnslink to Cloudflare 🚀
+        run: |
+          curl -X PUT "https://api.cloudflare.com/client/v4/zones/${{ secrets.CLOUDFLARE_ZONE }}/dns_records/${{ secrets.CLOUDFLARE_RECORD_ID }}" \
+            -H "X-Auth-Email: ${{ secrets.CLOUDFLARE_XAUTH_EMAIL }}" \
+            -H "X-Auth-Key: ${{ secrets.CLOUDFLARE_XAUTH_KEY }}" \
+            -H "Content-Type: application/json" \
+            --data '{"type":"TXT","name":"${{ secrets.CLOUDFLARE_RECORD_NAME }}","content":"dnslink=/ipfs/${{ steps.web3storage.outputs.cid }}","ttl":1}' > /dev/null 2>&1

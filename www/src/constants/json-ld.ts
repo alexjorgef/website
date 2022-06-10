@@ -1,12 +1,29 @@
+/*
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, version 3 of the License.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ *
+ * Copyright (C) 2022  Lennart Jörgens
+ * Copyright (C) 2022  Alexandre Ferreira
+ */
+
 import { site } from "./meta"
 
 export const identity = {
   "@id": `${site.url}/#identity`,
   "@type": `Organization`,
-  alternateName: `Lennart Jörgens`,
+  alternateName: `Alex Ferreira`,
   description: site.description,
-  email: `hello@lekoarts.de`,
-  founder: `Lennart Jörgens`,
+  email: `hello@alexjorgef.com`,
+  founder: `Alexandre Ferreira`,
   foundingDate: `2017-12-08`,
   image: {
     "@type": `ImageObject`,
@@ -22,11 +39,12 @@ export const identity = {
   },
   name: site.titleDefault,
   sameAs: [
-    `https://twitter.com/lekoarts_de`,
-    `https://www.youtube.com/c/LeKoArtsDE`,
-    `https://github.com/LekoArts`,
-    `https://dribbble.com/LekoArts`,
-    `https://www.behance.net/lekoarts`,
+    `https://twitter.com/alexandrejorgef`,
+    `https://www.youtube.com/c/AlexandreFerreiraJorge`,
+    `https://github.com/alexjorgef`,
+    `https://gitlab.com/alexjorgef`,
+    `https://dribbble.com/alexjorgef`,
+    `https://www.behance.net/alexjorgef`,
   ],
   url: site.url,
 }
@@ -34,10 +52,10 @@ export const identity = {
 export const creator = {
   "@id": `${site.url}/#creator`,
   "@type": `Organization`,
-  alternateName: `Lennart Jörgens`,
+  alternateName: `Alex Ferreira`,
   description: site.description,
-  email: `hello@lekoarts.de`,
-  founder: `Lennart Jörgens`,
+  email: `hello@alexjorgef.com`,
+  founder: `Alexandre Ferreira`,
   foundingDate: `2017-12-08`,
   image: {
     "@type": `ImageObject`,

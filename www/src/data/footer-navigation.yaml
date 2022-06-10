@@ -2,49 +2,27 @@
     name: Writing
     link: /writing
   items:
-    - name: Digital Garden
-      link: /garden
-    - name: Tutorials
-      link: /tutorials
-    - name: React
-      link: /react
-    - name: Community
-      link: /community
+    - name: Notebook
+      link: /notebook
+    - name: Awesomes
+      link: /awesomes
 - heading:
-    name: Art
-    link: /art
+    name: Library
+    link: /lib
   items:
-    - name: Design
-      link: /art/design
-    - name: 3D Art
-      link: /art/3d
-    - name: Photography
-      link: /art/photography
+    - name: Mixtapes
+      link: /lib/mixtapes
+    - name: Wishlist
+      link: /lib/wishlist
+    - name: Generative
+      link: /lib/generative
 - heading:
     name: About
     link: /about
   items:
-    - name: Appearances
-      link: /appearances
-    - name: Projects
-      link: /projects
+    - name: Portfolio
+      link: /about/portfolio
     - name: Uses
-      link: /uses
-- heading:
-    name: Social
-  items:
-    - name: Email
-      link: mailto:hello@lekoarts.de
-      isExternal: true
-    - name: Twitter
-      link: https://www.twitter.com/lekoarts_de
-      isExternal: true
-    - name: GitHub
-      link: https://www.github.com/LekoArts
-      isExternal: true
-    - name: LinkedIn
-      link: https://www.linkedin.com/in/lennart-joergens/
-      isExternal: true
-    - name: RSS
-      link: /rss.xml
-      isExternal: true
+      link: /about/uses
+    - name: Contact
+      link: /contact

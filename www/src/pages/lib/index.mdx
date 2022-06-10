@@ -1,0 +1,30 @@
+import { MDXLayout as PageLayout } from "../../components/blocks/mdx-layout"
+import { SEO } from "../../components/seo"
+import { useMixcloudPlays } from "../../hooks/use-mixcloud-plays"
+
+export const MixcloudPlayCount = () => {
+  const totalPlays = useMixcloudPlays()
+  return (
+    <span>{totalPlays}</span>
+  )
+}
+
+<SEO
+  title="Library"
+  description="Besides software development I have another huge passion of mine: Designing UI in Figma, creating photo manipulations in Photoshop, tinkering with abstract art in Cinema4D, and exploring nature & capturing it with my Fujifilm camera. Or in other words: I enjoy art!"
+  breadcrumbListItems={[{ name: `Library`, url: `/lib` }]}
+/>
+
+export default PageLayout
+
+# Library
+
+We all have different and unique pleasures, and why not share them? Here are some of my personal collections on various subjects.
+
+## Music
+
+I often mix music and take the opportunity to record. With already <MixcloudPlayCount /> plays, I share the mixtapes here at [/lib/mixtapes](/lib/mixtapes) page. You can also check my music wishlists at [/lib/wishlist](/lib/wishlist).
+
+## Design
+
+I like to play around with some computer graphics software to make procedural/generative designs, check it out at [/lib/generative](/lib/generative).

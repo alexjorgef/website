@@ -1,3 +1,20 @@
+/*
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, version 3 of the License.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ *
+ * Copyright (C) 2022  Lennart Jörgens
+ * Copyright (C) 2022  Alexandre Ferreira
+ */
+
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-restricted-syntax */
 import { test, expect } from "@playwright/test"
@@ -19,45 +36,45 @@ const metaTagAssertions = [
       },
       {
         key: `og:image`,
-        value: `https://www.lekoarts.de/social/default-og-image.png`,
+        value: `https://www.alexjorgef.com/social/default-og-image.png`,
       },
     ],
   },
   {
     name: `Blog Post`,
-    url: `/gatsby/using-deferred-static-generation-with-analytics-tools`,
-    title: `Using Deferred Static Generation with Analytics Tools | ${site.title}`,
+    url: `/javascript/demo-tutorial-1`,
+    title: `Demo tutorial 1 | ${site.title}`,
     metaTags: [
       {
         key: `og:title`,
-        value: `Using Deferred Static Generation with Analytics Tools`,
+        value: `Demo tutorial 1`,
       },
       {
         key: `og:description`,
-        value: `Only want to build out the most popular pages as static pages? No problem, you can use your analytics tool to control the usage of Deferred Static Generation in Gatsby.`,
+        value: `Demo tutorial article.`,
       },
       {
         key: `og:image`,
-        value: `https://www.lekoarts.de/og-images/dsg-analytics.png`,
+        value: `https://www.alexjorgef.com/og-images/dsg-analytics.png`,
       },
     ],
   },
   {
-    name: `Garden Post`,
-    url: `/garden/how-to-add-plausible-analytics-to-gatsby`,
-    title: `How to Add Plausible Analytics to Gatsby | ${site.title}`,
+    name: `Notebook Post`,
+    url: `/garden/demo-1`,
+    title: `Demo 1 | ${site.title}`,
     metaTags: [
       {
         key: `og:title`,
-        value: `How to Add Plausible Analytics to Gatsby`,
+        value: `Demo 1`,
       },
       {
         key: `og:description`,
-        value: `You're a fan of  Plausible Analytics  and  Gatsby ? Great! In this guide you'll learn how to add Plausible Analytics to your Gatsby site…`,
+        value: `This is MDX markdown`,
       },
       {
         key: `og:image`,
-        value: `https://www.lekoarts.de/social/digital-garden.png`,
+        value: `https://www.alexjorgef.com/social/digital-garden.png`,
       },
     ],
   },
@@ -80,11 +97,15 @@ const noIndexPages = [
 
 test.describe(`Meta Tags`, () => {
   for (const assertion of metaTagAssertions) {
-    test(`${assertion.name} should have correct information`, async ({ page }) => {
+    test(`${assertion.name} should have correct information`, async ({
+      page,
+    }) => {
       await page.goto(assertion.url)
       await expect(page).toHaveTitle(assertion.title)
       for (const tag of assertion.metaTags) {
-        const content = await page.locator(`meta[property="${tag.key}"]`).getAttribute(`content`)
+        const content = await page
+          .locator(`meta[property="${tag.key}"]`)
+          .getAttribute(`content`)
         await expect(content).toContain(tag.value)
       }
     })
@@ -92,7 +113,9 @@ test.describe(`Meta Tags`, () => {
   for (const assertion of noIndexPages) {
     test(`${assertion.name} should have noindex meta tag`, async ({ page }) => {
       await page.goto(assertion.url)
-      const content = await page.locator(`meta[name="robots"]`).getAttribute(`content`)
+      const content = await page
+        .locator(`meta[name="robots"]`)
+        .getAttribute(`content`)
       await expect(content).toStrictEqual(`noindex, nofollow`)
     })
   }

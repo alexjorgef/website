@@ -1,10 +1,27 @@
+/*
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, version 3 of the License.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ *
+ * Copyright (C) 2022  Lennart Jörgens
+ * Copyright (C) 2022  Alexandre Ferreira
+ */
+
 import { GatsbyConfig, PluginOptions } from "gatsby"
 import remarkSlug from "remark-slug"
 import remarkSmartyPants from "remark-smartypants"
 import camelCase from "lodash.camelcase"
 import { withDefaults, capitalize } from "utils"
 
-const { GITHUB_TOKEN } = process.env
+const { GATSBY_GITHUB_TOKEN, GATSBY_GITLAB_TOKEN } = process.env
 
 const gatsbyConfig = (themeOptions: PluginOptions): GatsbyConfig => {
   const options = withDefaults(themeOptions)
@@ -28,6 +45,20 @@ const gatsbyConfig = (themeOptions: PluginOptions): GatsbyConfig => {
       {
         resolve: `gatsby-source-filesystem`,
         options: {
+          name: options.awesomeSource,
+          path: options.awesomeSource,
+        },
+      },
+      {
+        resolve: `gatsby-source-filesystem`,
+        options: {
+          name: options.portfolioSource,
+          path: options.portfolioSource,
+        },
+      },
+      {
+        resolve: `gatsby-source-filesystem`,
+        options: {
           name: options.dataSource,
           path: options.dataSource,
         },
@@ -39,14 +70,26 @@ const gatsbyConfig = (themeOptions: PluginOptions): GatsbyConfig => {
           path: `src/pages`,
         },
       },
-      GITHUB_TOKEN && {
+      GATSBY_GITHUB_TOKEN && {
         resolve: `gatsby-source-graphql`,
         options: {
           typeName: `GitHub`,
           fieldName: `github`,
           url: `https://api.github.com/graphql`,
           headers: {
-            Authorization: `bearer ${GITHUB_TOKEN}`,
+            Authorization: `bearer ${GATSBY_GITHUB_TOKEN}`,
+          },
+          fetchOptions: {},
+        },
+      },
+      {
+        resolve: `gatsby-source-graphql`,
+        options: {
+          typeName: `GitLab`,
+          fieldName: `gitlab`,
+          url: `https://gitlab.com/api/graphql`,
+          headers: {
+            Authorization: `bearer ${GATSBY_GITLAB_TOKEN}`,
           },
           fetchOptions: {},
         },
@@ -78,6 +121,18 @@ const gatsbyConfig = (themeOptions: PluginOptions): GatsbyConfig => {
       },
       `gatsby-plugin-sharp`,
       `gatsby-plugin-catch-links`,
+      {
+        resolve: `gatsby-source-mixcloud`,
+        options: {
+          username: `dzzzz`,
+        },
+      },
+      {
+        resolve: `gatsby-source-bandcamp`,
+        options: {
+          username: `alexjorgef`,
+        },
+      },
     ].filter(Boolean),
   }
 }

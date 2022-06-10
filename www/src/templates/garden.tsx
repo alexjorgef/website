@@ -1,3 +1,20 @@
+/*
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, version 3 of the License.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ *
+ * Copyright (C) 2022  Lennart Jörgens
+ * Copyright (C) 2022  Alexandre Ferreira
+ */
+
 import * as React from "react"
 import { PageProps, graphql } from "gatsby"
 import { MDXRenderer } from "gatsby-plugin-mdx"
@@ -79,8 +96,8 @@ const GardenTemplate: React.FC<PageProps<DataProps>> = ({ data: { garden }, loca
                 year: garden.yearDate,
               },
               category: {
-                name: `Digital Garden`,
-                slug: `/garden`,
+                name: `Notebook`,
+                slug: `/notebook`,
               },
             })
           )}
@@ -105,7 +122,7 @@ const GardenTemplate: React.FC<PageProps<DataProps>> = ({ data: { garden }, loca
             </Flex>
             <Tag colorScheme="green" justifySelf="flex-start">
               <TagLabel>
-                <Link to="/garden">Digital Garden</Link>
+                <Link to="/notebook">Notebook</Link>
               </TagLabel>
             </Tag>
           </Grid>
@@ -129,7 +146,7 @@ const GardenTemplate: React.FC<PageProps<DataProps>> = ({ data: { garden }, loca
               <ExternalLink
                 fontSize={[`md`, null, null, `1.125rem`]}
                 fontWeight="medium"
-                href={`https://github.com/LekoArts/portfolio-v2/edit/main/www/content/garden/${garden.parent.parent.relativePath}`}
+                href={`https://github.com/alexjorgef/portfolio/edit/main/www/content/notebook/${garden.parent.parent.relativePath}`}
               >
                 Edit on GitHub
               </ExternalLink>
@@ -137,7 +154,7 @@ const GardenTemplate: React.FC<PageProps<DataProps>> = ({ data: { garden }, loca
               <ExternalLink
                 fontSize={[`md`, null, null, `1.125rem`]}
                 fontWeight="medium"
-                href={`https://www.twitter.com/search?q=${encodeURIComponent(`https://www.lekoarts.de${pathname}`)}`}
+                href={`https://www.twitter.com/search?q=${encodeURIComponent(`https://www.alexjorgef.com${pathname}`)}`}
               >
                 Discuss on Twitter
               </ExternalLink>
@@ -174,8 +191,8 @@ const GardenTemplate: React.FC<PageProps<DataProps>> = ({ data: { garden }, loca
             />
             <Box>
               Want to learn more?{` `}
-              <Link to="/garden" color="white">
-                Browse my Digital Garden
+              <Link to="/notebook" color="white">
+                Browse my notebook
               </Link>
             </Box>
           </Box>

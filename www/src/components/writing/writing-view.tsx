@@ -1,8 +1,26 @@
+/*
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, version 3 of the License.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ *
+ * Copyright (C) 2022  Lennart Jörgens
+ * Copyright (C) 2022  Alexandre Ferreira
+ */
+
 import * as React from "react"
 import { graphql } from "gatsby"
-import { Box, Container, Divider, Link as ExternalLink, Text, Stack } from "@chakra-ui/react"
+import { Box, Container, Divider, Link as ExternalLink, Text, Stack, useColorMode } from "@chakra-ui/react"
 import { MDXProvider } from "@mdx-js/react"
 import { MDXRenderer } from "gatsby-plugin-mdx"
+import { DiscussionEmbed } from "disqus-react"
 import { Layout } from "../blocks/layout"
 import { SEO } from "../seo"
 import { SkipNavContent } from "../a11y/skip-nav"
@@ -13,6 +31,8 @@ import { article } from "../../constants/json-ld"
 import { ShareAnywhereButton, TwitterButton } from "../buttons"
 import { site } from "../../constants/meta"
 import { TocItem, WithSidebarWrapper } from "./toc"
+import { Link } from "../../components/link"
+import { useSiteMetadata } from "../../hooks/use-site-metadata"
 
 export type WritingViewDataProps = {
   post: {
@@ -28,6 +48,8 @@ export type WritingViewDataProps = {
     seoLastUpdated: string
     subtitle: string
     timeToRead: string
+    locale: string
+    locales: string[]
     tableOfContents?: {
       items?: TocItem[]
     }
@@ -40,10 +62,22 @@ export type WritingViewDataProps = {
       parent: {
         relativePath: string
       }
+      rawBody: string
+      fields: {
+        isDefault: boolean
+      }
     }
   }
   pathname: string
-  type: "prose" | "tutorial"
+  type: "prose" | "tutorial" | "awesome"
+}
+
+export type PostLocales = {
+  allPost: {
+    nodes: {
+      locale
+    }[]
+  }
 }
 
 const WritingView: React.FC<React.PropsWithChildren<WritingViewDataProps>> = ({ post, pathname, children, type }) => {
@@ -52,6 +86,32 @@ const WritingView: React.FC<React.PropsWithChildren<WritingViewDataProps>> = ({ 
   React.useEffect(() => {
     setHasShareApi(!!window.navigator.share)
   }, [])
+
+  const meta = useSiteMetadata()
+
+  const disqusConfig = {
+    url: `${meta.siteUrl + pathname}`,
+    identifier: post.slug,
+    title: post.title,
+  }
+
+  // https://github.com/disqus/disqus-react/issues/18#issuecomment-603101171
+  const [flipState, forceUpdate] = React.useState(false)
+  const transitionEnd = React.useCallback((ev) => {
+    const { target, propertyName } = ev
+    if (target === document.body && propertyName === `background-color`) {
+      forceUpdate((o) => !o)
+    }
+  }, [])
+
+  React.useEffect(() => {
+    document.body.addEventListener(`transitionend`, transitionEnd)
+    return () => document.body.removeEventListener(`transitionend`, transitionEnd)
+  }, [transitionEnd])
+
+  const { colorMode } = useColorMode()
+
+  const encoded = encodeURI(post.parent.rawBody)
 
   return (
     <Layout>
@@ -112,18 +172,12 @@ const WritingView: React.FC<React.PropsWithChildren<WritingViewDataProps>> = ({ 
             alignItems={[`flex-start`, `center`]}
           >
             <Box>
-              <ExternalLink
-                fontSize={[`md`, null, null, `1.125rem`]}
-                fontWeight="medium"
-                href={`https://github.com/LekoArts/portfolio-v2/edit/main/www/content/writing/${post.parent.parent.relativePath}`}
-              >
-                Edit on GitHub
-              </ExternalLink>
+              <ExternalLink href={`mailto:contact@alexjorgef.com?body=${encoded}`} fontWeight="medium" fontSize={[`md`, null, null, `1.125rem`]}>Give feedback</ExternalLink>
               {` `}-{` `}
               <ExternalLink
                 fontSize={[`md`, null, null, `1.125rem`]}
                 fontWeight="medium"
-                href={`https://www.twitter.com/search?q=${encodeURIComponent(`https://www.lekoarts.de${pathname}`)}`}
+                href={`https://www.twitter.com/search?q=${encodeURIComponent(`https://www.alexjorgef.com${pathname}`)}`}
               >
                 Discuss on Twitter
               </ExternalLink>
@@ -143,6 +197,8 @@ const WritingView: React.FC<React.PropsWithChildren<WritingViewDataProps>> = ({ 
             </Text>
           )}
         </SkipNavContent>
+        <Spacer size={[16, null, null, 20]} axis="vertical" />
+        <DiscussionEmbed shortname={process.env.GATSBY_DISQUS_NAME} config={disqusConfig} theme={colorMode} fakeProp={flipState} />
       </Container>
     </Layout>
   )
@@ -165,6 +221,8 @@ export const query = graphql`
     subtitle
     timeToRead
     image
+    locale
+    locales
     category {
       name
       slug
@@ -172,6 +230,10 @@ export const query = graphql`
     ... on MdxPost {
       parent {
         ... on Mdx {
+          rawBody
+          fields {
+            isDefault
+          }
           parent {
             ... on File {
               relativePath
