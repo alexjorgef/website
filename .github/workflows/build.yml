@@ -74,14 +74,17 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable
 
-      - name: Run Jest
+      - name: Run ESLint 🧪
+        run: yarn lint
+
+      - name: Run Jest 🧪
         run: yarn test:ci
 
       - name: Install Playwright
         if: steps.playwright-cache.outputs.cache-hit != 'true'
         run: npx playwright install chromium --with-deps
 
-      - name: Build Gatsby Site 🔨
+      - name: Build Gatsby site 🔨
         run: yarn build
         env:
           GATSBY_GITHUB_TOKEN: ${{ secrets.GATSBY_GITHUB_TOKEN }}
@@ -91,7 +94,7 @@ jobs:
           GATSBY_DISQUS_NAME: ${{ secrets.GATSBY_DISQUS_NAME }}
           GATSBY_PANELBEAR_SITE_ID: ${{ secrets.GATSBY_PANELBEAR_SITE_ID }}
 
-      - name: Run Playwright
+      - name: Run Playwright 🧪
         run: yarn e2e:build
         env:
           GATSBY_GITHUB_TOKEN: ${{ secrets.GATSBY_GITHUB_TOKEN }}
