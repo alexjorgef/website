@@ -15,7 +15,7 @@
  * Copyright (C) 2022  Alexandre Ferreira
  */
 
-import React, { useContext, useState } from "react"
+import React, { useContext, useState, useMemo } from "react"
 
 const defaultState = {
   data: `en`,
@@ -26,10 +26,7 @@ export const I8nProvider = ({ children }) => {
   const [data, setData] = useState(defaultState)
   const updateState = (_data) => setData(_data)
 
-  const contextValues = {
-    data,
-    updateState,
-  }
+  const contextValues = useMemo(() => ({ data, updateState }), [data])
 
   return <I8nContext.Provider value={contextValues}>{children}</I8nContext.Provider>
 }

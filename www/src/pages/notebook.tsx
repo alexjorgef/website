@@ -62,9 +62,7 @@ interface State {
   tags: string[]
 }
 
-type Action =
-  | { type: `ADD_TAG`; payload: string }
-  | { type: `REMOVE_TAG`; payload: string }
+type Action = { type: `ADD_TAG`; payload: string } | { type: `REMOVE_TAG`; payload: string }
 
 const initialState: State = {
   tags: [],
@@ -84,10 +82,7 @@ const reducer = (state: State, action: Action) => {
   }
 }
 
-const Garden: React.FC<PageProps<DataProps>> = ({
-  data: { garden },
-  location,
-}) => {
+const Garden: React.FC<PageProps<DataProps>> = ({ data: { garden }, location }) => {
   const [state, dispatch] = useQueryStringReducer<State, Action>({
     initialState,
     location,
@@ -111,8 +106,8 @@ const Garden: React.FC<PageProps<DataProps>> = ({
         <Container py={space.paddingSmall}>
           <Heading as="h1">Notebook</Heading>
           <Text textStyle="prominent">
-            Here I will discuss problems, bugs and other quick information that
-            I think relevant to share with you. How exciting 😉
+            Here I will discuss problems, bugs and other quick information that I think relevant to share with you. How
+            exciting 😉
           </Text>
           <Spacer size={6} axis="vertical" />
           <Wrap>
@@ -141,9 +136,7 @@ const Garden: React.FC<PageProps<DataProps>> = ({
                 >
                   <Tag colorScheme={isActive ? `blue` : `gray`} size="lg">
                     <TagLabel>{tag.title}</TagLabel>
-                    {isActive && (
-                      <TagCloseButton as="span" aria-hidden aria-label="" />
-                    )}
+                    {isActive && <TagCloseButton as="span" aria-hidden aria-label="" />}
                   </Tag>
                 </WrapItem>
               )
@@ -152,14 +145,7 @@ const Garden: React.FC<PageProps<DataProps>> = ({
           <Spacer size={20} axis="vertical" />
           <Stack
             spacing={0}
-            divider={
-              <Spacer
-                axis="horizontal"
-                size="100%"
-                bg={dividerColor}
-                border="none"
-              />
-            }
+            divider={<Spacer axis="horizontal" size="100%" bg={dividerColor} border="none" />}
             mx={[`-2`, null, null, `-6`]}
           >
             {garden.nodes
@@ -174,12 +160,7 @@ const Garden: React.FC<PageProps<DataProps>> = ({
                   to={post.slug}
                   key={post.slug}
                   display="grid"
-                  gridTemplateColumns={[
-                    `25px 1fr 20px`,
-                    `35px 1fr 20px`,
-                    null,
-                    `50px 1fr 24px`,
-                  ]}
+                  gridTemplateColumns={[`25px 1fr 20px`, `35px 1fr 20px`, null, `50px 1fr 24px`]}
                   alignItems="center"
                   gridGap={6}
                   px={[2, null, null, 6]}
@@ -196,9 +177,7 @@ const Garden: React.FC<PageProps<DataProps>> = ({
                     },
                     "&:hover": {
                       span: {
-                        transform: prefersReducedMotion
-                          ? undefined
-                          : `translate3d(6px, 0px, 0px)`,
+                        transform: prefersReducedMotion ? undefined : `translate3d(6px, 0px, 0px)`,
                       },
                     },
                   }}
@@ -210,9 +189,7 @@ const Garden: React.FC<PageProps<DataProps>> = ({
                     <ChakraHeading as="h2" variant="gardenItem">
                       {post.title}
                     </ChakraHeading>
-                    <Text fontSize={[`14px`, null, null, `1rem`]}>
-                      {post.lastUpdated}
-                    </Text>
+                    <Text fontSize={[`14px`, null, null, `1rem`]}>{post.lastUpdated}</Text>
                   </Box>
                   <span>
                     <BsArrowRight />

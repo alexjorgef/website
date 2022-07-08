@@ -47,7 +47,7 @@ const styles = {
       "&:focus": {
         clip: `auto`,
       },
-    }
+    },
   }),
 }
 

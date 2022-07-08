@@ -1,30 +1,32 @@
-const cheerio = require('cheerio')
-const scrapeIt = require('scrape-it')
-const urlHelper = require('url')
-const linez = require('linez')
-const Ajv = require('ajv')
-const JSON5 = require('json5')
+const cheerio = require(`cheerio`)
+const scrapeIt = require(`scrape-it`)
+const urlHelper = require(`url`)
+const linez = require(`linez`)
+const Ajv = require(`ajv`)
+const JSON5 = require(`json5`)
 
 // add search-result Schema
 const ajv = new Ajv()
-ajv.addSchema(require('../schemas/search-result.json'), 'search-result')
-ajv.addSchema(require('../schemas/album-product.json'), 'album-product')
-ajv.addSchema(require('../schemas/album-info.json'), 'album-info')
-ajv.addSchema(require('../schemas/tag-result.json'), 'tag-result')
+ajv.addSchema(require(`../schemas/search-result.json`), `search-result`)
+ajv.addSchema(require(`../schemas/album-product.json`), `album-product`)
+ajv.addSchema(require(`../schemas/album-info.json`), `album-info`)
+ajv.addSchema(require(`../schemas/tag-result.json`), `tag-result`)
 
 linez.configure({
-  newlines: ['\n', '\r\n', '\r']
+  newlines: [`\n`, `\r\n`, `\r`],
 })
 
 const removeMultipleSpace = function (text) {
-  return text.replace(/\s{2,}/g, ' ')
+  return text.replace(/\s{2,}/g, ` `)
 }
 
 const removeNewLine = function (text) {
-  text = linez(text).lines.map(function (line) {
-    return line.text.trim()
-  }).join(' ')
-  return removeMultipleSpace(text)
+  const textParsed = linez(text)
+    .lines.map(function (line) {
+      return line.text.trim()
+    })
+    .join(` `)
+  return removeMultipleSpace(textParsed)
 }
 
 const assignProps = function (objFrom, objTo, propNames) {
@@ -39,103 +41,108 @@ exports.parseSearchResults = function (html) {
   const $ = cheerio.load(html)
   const data = scrapeIt.scrapeHTML($, {
     results: {
-      listItem: '.result-items li',
+      listItem: `.result-items li`,
       data: {
         type: {
-          selector: '.itemtype',
-          convert: function (text) {
+          selector: `.itemtype`,
+          convert(text) {
             return text.toLowerCase()
-          }
+          },
         },
-        name: { selector: '.heading' },
-        url: { selector: '.itemurl' },
-        imageUrl: { selector: '.art img', attr: 'src' },
+        name: { selector: `.heading` },
+        url: { selector: `.itemurl` },
+        imageUrl: { selector: `.art img`, attr: `src` },
         tags: {
-          selector: '.tags',
-          convert: function (text) {
-            const tags = text.replace('tags:', '').replace(/\s/g, '')
-            return tags.length > 1 ? tags.split(',') : []
-          }
+          selector: `.tags`,
+          convert(text) {
+            const tags = text.replace(`tags:`, ``).replace(/\s/g, ``)
+            return tags.length > 1 ? tags.split(`,`) : []
+          },
         },
         genre: {
-          selector: '.genre',
-          convert: function (text) {
-            return removeMultipleSpace(text.replace('genre:', ''))
-          }
+          selector: `.genre`,
+          convert(text) {
+            return removeMultipleSpace(text.replace(`genre:`, ``))
+          },
         },
         subhead: {
-          selector: '.subhead',
-          convert: function (text) {
+          selector: `.subhead`,
+          convert(text) {
             return removeMultipleSpace(text)
-          }
+          },
         },
         releaseDate: {
-          selector: '.released',
-          convert: function (text) {
-            return text.replace('released ', '')
-          }
+          selector: `.released`,
+          convert(text) {
+            return text.replace(`released `, ``)
+          },
         },
         numTracks: {
-          selector: '.length',
-          convert: function (text) {
-            const info = text.split(',')
+          selector: `.length`,
+          convert(text) {
+            const info = text.split(`,`)
             if (info.length === 2) {
-              return parseInt(info[0].replace(' tracks', ''))
+              return parseInt(info[0].replace(` tracks`, ``), 10)
             }
-          }
+          },
         },
         numMinutes: {
-          selector: '.length',
-          convert: function (text) {
-            const info = text.split(',')
+          selector: `.length`,
+          convert(text) {
+            const info = text.split(`,`)
             if (info.length === 2) {
-              return parseInt(info[1].replace(' minutes', ''))
+              return parseInt(info[1].replace(` minutes`, ``), 10)
             }
-          }
-        }
-      }
-    }
+          },
+        },
+      },
+    },
   })
   return data.results.reduce(function (results, result) {
     // basic properties
-    let object = assignProps(result, {}, ['type', 'name', 'url', 'imageUrl', 'tags'])
+    let object = assignProps(result, {}, [`type`, `name`, `url`, `imageUrl`, `tags`])
     // specific properties
     switch (result.type) {
-      case 'artist':
+      case `artist`:
         // genre
         object.genre = result.genre
         // location
         object.location = removeMultipleSpace(result.subhead).trim()
         break
-      case 'album':
+      case `album`:
         // album's specific properties
-        object = assignProps(result, object, ['releaseDate', 'numTracks', 'numMinutes'])
+        object = assignProps(result, object, [`releaseDate`, `numTracks`, `numMinutes`])
         // artist
-        object.artist = result.subhead.replace('by ', '').trim()
+        object.artist = result.subhead.replace(`by `, ``).trim()
         break
-      case 'track':
+      case `track`:
         // released date
         object.releaseDate = result.releaseDate
         //  album & artist
         if (result.subhead) {
-          const info = result.subhead.trim().split(' by ')
+          const info = result.subhead.trim().split(` by `)
           if (info.length > 0) {
-            object.album = removeNewLine(info[0]).replace('location', '').replace(/^from /, '')
+            object.album = removeNewLine(info[0])
+              .replace(`location`, ``)
+              .replace(/^from /, ``)
             info.shift()
-            object.artist = removeNewLine(info.join(' by '))
+            object.artist = removeNewLine(info.join(` by `))
           }
         }
         break
-      case 'fan':
+      case `fan`:
         // genre
         object.genre = result.genre
         break
+      default:
+        console.warn(`this should not be runned`)
     }
     // validate through JSON schema
-    if (ajv.validate('search-result', object)) {
+    if (ajv.validate(`search-result`, object)) {
       results.push(object)
-    } else { // TODO add a flag to log only when debugging
-      console.error('Validation error on search result: ', ajv.errorsText(), object, ajv.errors)
+    } else {
+      // TODO add a flag to log only when debugging
+      console.warn(`Validation error on search result: `, ajv.errorsText(), object, ajv.errors)
     }
     return results
   }, [])
@@ -146,20 +153,20 @@ exports.parseTagResults = function (html) {
   const $ = cheerio.load(html)
   const data = scrapeIt.scrapeHTML($, {
     results: {
-      listItem: '.item_list .item',
+      listItem: `.item_list .item`,
       data: {
-        name: { selector: '.itemtext' },
-        artist: { selector: '.itemsubtext' },
-        url: { selector: 'a', attr: 'href' }
-      }
-    }
+        name: { selector: `.itemtext` },
+        artist: { selector: `.itemsubtext` },
+        url: { selector: `a`, attr: `href` },
+      },
+    },
   })
   return data.results.reduce(function (results, result) {
-    const object = assignProps(result, {}, ['name', 'artist', 'url'])
-    if (ajv.validate('tag-result', object)) {
+    const object = assignProps(result, {}, [`name`, `artist`, `url`])
+    if (ajv.validate(`tag-result`, object)) {
       results.push(object)
     } else {
-      console.error('Validation error on tag result: ', ajv.errorsText(), object, ajv.errors)
+      console.warn(`Validation error on tag result: `, ajv.errorsText(), object, ajv.errors)
     }
     return results
   }, [])
@@ -170,21 +177,21 @@ exports.parseAlbumUrls = function (html, artistUrl) {
   const $ = cheerio.load(html)
   const data = scrapeIt.scrapeHTML($, {
     albumLinks: {
-      listItem: 'a',
+      listItem: `a`,
       data: {
         url: {
-          attr: 'href',
-          convert: function (href) {
+          attr: `href`,
+          convert(href) {
             if (/^\/(track|album)\/(.+)$/.exec(href)) {
               return new urlHelper.URL(href, artistUrl).toString()
             }
-          }
-        }
-      }
-    }
+          },
+        },
+      },
+    },
   })
   return data.albumLinks.reduce(function (albumUrls, albumLink) {
-    const url = albumLink.url
+    const { url } = albumLink
     if (url) {
       if (albumUrls.indexOf(url) === -1) {
         albumUrls.push(url)
@@ -195,18 +202,18 @@ exports.parseAlbumUrls = function (html, artistUrl) {
 }
 
 // parse profile follows urls
-exports.parseFollowsUrls = function (html, profileUrl) {
+exports.parseFollowsUrls = function (html) {
   const $ = cheerio.load(html)
   const data = scrapeIt.scrapeHTML($, {
     profileFollows: {
-      listItem: '.collection-item-container',
+      listItem: `.collection-item-container`,
       data: {
-        title: { selector: '.collection-item-title' },
-        artist: { selector: '.collection-item-artist' },
-        url: { selector: '.item-link', attr: 'href' },
-        img: { selector: '.collection-item-art', attr: 'src'}
-      }
-    }
+        title: { selector: `.collection-item-title` },
+        artist: { selector: `.collection-item-artist` },
+        url: { selector: `.item-link`, attr: `href` },
+        img: { selector: `.collection-item-art`, attr: `src` },
+      },
+    },
   })
   return data
 }
@@ -215,22 +222,22 @@ exports.parseArtistUrls = function (html, labelUrl) {
   const $ = cheerio.load(html)
   const data = scrapeIt.scrapeHTML($, {
     artistLinks: {
-      listItem: 'a',
+      listItem: `a`,
       data: {
         url: {
-          attr: 'href',
-          convert: function (href) {
+          attr: `href`,
+          convert(href) {
             if (/tab=artists*$/.exec(href)) {
               return new urlHelper.URL(href, labelUrl).toString()
             }
-          }
-        }
-      }
-    }
+          },
+        },
+      },
+    },
   })
 
   return data.artistLinks.reduce(function (artistUrls, artistLink) {
-    const url = artistLink.url
+    const { url } = artistLink
     if (url) {
       if (artistUrls.indexOf(url) === -1) {
         artistUrls.push(url)
@@ -241,7 +248,7 @@ exports.parseArtistUrls = function (html, labelUrl) {
 }
 
 exports.extractJavascriptObjectVariable = function (html, variableName) {
-  const regex = new RegExp('var ' + variableName + '\\s*=\\s*(\\{[\\s\\S]*?\\})\\s*;')
+  const regex = new RegExp(`var ${variableName}\\s*=\\s*(\\{[\\s\\S]*?\\})\\s*;`)
   const matches = html.match(regex)
   if (matches && matches.length === 2) {
     return matches[1]
@@ -253,182 +260,183 @@ exports.parseAlbumInfo = function (html, albumUrl) {
   const $ = cheerio.load(html)
   const data = scrapeIt.scrapeHTML($, {
     album: {
-      selector: 'body',
+      selector: `body`,
       data: {
-        artist: { selector: '#name-section span' },
-        title: { selector: '#name-section .trackTitle' },
+        artist: { selector: `#name-section span` },
+        title: { selector: `#name-section .trackTitle` },
         imageUrl: {
-          selector: '#tralbumArt img',
-          attr: 'src',
-          convert: function (src) {
+          selector: `#tralbumArt img`,
+          attr: `src`,
+          convert(src) {
             if (src) {
-              return src.replace(/_\d{1,3}\./, '_2.') // use small version
+              return src.replace(/_\d{1,3}\./, `_2.`) // use small version
             }
-          }
+          },
         },
         tags: {
-          listItem: '.tag',
+          listItem: `.tag`,
           data: {
             name: {
-              convert: function (tag) {
+              convert(tag) {
                 return tag
-              }
-            }
-          }
+              },
+            },
+          },
         },
         tracks: {
-          listItem: 'table#track_table tr.track_row_view',
+          listItem: `table#track_table tr.track_row_view`,
           data: {
             name: {
-              selector: 'span.track-title'
+              selector: `span.track-title`,
             },
             url: {
-              selector: '.info_link a',
-              attr: 'href',
-              convert: function (href) {
+              selector: `.info_link a`,
+              attr: `href`,
+              convert(href) {
                 if (!href) return null
                 return new urlHelper.URL(href, albumUrl).toString()
-              }
+              },
             },
             duration: {
-              selector: '.time',
-              convert: function (duration) {
+              selector: `.time`,
+              convert(duration) {
                 if (!duration) return null
                 return duration
-              }
-            }
-          }
+              },
+            },
+          },
         },
         nonPlayableTracks: {
-          listItem: 'table#track_table tr.track_row_view',
+          listItem: `table#track_table tr.track_row_view`,
           data: {
             name: {
-              selector: '.title>span:not(.time)'
-            }
-          }
-        }
-      }
-    }
+              selector: `.title>span:not(.time)`,
+            },
+          },
+        },
+      },
+    },
   })
 
-  for (const nonPlayableTrack of data.album.nonPlayableTracks) {
-    data.album.tracks.push(nonPlayableTrack)
-  };
+  Object.keys(data.album.nonPlayableTracks).forEach((key) => {
+    data.album.tracks.push(data.album.nonPlayableTracks[key])
+  })
 
-  const object = assignProps(data.album, {}, ['tags', 'artist', 'title', 'imageUrl', 'tracks'])
+  const object = assignProps(data.album, {}, [`tags`, `artist`, `title`, `imageUrl`, `tracks`])
   // Remove undefined/null properties.
 
   // remove non-playable tracks that would have been caught in "tracks" (in case of preview albums)
-  object.tracks = object.tracks.filter(x => x.name !== '')
+  object.tracks = object.tracks.filter((x) => x.name !== ``)
 
   for (let i = 0; i < object.tracks.length; i++) {
     // Remove tracks properties.
-    for (const key in object.tracks[i]) {
+    Object.keys(object.tracks[i]).forEach((key) => {
       if (Object.prototype.hasOwnProperty.call(object.tracks[i], key)) {
-        if (!object.tracks[i][key]) { delete object.tracks[i][key] }
+        if (!object.tracks[i][key]) {
+          delete object.tracks[i][key]
+        }
       }
-    }
+    })
   }
   // Parse raw.
-  const scriptWithRaw = $('script[data-tralbum]')
+  const scriptWithRaw = $(`script[data-tralbum]`)
   if (scriptWithRaw.length > 0) {
-    object.raw = scriptWithRaw.data('tralbum')
+    object.raw = scriptWithRaw.data(`tralbum`)
   } else {
-    let raw = this.extractJavascriptObjectVariable(html, 'TralbumData')
+    let raw = this.extractJavascriptObjectVariable(html, `TralbumData`)
     // The only javascript in the variable is the concatenation of the base url
     // with the current album path. We nned to do it yourself.
     // Ex:
     //  url: "http://musique.coeurdepirate.com" + "/album/blonde",
-    raw = raw ? raw.replace('" + "', '') : ''
+    raw = raw ? raw.replace(`" + "`, ``) : ``
     try {
       object.raw = JSON5.parse(raw)
     } catch (error) {
-      console.error(error)
+      console.warn(error)
     }
   }
 
   object.url = albumUrl
   // validate through JSON schema
-  if (ajv.validate('album-info', object)) {
+  if (ajv.validate(`album-info`, object)) {
     return object
-  } else { // TODO add a flag to log only when debugging
-    console.error('Validation error on album info: ', ajv.errorsText(), object)
-    return null
-  }
+  } // TODO add a flag to log only when debugging
+  console.warn(`Validation error on album info: `, ajv.errorsText(), object)
+  return null
 }
 
 exports.parseArtistInfo = function (html, artistUrl) {
   const $ = cheerio.load(html)
   const data = scrapeIt.scrapeHTML($, {
-    name: '#band-name-location .title',
-    location: '#band-name-location .location',
+    name: `#band-name-location .title`,
+    location: `#band-name-location .location`,
     coverImage: {
-      selector: '.bio-pic a',
-      attr: 'href'
+      selector: `.bio-pic a`,
+      attr: `href`,
     },
-    description: 'p#bio-text',
+    description: `p#bio-text`,
     albums: {
-      listItem: '.music-grid-item',
+      listItem: `.music-grid-item`,
       data: {
         url: {
-          selector: 'a',
-          attr: 'href',
-          convert: href => artistUrl + href
+          selector: `a`,
+          attr: `href`,
+          convert: (href) => artistUrl + href,
         },
         coverImageSrc: {
-          selector: 'img',
-          attr: 'src'
+          selector: `img`,
+          attr: `src`,
         },
         coverImageOriginal: {
-          selector: 'img',
-          attr: 'data-original'
+          selector: `img`,
+          attr: `data-original`,
         },
-        title: '.title'
-      }
+        title: `.title`,
+      },
     },
     discographyAlbums: {
-      listItem: '#discography ul li',
+      listItem: `#discography ul li`,
       data: {
         url: {
-          selector: 'a',
-          attr: 'href',
-          convert: href => artistUrl + href
+          selector: `a`,
+          attr: `href`,
+          convert: (href) => artistUrl + href,
         },
         coverImage: {
-          selector: 'img',
-          attr: 'src'
+          selector: `img`,
+          attr: `src`,
         },
-        title: '.trackTitle a'
-      }
+        title: `.trackTitle a`,
+      },
     },
     shows: {
-      listItem: '#showography ul li',
+      listItem: `#showography ul li`,
       data: {
-        date: '.showDate',
-        venue: '.showVenue a',
+        date: `.showDate`,
+        venue: `.showVenue a`,
         venueUrl: {
-          selector: '.showVenue a',
-          attr: 'href'
+          selector: `.showVenue a`,
+          attr: `href`,
         },
-        location: '.showLoc'
-      }
+        location: `.showLoc`,
+      },
     },
     bandLinks: {
-      listItem: '#band-links li',
+      listItem: `#band-links li`,
       data: {
-        name: 'a',
+        name: `a`,
         url: {
-          selector: 'a',
-          attr: 'href'
-        }
-      }
-    }
+          selector: `a`,
+          attr: `href`,
+        },
+      },
+    },
   })
 
-  const mapAlbums = album => ({
+  const mapAlbums = (album) => ({
     url: album.url,
     title: album.title,
-    coverImage: album.coverImageOriginal || album.coverImageSrc
+    coverImage: album.coverImageOriginal || album.coverImageSrc,
   })
 
   const albums = data.albums.map(mapAlbums)
@@ -441,7 +449,7 @@ exports.parseArtistInfo = function (html, artistUrl) {
     coverImage: data.coverImage,
     albums: mergedAlbums,
     shows: data.shows,
-    bandLinks: data.bandLinks
+    bandLinks: data.bandLinks,
   }
 }
 
@@ -451,79 +459,80 @@ exports.parseAlbumProducts = function (html, albumUrl) {
   const $ = cheerio.load(html)
   const data = scrapeIt.scrapeHTML($, {
     products: {
-      listItem: '.buyItem',
+      listItem: `.buyItem`,
       data: {
         imageUrls: {
-          listItem: '.popupImageGallery img',
+          listItem: `.popupImageGallery img`,
           data: {
-            url: { attr: 'src' }
-          }
+            url: { attr: `src` },
+          },
         },
         name: {
-          selector: '.buyItemPackageTitle',
-          convert: removeNewLine
+          selector: `.buyItemPackageTitle`,
+          convert: removeNewLine,
         },
-        nameFallback: { // fallback
-          selector: '.hd.lowHeadroom',
-          convert: removeNewLine
+        nameFallback: {
+          // fallback
+          selector: `.hd.lowHeadroom`,
+          convert: removeNewLine,
         },
         format: {
-          selector: '.buyItemPackageTitle'
+          selector: `.buyItemPackageTitle`,
         },
-        formatFallback: { // fallback
-          selector: '.merchtype'
+        formatFallback: {
+          // fallback
+          selector: `.merchtype`,
         },
         priceInCents: {
-          selector: '.ft span.base-text-color',
-          convert: function (text) {
+          selector: `.ft span.base-text-color`,
+          convert(text) {
             const matches = text.match(/(\d+)([.,]?)(\d{0,2})/)
             if (matches) {
-              return parseInt(matches[1] + (matches[3] || '00'))
-            } else {
-              return null
+              return parseInt(matches[1] + (matches[3] || `00`), 10)
             }
-          }
+            return null
+          },
         },
         // currency
         currency: {
-          selector: '.ft span.secondaryText',
-          eq: 0
+          selector: `.ft span.secondaryText`,
+          eq: 0,
         },
         offerMore: {
-          selector: '.ft span.secondaryText',
+          selector: `.ft span.secondaryText`,
           eq: 1,
-          convert: function (text) {
-            return text.toLowerCase() === 'or more'
-          }
+          convert(text) {
+            return text.toLowerCase() === `or more`
+          },
         },
         soldOut: {
-          selector: '.notable',
-          convert: function (text) {
-            return text.toLowerCase() === 'sold out'
-          }
+          selector: `.notable`,
+          convert(text) {
+            return text.toLowerCase() === `sold out`
+          },
         },
         nameYourPrice: {
-          selector: '.ft span.secondaryText',
-          convert: function (text) {
-            return text.toLowerCase() === 'name your price'
-          }
+          selector: `.ft span.secondaryText`,
+          convert(text) {
+            return text.toLowerCase() === `name your price`
+          },
         },
         description: {
-          selector: '.bd',
-          convert: function (text) {
+          selector: `.bd`,
+          convert(text) {
             return removeNewLine(text.trim())
-          }
-        }
-      }
-    }
+          },
+        },
+      },
+    },
   })
   return data.products.reduce(function (products, product) {
     // basic properties
-    const object = assignProps(product, {}, ['description', 'soldOut', 'nameYourPrice', 'offerMore', 'nameYourPrice'])
+    const object = assignProps(product, {}, [`description`, `soldOut`, `nameYourPrice`, `offerMore`, `nameYourPrice`])
     // url
     object.url = albumUrl
     // format
-    object.format = product.format || product.formatFallback || 'Other'
+    object.format = product.format || product.formatFallback || `Other`
     // name
     if (object.format.match(/digital\s(track|album)/i)) {
       // digital have a different name
@@ -553,10 +562,11 @@ exports.parseAlbumProducts = function (html, albumUrl) {
     // artist
     object.artist = albumInfo.artist
     // validate through JSON schema
-    if (ajv.validate('album-product', object)) {
+    if (ajv.validate(`album-product`, object)) {
       products.push(object)
-    } else { // TODO add a flag to log only when debugging
-      console.error('Error: ', ajv.errorsText(), object, JSON.stringify(ajv.errors))
+    } else {
+      // TODO add a flag to log only when debugging
+      console.warn(`Error: `, ajv.errorsText(), object, JSON.stringify(ajv.errors))
     }
     return products
   }, [])

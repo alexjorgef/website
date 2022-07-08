@@ -17,8 +17,7 @@
 
 import * as React from "react"
 import { PageProps, graphql } from "gatsby"
-import { StaticImage } from "gatsby-plugin-image"
-import { FaLanguage, FaStar } from "react-icons/fa"
+import { FaStar } from "react-icons/fa"
 import {
   Container,
   Stack,
@@ -132,8 +131,7 @@ const Index: React.FC<PageProps<DataProps>> = ({ data }) => {
               <br />
             </Text>
             <Text variant="prominent" maxWidth="40ch" textAlign="center">
-              Currently working as a full‑stack developer, specializing in
-              backend and cross‑platform development.
+              Currently working as a full‑stack developer, specializing in backend and cross‑platform development.
             </Text>
           </Stack>
         </FullWidthContainer>
@@ -145,19 +143,14 @@ const Index: React.FC<PageProps<DataProps>> = ({ data }) => {
                 <Heading as="h2">{firstPost.title}</Heading>
                 <Text variant="lightContainer">{firstPost.description}</Text>
               </Box>
-              <PrimaryButton to={firstPost.slug}>
-                Continue Reading
-              </PrimaryButton>
+              <PrimaryButton to={firstPost.slug}>Continue Reading</PrimaryButton>
             </Stack>
             <Stack direction="column" width="100%" spacing={6}>
               <Flex justifyContent="space-between" alignItems="center">
                 <Badge variant="light">Posts</Badge>
                 <SubtleButton to="/writing">Read all</SubtleButton>
               </Flex>
-              <Grid
-                templateColumns={[`repeat(1, 1fr)`, null, `repeat(3, 1fr)`]}
-                gap={[4, null, 8]}
-              >
+              <Grid templateColumns={[`repeat(1, 1fr)`, null, `repeat(3, 1fr)`]} gap={[4, null, 8]}>
                 {otherPosts
                   .filter((post) => post.locale === localeDefault)
                   .map((item, index) => (
@@ -193,10 +186,7 @@ const Index: React.FC<PageProps<DataProps>> = ({ data }) => {
                 <Badge variant="light">Notebook</Badge>
                 <SubtleButton to="/notebook">Read all</SubtleButton>
               </Flex>
-              <Grid
-                templateColumns={[`repeat(1, 1fr)`, null, `repeat(3, 1fr)`]}
-                gap={[4, null, 8]}
-              >
+              <Grid templateColumns={[`repeat(1, 1fr)`, null, `repeat(3, 1fr)`]} gap={[4, null, 8]}>
                 {data.garden.nodes.map((item, index) => (
                   <Link
                     to={item.slug}
@@ -228,15 +218,11 @@ const Index: React.FC<PageProps<DataProps>> = ({ data }) => {
           </Stack>
         </FullWidthContainer>
         <Container>
-          <Flex
-            alignItems="center"
-            flexDirection="column"
-            pb={space.paddingSmall}
-          >
+          <Flex alignItems="center" flexDirection="column" pb={space.paddingSmall}>
             <Heading as="h2">Open Source</Heading>
             <Text variant="prominent" maxWidth="40ch" textAlign="center">
-              Highly motivated by the entire ecosystem, I love working with
-              modern technologies, building, and designing awesome projects.
+              Highly motivated by the entire ecosystem, I love working with modern technologies, building, and designing
+              awesome projects.
             </Text>
             <Spacer axis="vertical" size={20} />
             <Stack direction="column" width="100%" spacing={6}>
@@ -246,18 +232,11 @@ const Index: React.FC<PageProps<DataProps>> = ({ data }) => {
                   GitHub
                 </SubtleButton>
               </Flex>
-              <Grid
-                gridTemplateColumns={[`1fr`, null, null, `2fr 1fr`]}
-                gap={6}
-              >
+              <Grid gridTemplateColumns={[`1fr`, null, null, `2fr 1fr`]} gap={6}>
                 {primRepo && secRepo ? (
                   <>
                     <Box bg="primaryBg" color="#e7f1ff" p={6} borderRadius="lg">
-                      <Flex
-                        flexDirection="row"
-                        justifyContent="space-between"
-                        mb={6}
-                      >
+                      <Flex flexDirection="row" justifyContent="space-between" mb={6}>
                         <ChakraLink
                           fontSize={[`lg`, null, null, null, `1.3125rem`]}
                           color="white"
@@ -274,11 +253,7 @@ const Index: React.FC<PageProps<DataProps>> = ({ data }) => {
                       <Text>{primRepo.description}</Text>
                     </Box>
                     <Box bg={secondaryRepoBg} p={6} borderRadius="lg">
-                      <Flex
-                        flexDirection="row"
-                        justifyContent="space-between"
-                        mb={6}
-                      >
+                      <Flex flexDirection="row" justifyContent="space-between" mb={6}>
                         <ChakraLink
                           fontSize={[`lg`, null, null, null, `1.3125rem`]}
                           fontWeight="bold"
@@ -296,8 +271,7 @@ const Index: React.FC<PageProps<DataProps>> = ({ data }) => {
                   </>
                 ) : (
                   <Box p={2} borderRadius="lg">
-                    <strong>GATSBY_GITHUB_TOKEN</strong> for gatsby-source-graphql
-                    necessary.
+                    <strong>GATSBY_GITHUB_TOKEN</strong> for gatsby-source-graphql necessary.
                   </Box>
                 )}
               </Grid>
@@ -320,11 +294,7 @@ export default Index
 
 export const query = graphql`
   {
-    posts: allPost(
-      filter: { published: { eq: true } }
-      sort: { fields: date, order: DESC }
-      limit: 4
-    ) {
+    posts: allPost(filter: { published: { eq: true } }, sort: { fields: date, order: DESC }, limit: 4) {
       nodes {
         title
         description

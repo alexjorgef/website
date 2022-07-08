@@ -93,10 +93,7 @@ const reducer = (state: State, action: Action) => {
   }
 }
 
-const Awesomes: React.FC<PageProps<DataProps>> = ({
-  data: { awesomes },
-  location,
-}) => {
+const Awesomes: React.FC<PageProps<DataProps>> = ({ data: { awesomes }, location }) => {
   const [state, dispatch] = useQueryStringReducer<State, Action>({
     initialState,
     location,
@@ -124,8 +121,7 @@ const Awesomes: React.FC<PageProps<DataProps>> = ({
         <Container py={space.paddingSmall}>
           <Heading as="h1">Awesomes</Heading>
           <Text textStyle="prominent">
-            During my research time I usually write down some resources that I
-            find useful. Here they are:
+            During my research time I usually write down some resources that I find useful. Here they are:
           </Text>
           <Spacer size={6} axis="vertical" />
           <Wrap>
@@ -154,32 +150,17 @@ const Awesomes: React.FC<PageProps<DataProps>> = ({
                 >
                   <Tag colorScheme={isActive ? `blue` : `gray`} size="lg">
                     <TagLabel>{tag.title}</TagLabel>
-                    {isActive && (
-                      <TagCloseButton as="span" aria-hidden aria-label="" />
-                    )}
+                    {isActive && <TagCloseButton as="span" aria-hidden aria-label="" />}
                   </Tag>
                 </WrapItem>
               )
             })}
           </Wrap>
-          <Input
-            onChange={handleInputChange}
-            width={350}
-            mt={6}
-            id="filter"
-            placeholder="Type to filter awesomes..."
-          />
+          <Input onChange={handleInputChange} width={350} mt={6} id="filter" placeholder="Type to filter awesomes..." />
           <Spacer size={20} axis="vertical" />
           <Stack
             spacing={0}
-            divider={
-              <Spacer
-                axis="horizontal"
-                size="100%"
-                bg={dividerColor}
-                border="none"
-              />
-            }
+            divider={<Spacer axis="horizontal" size="100%" bg={dividerColor} border="none" />}
             mx={[`-2`, null, null, `-6`]}
           >
             {awesomes.nodes
@@ -189,23 +170,15 @@ const Awesomes: React.FC<PageProps<DataProps>> = ({
                 }
                 if (state.tags.length === 0 && state.searchQuery !== ``) {
                   return (
-                    slug
-                      .toLowerCase()
-                      .includes(state.searchQuery.toLowerCase()) ||
-                    title
-                      .toLowerCase()
-                      .includes(state.searchQuery.toLowerCase())
+                    slug.toLowerCase().includes(state.searchQuery.toLowerCase()) ||
+                    title.toLowerCase().includes(state.searchQuery.toLowerCase())
                   )
                 }
                 return state.tags.some(
                   (tag) =>
                     tags.includes(tag) &&
-                    (slug
-                      .toLowerCase()
-                      .includes(state.searchQuery.toLowerCase()) ||
-                      title
-                        .toLowerCase()
-                        .includes(state.searchQuery.toLowerCase()))
+                    (slug.toLowerCase().includes(state.searchQuery.toLowerCase()) ||
+                      title.toLowerCase().includes(state.searchQuery.toLowerCase()))
                 )
               })
               .map((awesome) => (
@@ -213,12 +186,7 @@ const Awesomes: React.FC<PageProps<DataProps>> = ({
                   to={awesome.slug}
                   key={awesome.slug}
                   display="grid"
-                  gridTemplateColumns={[
-                    `25px 1fr 20px`,
-                    `35px 1fr 20px`,
-                    null,
-                    `50px 1fr 24px`,
-                  ]}
+                  gridTemplateColumns={[`25px 1fr 20px`, `35px 1fr 20px`, null, `50px 1fr 24px`]}
                   alignItems="center"
                   gridGap={6}
                   px={[2, null, null, 6]}
@@ -235,9 +203,7 @@ const Awesomes: React.FC<PageProps<DataProps>> = ({
                     },
                     "&:hover": {
                       span: {
-                        transform: prefersReducedMotion
-                          ? undefined
-                          : `translate3d(6px, 0px, 0px)`,
+                        transform: prefersReducedMotion ? undefined : `translate3d(6px, 0px, 0px)`,
                       },
                     },
                   }}
@@ -249,9 +215,7 @@ const Awesomes: React.FC<PageProps<DataProps>> = ({
                     <ChakraHeading as="h2" variant="gardenItem">
                       {awesome.title}
                     </ChakraHeading>
-                    <Text fontSize={[`14px`, null, null, `1rem`]}>
-                      {awesome.lastUpdated}
-                    </Text>
+                    <Text fontSize={[`14px`, null, null, `1rem`]}>{awesome.lastUpdated}</Text>
                   </Box>
                   <span>
                     <BsArrowRight />

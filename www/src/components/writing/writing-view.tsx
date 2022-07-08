@@ -31,7 +31,6 @@ import { article } from "../../constants/json-ld"
 import { ShareAnywhereButton, TwitterButton } from "../buttons"
 import { site } from "../../constants/meta"
 import { TocItem, WithSidebarWrapper } from "./toc"
-import { Link } from "../../components/link"
 import { useSiteMetadata } from "../../hooks/use-site-metadata"
 
 export type WritingViewDataProps = {
@@ -172,7 +171,13 @@ const WritingView: React.FC<React.PropsWithChildren<WritingViewDataProps>> = ({ 
             alignItems={[`flex-start`, `center`]}
           >
             <Box>
-              <ExternalLink href={`mailto:contact@alexjorgef.com?body=${encoded}`} fontWeight="medium" fontSize={[`md`, null, null, `1.125rem`]}>Give feedback</ExternalLink>
+              <ExternalLink
+                href={`mailto:contact@alexjorgef.com?body=${encoded}`}
+                fontWeight="medium"
+                fontSize={[`md`, null, null, `1.125rem`]}
+              >
+                Give feedback
+              </ExternalLink>
               {` `}-{` `}
               <ExternalLink
                 fontSize={[`md`, null, null, `1.125rem`]}
@@ -198,7 +203,12 @@ const WritingView: React.FC<React.PropsWithChildren<WritingViewDataProps>> = ({ 
           )}
         </SkipNavContent>
         <Spacer size={[16, null, null, 20]} axis="vertical" />
-        <DiscussionEmbed shortname={process.env.GATSBY_DISQUS_NAME} config={disqusConfig} theme={colorMode} fakeProp={flipState} />
+        <DiscussionEmbed
+          shortname={process.env.GATSBY_DISQUS_NAME}
+          config={disqusConfig}
+          theme={colorMode}
+          fakeProp={flipState}
+        />
       </Container>
     </Layout>
   )

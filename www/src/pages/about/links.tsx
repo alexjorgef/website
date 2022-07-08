@@ -34,7 +34,6 @@ import {
   FaGithub,
   FaInstagram,
   FaLinkedin,
-  FaTwitter,
   FaStackOverflow,
   FaTelegram,
   FaKey,

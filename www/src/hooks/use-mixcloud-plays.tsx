@@ -37,7 +37,9 @@ export const useMixcloudPlays = () => {
   `)
 
   let totalPlays = 0
-  data.cloudcasts.nodes.map((cloudcast) => (totalPlays += cloudcast.play_count))
+  data.cloudcasts.nodes.forEach((cloudcast) => {
+    totalPlays += cloudcast.play_count
+  })
 
   return totalPlays
 }
