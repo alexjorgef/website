@@ -17,13 +17,7 @@
 
 import * as React from "react"
 import { PageProps, graphql } from "gatsby"
-import {
-  Container,
-  Stack,
-  Text,
-  Grid,
-  Link as ChakraLink,
-} from "@chakra-ui/react"
+import { Container, Stack, Text, Grid } from "@chakra-ui/react"
 import { Layout } from "../components/blocks/layout"
 import { SkipNavContent } from "../components/a11y/skip-nav"
 import { WritingSubNavigation } from "../components/writing/subnavigation"
@@ -53,30 +47,22 @@ type WritingProps = {
   }
 }
 
-const Writing: React.FC<PageProps<WritingProps>> = ({
-  data: { posts, locales },
-}) => {
+const Writing: React.FC<PageProps<WritingProps>> = ({ data: { posts, locales } }) => {
   const { data: language } = useI18nContext()
   const localeDefault = locales.nodes[0].name
-  const postsShow = posts.nodes.filter((post) =>
-    post.locales.length === 0 ? true : post.locale === language.data
-  )
+  const postsShow = posts.nodes.filter((post) => (post.locales.length === 0 ? true : post.locale === language.data))
 
   return (
     <Layout subnavigation={<WritingSubNavigation />}>
-      <SEO
-        title="Writing"
-        breadcrumbListItems={[{ name: `Writing`, url: `/writing` }]}
-      />
+      <SEO title="Writing" breadcrumbListItems={[{ name: `Writing`, url: `/writing` }]} />
       <SkipNavContent>
         <Container py={space.paddingMedium}>
           <Stack spacing="20" align="center">
             <Stack spacing="3" align="center">
               <Heading as="h1">Writing</Heading>
               <Text variant="prominent" maxWidth="45ch" textAlign="center">
-                So far I’ve written {postsShow.length} longform tutorials &
-                articles. For a shorter and more compact content, see my{" "}
-                <Link to="/notebook">notebook</Link>.
+                So far I’ve written {postsShow.length} longform tutorials & articles. For a shorter and more compact
+                content, see my <Link to="/notebook">notebook</Link>.
               </Text>
             </Stack>
             <Grid
@@ -84,21 +70,15 @@ const Writing: React.FC<PageProps<WritingProps>> = ({
               gap={8}
               width={[`100%`, null, null, `calc(100% + 3rem)`]}
             >
-              {postsShow.map((post) => {
-                return (
-                  <Card
-                    key={post.slug}
-                    slug={
-                      language.data === localeDefault
-                        ? post.slug
-                        : `/${language.data}${post.slug}`
-                    }
-                    title={post.title}
-                    subtitle={post.subtitle}
-                    description={post.description}
-                  />
-                )
-              })}
+              {postsShow.map((post) => (
+                <Card
+                  key={post.slug}
+                  slug={language.data === localeDefault ? post.slug : `/${language.data}${post.slug}`}
+                  title={post.title}
+                  subtitle={post.subtitle}
+                  description={post.description}
+                />
+              ))}
             </Grid>
           </Stack>
         </Container>
@@ -111,10 +91,7 @@ export default Writing
 
 export const query = graphql`
   {
-    posts: allPost(
-      filter: { published: { eq: true } }
-      sort: { fields: date, order: DESC }
-    ) {
+    posts: allPost(filter: { published: { eq: true } }, sort: { fields: date, order: DESC }) {
       nodes {
         ...CardPostInformation
       }

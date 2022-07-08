@@ -20,17 +20,17 @@ import { IconButton, useColorMode } from "@chakra-ui/react"
 import { FaMoon as MoonIcon } from "react-icons/fa"
 import { MdWbSunny as SunIcon } from "react-icons/md"
 
-export const Toggle: React.FC<React.PropsWithChildren<any>> = ({...props}) => {
+export const Toggle: React.FC<React.PropsWithChildren<any>> = ({ ...props }) => {
   const { colorMode, toggleColorMode } = useColorMode()
   const isLight = colorMode === `light`
   return (
     <IconButton
       {...props}
       aria-label={isLight ? `Activate Dark Mode` : `Activate Light Mode`}
-      _hover={{ color: 'white', borderColor: 'white' }}
+      _hover={{ color: `white`, borderColor: `white` }}
       variant="outline"
-      color={"whiteAlpha.600"}
-      borderColor={"whiteAlpha.600"}
+      color={`whiteAlpha.600`}
+      borderColor={`whiteAlpha.600`}
       icon={isLight ? <MoonIcon /> : <SunIcon fontSize="1.25rem" />}
       onClick={toggleColorMode}
       borderRadius="md"

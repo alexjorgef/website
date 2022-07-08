@@ -97,15 +97,11 @@ const noIndexPages = [
 
 test.describe(`Meta Tags`, () => {
   for (const assertion of metaTagAssertions) {
-    test(`${assertion.name} should have correct information`, async ({
-      page,
-    }) => {
+    test(`${assertion.name} should have correct information`, async ({ page }) => {
       await page.goto(assertion.url)
       await expect(page).toHaveTitle(assertion.title)
       for (const tag of assertion.metaTags) {
-        const content = await page
-          .locator(`meta[property="${tag.key}"]`)
-          .getAttribute(`content`)
+        const content = await page.locator(`meta[property="${tag.key}"]`).getAttribute(`content`)
         await expect(content).toContain(tag.value)
       }
     })
@@ -113,9 +109,7 @@ test.describe(`Meta Tags`, () => {
   for (const assertion of noIndexPages) {
     test(`${assertion.name} should have noindex meta tag`, async ({ page }) => {
       await page.goto(assertion.url)
-      const content = await page
-        .locator(`meta[name="robots"]`)
-        .getAttribute(`content`)
+      const content = await page.locator(`meta[name="robots"]`).getAttribute(`content`)
       await expect(content).toStrictEqual(`noindex, nofollow`)
     })
   }

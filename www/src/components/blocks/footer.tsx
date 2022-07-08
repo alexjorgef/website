@@ -16,17 +16,7 @@
  */
 
 import * as React from "react"
-import {
-  Box,
-  Stack,
-  Flex,
-  Link as ExternalLink,
-  Icon,
-  useColorMode,
-  Divider,
-  IconButton,
-  Text,
-} from "@chakra-ui/react"
+import { Box, Stack, Flex, Link as ExternalLink, Icon, useColorMode, Divider, Text } from "@chakra-ui/react"
 import {
   FaHeart as HeartIcon,
   FaInstagram as InstagramIcon,
@@ -53,35 +43,29 @@ export const Footer: React.FC = () => {
     <FullWidthContainer variant="dark">
       <Box as="footer" py={16} role="contentinfo">
         <Stack direction="column" spacing={16}>
-          <Flex
-            flexDirection={[`column`, `row`]}
-            flexWrap="wrap"
-            justifyContent="space-between"
-          >
+          <Flex flexDirection={[`column`, `row`]} flexWrap="wrap" justifyContent="space-between">
             <Flex flexDirection="column" maxWidth="300px">
               <Text fontSize={[`1.125rem`, null, `1.9125rem`]} mb={3}>
                 alexjorgef.com
               </Text>
               <Text>
-                This is my personal website made with{" "}
+                This is my personal website made with{` `}
                 <Icon
                   transition="all 0.4s"
-                  color={isLight ? "white" : "textMuted"}
+                  color={isLight ? `white` : `textMuted`}
                   _hover={{ color: `#984de2` }}
                   as={GatsbyIcon}
-                />{" "}
-                and{" "}
+                />
+                {` `}
+                and{` `}
                 <Icon
                   transition="all 0.4s"
-                  color={isLight ? "white" : "textMuted"}
+                  color={isLight ? `white` : `textMuted`}
                   _hover={{ color: `red` }}
                   as={HeartIcon}
                 />
-                . Respectfully inspired on{" "}
-                <ExternalLink href="https://github.com/LekoArts/portfolio-v2">
-                  LekoArts
-                </ExternalLink>{" "}
-                code.
+                . Respectfully inspired on{` `}
+                <ExternalLink href="https://github.com/LekoArts/portfolio-v2">LekoArts</ExternalLink> code.
               </Text>
               <Flex justifyContent={[`center`, `flex-start`]} mt="16px">
                 <LangSwitcher mr={2} />
@@ -91,37 +75,18 @@ export const Footer: React.FC = () => {
             {footerNavigation.map((section) => {
               const { heading } = section
               return (
-                <Flex
-                  key={heading.name}
-                  flexDirection="column"
-                  alignItems="flex-start"
-                  minWidth="150px"
-                  mb={[8, 0]}
-                >
+                <Flex key={heading.name} flexDirection="column" alignItems="flex-start" minWidth="150px" mb={[8, 0]}>
                   {heading.link ? (
-                    <Link
-                      to={heading.link}
-                      p={1}
-                      color="white"
-                      fontSize={[`1.125rem`, null, `1.3125rem`]}
-                    >
+                    <Link to={heading.link} p={1} color="white" fontSize={[`1.125rem`, null, `1.3125rem`]}>
                       {heading.name}
                     </Link>
                   ) : (
-                    <Box
-                      color="white"
-                      p={1}
-                      fontSize={[`1.125rem`, null, `1.3125rem`]}
-                    >
+                    <Box color="white" p={1} fontSize={[`1.125rem`, null, `1.3125rem`]}>
                       {heading.name}
                     </Box>
                   )}
                   <Divider mb={[2, 3]} />
-                  <Flex
-                    flexDirection={[`row`, `column`]}
-                    alignItems="flex-start"
-                    flexWrap={[`wrap`, `nowrap`]}
-                  >
+                  <Flex flexDirection={[`row`, `column`]} alignItems="flex-start" flexWrap={[`wrap`, `nowrap`]}>
                     {section.items.map((item) => (
                       <React.Fragment key={item.link}>
                         {item.isExternal ? (
@@ -150,8 +115,7 @@ export const Footer: React.FC = () => {
               mt="16px"
             >
               <div>
-                &copy; {new Date().getFullYear()}.{" "}
-                <Link to="/privacy-policy">Privacy Policy</Link>.{" "}
+                &copy; {new Date().getFullYear()}. <Link to="/privacy-policy">Privacy Policy</Link>.{` `}
                 <Link to="/legal-notice">Legal Notice</Link>.
               </div>
               <div>
@@ -164,10 +128,7 @@ export const Footer: React.FC = () => {
                 <Link href={`https://gitlab.com/${meta.gitlab}`} ml="16px">
                   <Icon fontSize="1.45rem" as={GitlabIcon} />
                 </Link>
-                <Link
-                  href={`https://instagram.com/${meta.instagram}`}
-                  ml="16px"
-                >
+                <Link href={`https://instagram.com/${meta.instagram}`} ml="16px">
                   <Icon fontSize="1.45rem" as={InstagramIcon} />
                 </Link>
                 <Link to="/rss.xml" ml="16px">

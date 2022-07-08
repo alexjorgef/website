@@ -1,7 +1,7 @@
-const req = require('tinyreq')
-const urlHelper = require('url')
-const htmlParser = require('./htmlParser.js')
-const utils = require('./utils.js')
+const req = require(`tinyreq`)
+const urlHelper = require(`url`)
+const htmlParser = require(`./htmlParser.js`)
+const utils = require(`./utils.js`)
 
 exports.search = function (params, cb) {
   const url = utils.generateSearchUrl(params)
@@ -16,7 +16,7 @@ exports.search = function (params, cb) {
 }
 
 exports.getProfileFollows = function (username, cb) {
-  profileUrl = new urlHelper.URL(`/${username}`, "https://bandcamp.com").toString()
+  const profileUrl = new urlHelper.URL(`/${username}`, `https://bandcamp.com`).toString()
   req(profileUrl, function (error, html) {
     if (error) {
       cb(error, null)
@@ -40,12 +40,12 @@ exports.getAlbumsWithTag = function (params, cb) {
 }
 
 exports.getAlbumUrls = function (artistUrl, cb) {
-  artistUrl = new urlHelper.URL('/music', artistUrl).toString()
-  req(artistUrl, function (error, html) {
+  const artistUrlParsed = new urlHelper.URL(`/music`, artistUrl).toString()
+  req(artistUrlParsed, function (error, html) {
     if (error) {
       cb(error, null)
     } else {
-      const albumUrls = htmlParser.parseAlbumUrls(html, artistUrl)
+      const albumUrls = htmlParser.parseAlbumUrls(html, artistUrlParsed)
       cb(null, albumUrls)
     }
   })
@@ -74,12 +74,12 @@ exports.getAlbumProducts = function (albumUrl, cb) {
 }
 
 exports.getArtistUrls = function (labelUrl, cb) {
-  labelUrl = new urlHelper.URL('/artists', labelUrl).toString()
-  req(labelUrl, function (error, html) {
+  const labelUrlParsed = new urlHelper.URL(`/artists`, labelUrl).toString()
+  req(labelUrlParsed, function (error, html) {
     if (error) {
       cb(error, null)
     } else {
-      const artistUrls = htmlParser.parseArtistUrls(html, labelUrl)
+      const artistUrls = htmlParser.parseArtistUrls(html, labelUrlParsed)
       cb(null, artistUrls)
     }
   })

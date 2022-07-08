@@ -16,12 +16,12 @@
  */
 
 import * as React from "react"
+import { Alert, AlertIcon, AlertTitle, AlertDescription } from "@chakra-ui/react"
 import { SkipNavLink } from "../a11y/skip-nav"
 import { SEO } from "../seo"
 import { Fonts } from "./fonts"
 import { Footer } from "./footer"
 import { Header } from "./header"
-import { Alert, AlertIcon, AlertTitle, AlertDescription } from "@chakra-ui/react"
 
 export const LocaleContext = React.createContext(``)
 
@@ -34,7 +34,7 @@ export const Layout: React.FC<React.PropsWithChildren<{ subnavigation?: React.Re
     <SkipNavLink />
     <SEO />
     <Header subnavigation={subnavigation} />
-    <Alert status='error' className="only-no-js" display="none">
+    <Alert status="error" className="only-no-js" display="none">
       <AlertIcon />
       <AlertTitle>Your browser does not support JavaScript, make sure you have enabled it!</AlertTitle>
       <AlertDescription>Your experience may be degraded and some functionalities may not work.</AlertDescription>

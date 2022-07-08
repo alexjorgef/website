@@ -18,6 +18,11 @@
 import * as React from "react"
 import type { GatsbySSR } from "gatsby"
 
+// @ts-ignore
+import interVariableWoff2 from "./src/assets/fonts/Inter-roman.var.woff2"
+// @ts-ignore
+import crimsonProVariableWoff2 from "./src/assets/fonts/Crimson-Pro.var.woff2"
+
 const PANELBEAR_SITE_ID = process.env.GATSBY_PANELBEAR_SITE_ID
 
 const PANELBEAR_CONFIG = {
@@ -26,15 +31,7 @@ const PANELBEAR_CONFIG = {
   debug: false,
 }
 
-// @ts-ignore
-import interVariableWoff2 from "./src/assets/fonts/Inter-roman.var.woff2"
-// @ts-ignore
-import crimsonProVariableWoff2 from "./src/assets/fonts/Crimson-Pro.var.woff2"
-
-export const onRenderBody: GatsbySSR["onRenderBody"] = ({
-  setHeadComponents,
-  setPostBodyComponents,
-}) => {
+export const onRenderBody: GatsbySSR["onRenderBody"] = ({ setHeadComponents, setPostBodyComponents }) => {
   if (process.env.NODE_ENV === `production`) {
     const panelbearScriptProps = {
       src: `https://cdn.panelbear.com/analytics.js?site=${PANELBEAR_SITE_ID}`,
@@ -55,13 +52,7 @@ export const onRenderBody: GatsbySSR["onRenderBody"] = ({
     ])
 
     return setHeadComponents([
-      <link
-        rel="preload"
-        href="/icons.svg"
-        as="image"
-        type="image/svg+xml"
-        key="svgIcons"
-      />,
+      <link rel="preload" href="/icons.svg" as="image" type="image/svg+xml" key="svgIcons" />,
       <link
         rel="preload"
         href={interVariableWoff2}

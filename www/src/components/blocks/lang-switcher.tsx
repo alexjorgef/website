@@ -21,7 +21,7 @@ import { MdLanguage as LanguageIcon } from "react-icons/md"
 import { useI18nContext } from "../../context/i18n-provider"
 import { useLocales } from "../../hooks/use-locales"
 
-export const LangSwitcher: React.FC<React.PropsWithChildren<any>> = ({...props}) => {
+export const LangSwitcher: React.FC<React.PropsWithChildren<any>> = ({ ...props }) => {
   const [locales] = useLocales()
   const { updateState, data: language } = useI18nContext()
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,9 +36,9 @@ export const LangSwitcher: React.FC<React.PropsWithChildren<any>> = ({...props})
       variant="outline"
       size="sm"
       maxWidth="75"
-      _hover={{ color: 'white', borderColor: 'white' }}
-      borderColor={"whiteAlpha.600"}
-      color={"whiteAlpha.600"}
+      _hover={{ color: `white`, borderColor: `white` }}
+      borderColor={`whiteAlpha.600`}
+      color={`whiteAlpha.600`}
       borderRadius="md"
     >
       {locales.map((locale) => (

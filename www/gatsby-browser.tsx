@@ -19,13 +19,7 @@ import * as React from "react"
 import type { GatsbyBrowser } from "gatsby"
 import { I8nProvider } from "./src/context/i18n-provider"
 
-export const wrapRootElement: GatsbyBrowser["wrapRootElement"] = ({ element }) => {
-  return (
-    <I8nProvider>
-      {element}
-    </I8nProvider>
-  )
-}
+export const wrapRootElement: GatsbyBrowser["wrapRootElement"] = ({ element }) => <I8nProvider>{element}</I8nProvider>
 
 export const onRouteUpdate: GatsbyBrowser["onRouteUpdate"] = () => {
   if (process.env.NODE_ENV === `production` && typeof window.panelbear !== `undefined`) {

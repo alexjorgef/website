@@ -18,21 +18,16 @@
 import * as React from "react"
 import { PageProps, graphql } from "gatsby"
 import { Text } from "@chakra-ui/react"
-import WritingView, {
-  WritingViewDataProps,
-} from "../components/writing/writing-view"
+import WritingView, { WritingViewDataProps } from "../components/writing/writing-view"
 import { Heading } from "../components/typography/heading"
 import { Spacer } from "../components/blocks/spacer"
 import { Link } from "../components/link"
 import { useI18nContext } from "../context/i18n-provider"
 import { useLocales } from "../hooks/use-locales"
 
-const ProseTemplate: React.FC<PageProps<WritingViewDataProps>> = ({
-  data: { post },
-  location: { pathname },
-}) => {
-  const { updateState, data: language } = useI18nContext()
-  const [locales, defaultLocale] = useLocales()
+const ProseTemplate: React.FC<PageProps<WritingViewDataProps>> = ({ data: { post }, location: { pathname } }) => {
+  const { updateState } = useI18nContext()
+  const [defaultLocale] = useLocales()
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     updateState({ data: event.target.text })
   }
@@ -61,19 +56,16 @@ const ProseTemplate: React.FC<PageProps<WritingViewDataProps>> = ({
           <>
             <Text color="text" as="u" fontWeight={800}>
               {post.locale}
-            </Text>{" "}
-            /{" "}
+            </Text>
+            {` `}/{` `}
             {post.locales.map((locale, index) => {
-              console.log('defaultLocale', defaultLocale)
-              console.log('locale', locale)
-
               const link = locale === defaultLocale ? `${post.slug}` : `/${locale}${post.slug}`
               return post.locales.length - 1 !== index ? (
                 <>
                   <Link to={link} onClick={handleChange}>
                     {locale}
-                  </Link>{" "}
-                  /{" "}
+                  </Link>
+                  {` `}/{` `}
                 </>
               ) : (
                 <Link to={link} onClick={handleChange}>
