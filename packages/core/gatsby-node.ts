@@ -334,24 +334,22 @@ export const onCreateNode = (
     const lang = isDefault ? defaultKey : name.split(`.`)[1]
 
     const langs: string[] = []
-    if (!isDefault || isDefault) {
-      const nodes = getNodesByType(`File`)
-      nodes.forEach((refNode) => {
-        if (fileNode.id !== refNode.id) {
-          if (refNode.sourceInstanceName === writingSource) {
-            if (refNode.extension === `mdx`) {
-              if (fileNode.relativeDirectory === refNode.relativeDirectory) {
-                const refName = path.basename(`${refNode.absolutePath}`, `.mdx`)
-                const refIsDefault = refName === `index`
-                const refDefaultKey = findKey(locales, (o) => o.default === true)
-                const refLang = refIsDefault ? refDefaultKey : refName.split(`.`)[1]
-                langs.push(refLang)
-              }
+    const nodes = getNodesByType(`File`)
+    nodes.forEach((refNode) => {
+      if (refNode.id !== fileNode.id) {
+        if (refNode.sourceInstanceName === writingSource) {
+          if (refNode.extension === `mdx`) {
+            if (refNode.relativeDirectory === fileNode.relativeDirectory) {
+              const refName = path.basename(`${refNode.absolutePath}`, `.mdx`)
+              const refIsDefault = refName === `index`
+              const refDefaultKey = findKey(locales, (o) => o.default === true)
+              const refLang = refIsDefault ? refDefaultKey : refName.split(`.`)[1]
+              langs.push(refLang)
             }
           }
         }
-      })
-    }
+      }
+    })
 
     const f = node.frontmatter as WritingNode["frontmatter"]
     const fieldData: WritingNode["frontmatter"] = {

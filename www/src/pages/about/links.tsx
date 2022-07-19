@@ -59,162 +59,166 @@ const Links: React.FC<PageProps> = () => {
       <SEO title="Links" breadcrumbListItems={[{ name: `Links`, url: `/links` }]} />
       <SkipNavContent>
         <Container py={space.paddingMedium}>
-          <Stack spacing="20" align="center">
-            <Stack spacing="3" align="center">
+          <Stack spacing="20" align="left">
+            <Stack spacing="3" align="left">
               <Heading as="h1">Links</Heading>
-              <Text variant="prominent" maxWidth="45ch" textAlign="center">
+              <Text variant="prominent" textAlign="left">
                 Here you can find some links about me.
               </Text>
+              <Divider mt={4} orientation="horizontal" />
             </Stack>
-            <Divider mt={4} orientation="horizontal" />
             <Grid
               gridTemplateColumns={[`1fr`, null, `repeat(1, 1fr)`]}
               gap={8}
               width={[`100%`, null, null, `calc(100% + 3rem)`]}
             >
-              <Container>
+              <Container px={0}>
                 <Grid templateRows="repeat(1, 1fr)" templateColumns="repeat(1, 1fr)" gap={8}>
-                  <VStack spacing="24px">
-                    <Heading as="h2">Social Media</Heading>
-                    <HStack spacing="24px">
-                      <ExternalLink ml="8px" href={`https://www.linkedin.com/in/${meta.linkedin}`}>
-                        <IconButton
-                          variant="ghost"
-                          color="textMuted"
-                          colorScheme="gray"
-                          _hover={{ color: isLight ? `black` : `white` }}
-                          aria-label="LinkedIn"
-                          fontSize="48px"
-                          size="lg"
-                          icon={<FaLinkedin />}
-                        />
-                      </ExternalLink>
-                      <ExternalLink ml="8px" href={`https://github.com/${meta.github}`}>
-                        <IconButton
-                          variant="ghost"
-                          color="textMuted"
-                          colorScheme="gray"
-                          _hover={{ color: isLight ? `black` : `white` }}
-                          aria-label="GitHub"
-                          fontSize="48px"
-                          size="lg"
-                          icon={<FaGithub />}
-                        />
-                      </ExternalLink>
-                      <ExternalLink ml="8px" href={`https://gitlab.com/${meta.gitlab}`}>
-                        <IconButton
-                          variant="ghost"
-                          color="textMuted"
-                          colorScheme="gray"
-                          _hover={{ color: isLight ? `black` : `white` }}
-                          aria-label="GitLab"
-                          fontSize="48px"
-                          size="lg"
-                          icon={<FaGitlab />}
-                        />
-                      </ExternalLink>
-                      <ExternalLink ml="8px" href={`https://instagram.com/${meta.instagram}`}>
-                        <IconButton
-                          variant="ghost"
-                          color="textMuted"
-                          colorScheme="gray"
-                          _hover={{ color: isLight ? `black` : `white` }}
-                          aria-label="Instagram"
-                          fontSize="48px"
-                          size="lg"
-                          icon={<FaInstagram />}
-                        />
-                      </ExternalLink>
-                      <ExternalLink ml="8px" href={`https://stackoverflow.com/users/${meta.stackoverflow}`}>
-                        <IconButton
-                          variant="ghost"
-                          color="textMuted"
-                          colorScheme="gray"
-                          _hover={{ color: isLight ? `black` : `white` }}
-                          aria-label="StackOverflow"
-                          fontSize="48px"
-                          size="lg"
-                          icon={<FaStackOverflow />}
-                        />
-                      </ExternalLink>
-                      <ExternalLink ml="8px" href={`https://wakatime.com/${meta.wakatime}`}>
-                        <IconButton
-                          variant="ghost"
-                          color="textMuted"
-                          colorScheme="gray"
-                          _hover={{ color: isLight ? `black` : `white` }}
-                          aria-label="Wakatime"
-                          fontSize="48px"
-                          size="lg"
-                          icon={<SiWakatime />}
-                        />
-                      </ExternalLink>
-                    </HStack>
-                    <Heading as="h2" mt="58px">
-                      Contact
-                    </Heading>
-                    <HStack spacing="24px">
-                      <ExternalLink ml="8px" href={`https://t.me/${meta.telegram}`}>
-                        <IconButton
-                          variant="ghost"
-                          color="textMuted"
-                          colorScheme="gray"
-                          _hover={{ color: isLight ? `black` : `white` }}
-                          aria-label="Telegram"
-                          fontSize="48px"
-                          size="lg"
-                          icon={<FaTelegram />}
-                        />
-                      </ExternalLink>
-                      <ExternalLink ml="8px" href={`mailto:${meta.siteAuthorEmail}`}>
-                        <IconButton
-                          variant="ghost"
-                          color="textMuted"
-                          colorScheme="gray"
-                          _hover={{ color: isLight ? `black` : `white` }}
-                          aria-label="Email"
-                          fontSize="48px"
-                          size="lg"
-                          icon={<FaEnvelope />}
-                        />
-                      </ExternalLink>
-                      <Link ml="8px" to={`/vcard.vcf`}>
-                        <IconButton
-                          variant="ghost"
-                          color="textMuted"
-                          colorScheme="gray"
-                          _hover={{ color: isLight ? `black` : `white` }}
-                          aria-label="Contact Card"
-                          fontSize="48px"
-                          size="lg"
-                          icon={<FaAddressCard />}
-                        />
-                      </Link>
-                      <Link ml="8px" to={`/pgp.asc`}>
-                        <IconButton
-                          variant="ghost"
-                          color="textMuted"
-                          colorScheme="gray"
-                          _hover={{ color: isLight ? `black` : `white` }}
-                          aria-label="PGP Key"
-                          fontSize="48px"
-                          size="lg"
-                          icon={<FaKey />}
-                        />
-                      </Link>
-                      <Link ml="8px" to={`/ssh.pub`}>
-                        <IconButton
-                          variant="ghost"
-                          color="textMuted"
-                          colorScheme="gray"
-                          _hover={{ color: isLight ? `black` : `white` }}
-                          aria-label="SSH Key"
-                          fontSize="48px"
-                          size="lg"
-                          icon={<FaKey />}
-                        />
-                      </Link>
-                    </HStack>
+                  <VStack spacing="16px" align="left">
+                    <Container px={0}>
+                      <Heading as="h2">Social Media</Heading>
+                      <HStack spacing="32px">
+                        <ExternalLink ml="8px" href={`https://www.linkedin.com/in/${meta.linkedin}`}>
+                          <IconButton
+                            variant="ghost"
+                            color="textMuted"
+                            colorScheme="gray"
+                            _hover={{ color: isLight ? `black` : `white` }}
+                            aria-label="LinkedIn"
+                            fontSize="48px"
+                            size="lg"
+                            icon={<FaLinkedin />}
+                          />
+                        </ExternalLink>
+                        <ExternalLink ml="8px" href={`https://github.com/${meta.github}`}>
+                          <IconButton
+                            variant="ghost"
+                            color="textMuted"
+                            colorScheme="gray"
+                            _hover={{ color: isLight ? `black` : `white` }}
+                            aria-label="GitHub"
+                            fontSize="48px"
+                            size="lg"
+                            icon={<FaGithub />}
+                          />
+                        </ExternalLink>
+                        <ExternalLink ml="8px" href={`https://gitlab.com/${meta.gitlab}`}>
+                          <IconButton
+                            variant="ghost"
+                            color="textMuted"
+                            colorScheme="gray"
+                            _hover={{ color: isLight ? `black` : `white` }}
+                            aria-label="GitLab"
+                            fontSize="48px"
+                            size="lg"
+                            icon={<FaGitlab />}
+                          />
+                        </ExternalLink>
+                        <ExternalLink ml="8px" href={`https://instagram.com/${meta.instagram}`}>
+                          <IconButton
+                            variant="ghost"
+                            color="textMuted"
+                            colorScheme="gray"
+                            _hover={{ color: isLight ? `black` : `white` }}
+                            aria-label="Instagram"
+                            fontSize="48px"
+                            size="lg"
+                            icon={<FaInstagram />}
+                          />
+                        </ExternalLink>
+                        <ExternalLink ml="8px" href={`https://stackoverflow.com/users/${meta.stackoverflow}`}>
+                          <IconButton
+                            variant="ghost"
+                            color="textMuted"
+                            colorScheme="gray"
+                            _hover={{ color: isLight ? `black` : `white` }}
+                            aria-label="StackOverflow"
+                            fontSize="48px"
+                            size="lg"
+                            icon={<FaStackOverflow />}
+                          />
+                        </ExternalLink>
+                        <ExternalLink ml="8px" href={`https://wakatime.com/${meta.wakatime}`}>
+                          <IconButton
+                            variant="ghost"
+                            color="textMuted"
+                            colorScheme="gray"
+                            _hover={{ color: isLight ? `black` : `white` }}
+                            aria-label="Wakatime"
+                            fontSize="48px"
+                            size="lg"
+                            icon={<SiWakatime />}
+                          />
+                        </ExternalLink>
+                      </HStack>
+                    </Container>
+                    <Container px={0}>
+                      <Heading as="h2" mt="58px">
+                        Contact
+                      </Heading>
+                      <HStack spacing="32px">
+                        <ExternalLink ml="8px" href={`https://t.me/${meta.telegram}`}>
+                          <IconButton
+                            variant="ghost"
+                            color="textMuted"
+                            colorScheme="gray"
+                            _hover={{ color: isLight ? `black` : `white` }}
+                            aria-label="Telegram"
+                            fontSize="48px"
+                            size="lg"
+                            icon={<FaTelegram />}
+                          />
+                        </ExternalLink>
+                        <ExternalLink ml="8px" href={`mailto:${meta.siteAuthorEmail}`}>
+                          <IconButton
+                            variant="ghost"
+                            color="textMuted"
+                            colorScheme="gray"
+                            _hover={{ color: isLight ? `black` : `white` }}
+                            aria-label="Email"
+                            fontSize="48px"
+                            size="lg"
+                            icon={<FaEnvelope />}
+                          />
+                        </ExternalLink>
+                        <Link ml="8px" to={`/vcard.vcf`}>
+                          <IconButton
+                            variant="ghost"
+                            color="textMuted"
+                            colorScheme="gray"
+                            _hover={{ color: isLight ? `black` : `white` }}
+                            aria-label="Contact Card"
+                            fontSize="48px"
+                            size="lg"
+                            icon={<FaAddressCard />}
+                          />
+                        </Link>
+                        <Link ml="8px" to={`/pgp.asc`}>
+                          <IconButton
+                            variant="ghost"
+                            color="textMuted"
+                            colorScheme="gray"
+                            _hover={{ color: isLight ? `black` : `white` }}
+                            aria-label="PGP Key"
+                            fontSize="48px"
+                            size="lg"
+                            icon={<FaKey />}
+                          />
+                        </Link>
+                        <Link ml="8px" to={`/ssh.pub`}>
+                          <IconButton
+                            variant="ghost"
+                            color="textMuted"
+                            colorScheme="gray"
+                            _hover={{ color: isLight ? `black` : `white` }}
+                            aria-label="SSH Key"
+                            fontSize="48px"
+                            size="lg"
+                            icon={<FaKey />}
+                          />
+                        </Link>
+                      </HStack>
+                    </Container>
                   </VStack>
                 </Grid>
               </Container>

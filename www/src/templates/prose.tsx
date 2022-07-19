@@ -23,11 +23,9 @@ import { Heading } from "../components/typography/heading"
 import { Spacer } from "../components/blocks/spacer"
 import { Link } from "../components/link"
 import { useI18nContext } from "../context/i18n-provider"
-import { useLocales } from "../hooks/use-locales"
 
 const ProseTemplate: React.FC<PageProps<WritingViewDataProps>> = ({ data: { post }, location: { pathname } }) => {
   const { updateState } = useI18nContext()
-  const [defaultLocale] = useLocales()
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     updateState({ data: event.target.text })
   }
@@ -59,7 +57,7 @@ const ProseTemplate: React.FC<PageProps<WritingViewDataProps>> = ({ data: { post
             </Text>
             {` `}/{` `}
             {post.locales.map((locale, index) => {
-              const link = locale === defaultLocale ? `${post.slug}` : `/${locale}${post.slug}`
+              const link = `/${locale}${post.slug}`
               return post.locales.length - 1 !== index ? (
                 <>
                   <Link to={link} onClick={handleChange}>
