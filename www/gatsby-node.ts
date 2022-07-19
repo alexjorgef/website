@@ -53,6 +53,10 @@ type CreatePagesResult = {
           isDefault: boolean
           locale: string
         }
+        parent: {
+          relativeDirectory: string
+          relativePath: string
+        }
       }
     }[]
   }
@@ -110,6 +114,12 @@ export const createPages: GatsbyNode["createPages"] = async ({ graphql, actions,
                 fields {
                   isDefault
                   locale
+                }
+                parent {
+                  ... on File {
+                    relativeDirectory
+                    relativePath
+                  }
                 }
               }
             }
@@ -176,6 +186,31 @@ export const createPages: GatsbyNode["createPages"] = async ({ graphql, actions,
         id: article.id,
         locale: article.parent.fields.locale,
       },
+    })
+
+    writing.nodes.forEach((articleTranslate) => {
+      if (
+        article.parent.parent.relativeDirectory === articleTranslate.parent.parent.relativeDirectory &&
+        article.parent.parent.relativePath !== articleTranslate.parent.parent.relativePath
+      ) {
+        if (articleTranslate.parent.fields.isDefault) {
+          createRedirect({
+            isPermanent: true,
+            fromPath: `/${articleTranslate.parent.fields.locale}${article.slug}`,
+            toPath: `${articleTranslate.slug}`,
+            force: true,
+            redirectInBrowser: true,
+          })
+        } else {
+          createRedirect({
+            isPermanent: true,
+            fromPath: `/${articleTranslate.parent.fields.locale}${article.slug}`,
+            toPath: `/${articleTranslate.parent.fields.locale}${articleTranslate.slug}`,
+            force: true,
+            redirectInBrowser: true,
+          })
+        }
+      }
     })
   })
 }
