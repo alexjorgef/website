@@ -66,7 +66,7 @@ const Portfolio: React.FC<PageProps<DataProps>> = ({ data: { portfolio } }) => {
             <Stack spacing="3" align="center">
               <Heading as="h1">Portfolio</Heading>
               <Text variant="prominent" maxWidth="45ch" textAlign="center">
-                A compilation of my experiences.
+                A compilation of my experiences
               </Text>
             </Stack>
             <Grid
@@ -79,8 +79,8 @@ const Portfolio: React.FC<PageProps<DataProps>> = ({ data: { portfolio } }) => {
                 return (
                   <Container key={project.slug}>
                     <GatsbyLink to={project.slug}>
-                      <Grid templateRows="repeat(1, 1fr)" templateColumns="repeat(4, 1fr)" gap={8}>
-                        <GridItem colSpan={3}>
+                      <Grid templateRows="repeat(1, 1fr)" templateColumns="repeat(3, 1fr)" gap={8}>
+                        <GridItem colSpan={2}>
                           <HStack spacing="16px" align="center" justify="left">
                             <Box>
                               <ChakraHeading as="h2" size="2xl">
@@ -108,7 +108,8 @@ const Portfolio: React.FC<PageProps<DataProps>> = ({ data: { portfolio } }) => {
                               borderRadius="lg"
                               src={imageSrc}
                               alt={project.title}
-                              boxSize="150px"
+                              width={`300px`}
+                              height={`300px`}
                               objectFit="cover"
                             />
                           </Flex>
