@@ -24,7 +24,6 @@ import {
   Grid,
   Divider,
   GridItem,
-  Link as ChakraLink,
   Image,
   Flex,
   Box,
@@ -38,7 +37,6 @@ import { getSrc, IGatsbyImageData } from "gatsby-plugin-image"
 import { Layout } from "../../components/blocks/layout"
 import { SkipNavContent } from "../../components/a11y/skip-nav"
 import { Heading } from "../../components/typography/heading"
-import { Link } from "../../components/link"
 import { space } from "../../constants/space"
 import { SEO } from "../../components/seo"
 
@@ -53,7 +51,6 @@ type DataProps = {
       archived: boolean
       featureImage: IGatsbyImageData
     }[]
-    totalCount: number
   }
 }
 
@@ -69,10 +66,7 @@ const Portfolio: React.FC<PageProps<DataProps>> = ({ data: { portfolio } }) => {
             <Stack spacing="3" align="center">
               <Heading as="h1">Portfolio</Heading>
               <Text variant="prominent" maxWidth="45ch" textAlign="center">
-                So far I’ve written {portfolio.totalCount} longform tutorials & articles. For more compact content visit
-                my
-                {` `}
-                <Link to="/notebook">notebook</Link>. <ChakraLink href="/rss.xml">RSS</ChakraLink>.
+                A compilation of my experiences
               </Text>
             </Stack>
             <Grid
@@ -85,8 +79,8 @@ const Portfolio: React.FC<PageProps<DataProps>> = ({ data: { portfolio } }) => {
                 return (
                   <Container key={project.slug}>
                     <GatsbyLink to={project.slug}>
-                      <Grid templateRows="repeat(1, 1fr)" templateColumns="repeat(4, 1fr)" gap={8}>
-                        <GridItem colSpan={3}>
+                      <Grid templateRows="repeat(1, 1fr)" templateColumns="repeat(3, 1fr)" gap={8}>
+                        <GridItem colSpan={2}>
                           <HStack spacing="16px" align="center" justify="left">
                             <Box>
                               <ChakraHeading as="h2" size="2xl">
@@ -114,7 +108,8 @@ const Portfolio: React.FC<PageProps<DataProps>> = ({ data: { portfolio } }) => {
                               borderRadius="lg"
                               src={imageSrc}
                               alt={project.title}
-                              boxSize="150px"
+                              width={`300px`}
+                              height={`300px`}
                               objectFit="cover"
                             />
                           </Flex>
@@ -150,7 +145,6 @@ export const query = graphql`
           }
         }
       }
-      totalCount
     }
   }
 `
