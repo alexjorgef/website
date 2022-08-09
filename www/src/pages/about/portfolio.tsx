@@ -55,7 +55,7 @@ type DataProps = {
 }
 
 const Portfolio: React.FC<PageProps<DataProps>> = ({ data: { portfolio } }) => {
-  const imageDisplay = useBreakpointValue({ base: `none`, md: `block` })
+  const imageDisplay = useBreakpointValue({ base: `none`, md: `block` }, `md`)
 
   return (
     <Layout>

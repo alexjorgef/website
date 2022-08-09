@@ -16,7 +16,7 @@
  */
 
 import * as React from "react"
-import { Select } from "@chakra-ui/react"
+import { Select, useColorMode } from "@chakra-ui/react"
 import { MdLanguage as LanguageIcon } from "react-icons/md"
 import { useI18nContext } from "../../context/i18n-provider"
 import { useLocales } from "../../hooks/use-locales"
@@ -27,6 +27,8 @@ export const LangSwitcher: React.FC<React.PropsWithChildren<any>> = ({ ...props 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     updateState({ data: event.target.value })
   }
+  const { colorMode } = useColorMode()
+  const isLight = colorMode === `light`
   return (
     <Select
       {...props}
@@ -42,7 +44,7 @@ export const LangSwitcher: React.FC<React.PropsWithChildren<any>> = ({ ...props 
       borderRadius="md"
     >
       {locales.map((locale) => (
-        <option key={locale.name} value={locale.name}>
+        <option key={locale.name} value={locale.name} style={{ color: isLight ? `black` : `white` }}>
           {locale.name.toUpperCase()}
         </option>
       ))}
