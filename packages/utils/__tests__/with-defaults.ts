@@ -29,6 +29,7 @@ describe(`withDefaults`, () => {
       awesomeSource: defaults.awesomeSource,
       portfolioSource: defaults.portfolioSource,
       locales: defaults.locales,
+      localeInitial: defaults.localeInitial,
     })
   })
 })

@@ -31,6 +31,10 @@ const tagColorSwitch = (name) => {
       return `yellow`
     case `Environment`:
       return `green`
+    case `Artificial Intelligence`:
+      return `green`
+    case `Mathematics`:
+      return `green`
     default:
       return `gray`
   }
