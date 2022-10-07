@@ -15,7 +15,7 @@
  * Copyright (C) 2022  Alexandre Ferreira
  */
 
-import * as React from "react"
+import React, { useEffect, useState } from "react"
 import { graphql } from "gatsby"
 import { Box, Container, Divider, Link as ExternalLink, Text, Stack, useColorMode } from "@chakra-ui/react"
 import { MDXProvider } from "@mdx-js/react"
@@ -80,9 +80,9 @@ export type PostLocales = {
 }
 
 const WritingView: React.FC<React.PropsWithChildren<WritingViewDataProps>> = ({ post, pathname, children, type }) => {
-  const [hasShareApi, setHasShareApi] = React.useState(false)
+  const [hasShareApi, setHasShareApi] = useState(false)
 
-  React.useEffect(() => {
+  useEffect(() => {
     setHasShareApi(!!window.navigator.share)
   }, [])
 
@@ -93,20 +93,6 @@ const WritingView: React.FC<React.PropsWithChildren<WritingViewDataProps>> = ({ 
     identifier: post.slug,
     title: post.title,
   }
-
-  // https://github.com/disqus/disqus-react/issues/18#issuecomment-603101171
-  const [flipState, forceUpdate] = React.useState(false)
-  const transitionEnd = React.useCallback((ev) => {
-    const { target, propertyName } = ev
-    if (target === document.body && propertyName === `background-color`) {
-      forceUpdate((o) => !o)
-    }
-  }, [])
-
-  React.useEffect(() => {
-    document.body.addEventListener(`transitionend`, transitionEnd)
-    return () => document.body.removeEventListener(`transitionend`, transitionEnd)
-  }, [transitionEnd])
 
   const { colorMode } = useColorMode()
 
@@ -203,12 +189,9 @@ const WritingView: React.FC<React.PropsWithChildren<WritingViewDataProps>> = ({ 
           )}
         </SkipNavContent>
         <Spacer size={[16, null, null, 20]} axis="vertical" />
-        <DiscussionEmbed
-          shortname={process.env.GATSBY_DISQUS_NAME}
-          config={disqusConfig}
-          theme={colorMode}
-          fakeProp={flipState}
-        />
+        <div style={{ colorScheme: `normal` }}>
+          <DiscussionEmbed shortname={process.env.GATSBY_DISQUS_NAME} config={disqusConfig} fakeProp={colorMode} />
+        </div>
       </Container>
     </Layout>
   )

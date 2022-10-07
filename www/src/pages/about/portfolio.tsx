@@ -26,8 +26,10 @@ import {
   GridItem,
   Image,
   Flex,
+  Badge,
   Box,
-  HStack,
+  VStack,
+  Link as ChakraLink,
   Tag,
   Heading as ChakraHeading,
   TagLabel,
@@ -37,8 +39,18 @@ import { getSrc, IGatsbyImageData } from "gatsby-plugin-image"
 import { Layout } from "../../components/blocks/layout"
 import { SkipNavContent } from "../../components/a11y/skip-nav"
 import { Heading } from "../../components/typography/heading"
+import { Spacer } from "../../components/blocks/spacer"
+import { SubtleButton } from "../../components/buttons"
 import { space } from "../../constants/space"
+import { GitRepoGallery } from "../../components/blocks/gitRepoGallery"
 import { SEO } from "../../components/seo"
+
+type RepositoryInfo = {
+  stargazerCount: number
+  description: string
+  name: string
+  url: string
+}
 
 type DataProps = {
   portfolio: {
@@ -52,17 +64,87 @@ type DataProps = {
       featureImage: IGatsbyImageData
     }[]
   }
+  repoGh1?: {
+    repository?: RepositoryInfo
+  }
+  repoGh2?: {
+    repository?: RepositoryInfo
+  }
+  repoGh3?: {
+    repository?: RepositoryInfo
+  }
+  repoGh4?: {
+    repository?: RepositoryInfo
+  }
+  repoGh5?: {
+    repository?: RepositoryInfo
+  }
+  repoGl1?: {
+    repository?: RepositoryInfo
+  }
+  repoGl2?: {
+    repository?: RepositoryInfo
+  }
 }
 
-const Portfolio: React.FC<PageProps<DataProps>> = ({ data: { portfolio } }) => {
+const openSourceRepos = [
+  {
+    name: `sliverbot`,
+    url: `https://github.com/alexjorgef/sliverbot`,
+  },
+  {
+    name: `invisiblespider`,
+    url: `https://github.com/alexjorgef/invisiblespider`,
+  },
+  {
+    name: `website-v3`,
+    url: `https://github.com/alexjorgef/website-v3`,
+  },
+  {
+    name: `website-v4`,
+    url: `https://github.com/alexjorgef/website-v4`,
+  },
+  {
+    name: `website-costalanparty2010`,
+    url: `https://github.com/alexjorgef/website-costalanparty2010`,
+  },
+  {
+    name: `website-costalanparty2011`,
+    url: `https://github.com/alexjorgef/website-costalanparty2011`,
+  },
+  {
+    name: `test`,
+    url: `https://github.com/alexjorgef/test`,
+  },
+  {
+    name: `alexjorgef.github.io`,
+    url: `https://github.com/alexjorgef/alexjorgef.github.io`,
+  },
+  {
+    name: `alexjorgef`,
+    url: `https://github.com/alexjorgef/alexjorgef`,
+  },
+]
+
+const Portfolio: React.FC<PageProps<DataProps>> = ({ data }) => {
   const imageDisplay = useBreakpointValue({ base: `none`, md: `block` }, `md`)
+  const repoGh1 = data?.repoGh1?.repository
+  const repoGh2 = data?.repoGh2?.repository
+  const repoGh3 = data?.repoGh3?.repository
+  const repoGh4 = data?.repoGh4?.repository
+  const repoGh5 = data?.repoGh5?.repository
+  const repoGl1 = data?.repoGl1?.repository
+  const repoGl2 = data?.repoGl2?.repository
+  const isReposFetched = repoGh1 && repoGh2 && repoGh3 && repoGh4 && repoGh5 && repoGl1 && repoGl2
+  const reposGh = [repoGh1, repoGh2, repoGh3, repoGh4, repoGh5]
+  const reposGl = [repoGl1, repoGl2]
 
   return (
     <Layout>
       <SEO title="Portfolio" breadcrumbListItems={[{ name: `Portfolio`, url: `/portfolio` }]} />
       <SkipNavContent>
-        <Container py={space.paddingMedium}>
-          <Stack spacing="20" align="center">
+        <Container py={space.paddingSmall}>
+          <Stack spacing="32" align="center">
             <Stack spacing="3" align="center">
               <Heading as="h1">Portfolio</Heading>
               <Text variant="prominent" maxWidth="45ch" textAlign="center">
@@ -70,57 +152,92 @@ const Portfolio: React.FC<PageProps<DataProps>> = ({ data: { portfolio } }) => {
               </Text>
             </Stack>
             <Grid
-              gridTemplateColumns={[`1fr`, null, `repeat(1, 1fr)`]}
+              gridTemplateColumns={[`1fr`, null, `repeat(3, 1fr)`]}
               gap={8}
               width={[`100%`, null, null, `calc(100% + 3rem)`]}
             >
-              {portfolio.nodes.map((project, i, portfolioMapped) => {
+              {data?.portfolio.nodes.map((project, i) => {
                 const imageSrc = getSrc(project.featureImage)
                 return (
                   <Container key={project.slug}>
                     <GatsbyLink to={project.slug}>
-                      <Grid templateRows="repeat(1, 1fr)" templateColumns="repeat(3, 1fr)" gap={8}>
-                        <GridItem colSpan={2}>
-                          <HStack spacing="16px" align="center" justify="left">
-                            <Box>
-                              <ChakraHeading as="h2" size="2xl">
-                                {project.title}
-                              </ChakraHeading>
-                            </Box>
-                            <Box>
-                              {project.archived ? (
-                                <Tag colorScheme="blue">
-                                  <TagLabel>Archived</TagLabel>
-                                </Tag>
-                              ) : (
-                                <Tag colorScheme="green">
-                                  <TagLabel>Active</TagLabel>
-                                </Tag>
-                              )}
-                            </Box>
-                          </HStack>
-                          <Text mt={4}>{project.description}</Text>
-                        </GridItem>
-                        <GridItem colSpan={1}>
-                          <Flex justifyContent="flex-end">
-                            <Image
-                              display={imageDisplay}
-                              borderRadius="lg"
-                              src={imageSrc}
-                              alt={project.title}
-                              width={`300px`}
-                              height={`300px`}
-                              objectFit="cover"
-                            />
-                          </Flex>
-                        </GridItem>
-                      </Grid>
+                      <GridItem colSpan={1} colStart={i % 2 === 0 ? 0 : 1}>
+                        <Flex justifyContent="flex-start" width="100%">
+                          <Image
+                            display={imageDisplay}
+                            borderRadius="lg"
+                            src={imageSrc}
+                            alt={project.title}
+                            // width={`300px`}
+                            width={`100%`}
+                            height={`250px`}
+                            objectFit="cover"
+                          />
+                        </Flex>
+                        <VStack spacing="8px" align="flex-start" justify="left" marginTop={`16px`}>
+                          <Box>
+                            <ChakraHeading as="h2" size="2xl">
+                              {project.title}
+                            </ChakraHeading>
+                          </Box>
+                          <Box>
+                            {project.archived ? (
+                              <Tag colorScheme="blue">
+                                <TagLabel>Archived</TagLabel>
+                              </Tag>
+                            ) : (
+                              <Tag colorScheme="green">
+                                <TagLabel>Active</TagLabel>
+                              </Tag>
+                            )}
+                          </Box>
+                        </VStack>
+                        <Divider mt={4} orientation="horizontal" />
+                        <Text mt={4}>{project.description}</Text>
+                      </GridItem>
                     </GatsbyLink>
-                    {i + 1 !== portfolioMapped.length && <Divider mt={4} orientation="horizontal" />}
+                    {/* {i + 1 !== portfolioMapped.length && <Divider mt={4} orientation="horizontal" />} */}
                   </Container>
                 )
               })}
             </Grid>
+          </Stack>
+          <Stack spacing="32" align="center" paddingTop="32">
+            <Stack spacing="3" align="center">
+              <Heading as="h1">Open Source</Heading>
+              <Text variant="prominent" maxWidth="40ch" textAlign="center">
+                Highly motivated by the entire ecosystem, I love working with modern technologies, building, and
+                designing awesome projects.
+              </Text>
+            </Stack>
+            {isReposFetched ? (
+              <Stack direction="column" width="100%" spacing={6}>
+                <Flex justifyContent="space-between" alignItems="center">
+                  <Badge variant="dark">Featured Projects</Badge>
+                  <SubtleButton isExternal to="https://www.github.com/alexjorgef">
+                    GitHub
+                  </SubtleButton>
+                </Flex>
+                <GitRepoGallery repositories={reposGh} />
+                <Flex justifyContent="flex-end" alignItems="center">
+                  <SubtleButton isExternal to="https://www.gitlab.com/alexjorgef">
+                    GitLab
+                  </SubtleButton>
+                </Flex>
+                <GitRepoGallery repositories={reposGl} inverted />
+                <Flex justifyContent="space-between" flexWrap="wrap">
+                  {openSourceRepos.map((repo) => (
+                    <ChakraLink key={repo.url} href={repo.url} p={2}>
+                      {repo.name}
+                    </ChakraLink>
+                  ))}
+                </Flex>
+              </Stack>
+            ) : (
+              <Box p={2} borderRadius="lg">
+                <strong>GATSBY_GITHUB_TOKEN</strong> for gatsby-source-graphql necessary.
+              </Box>
+            )}
           </Stack>
         </Container>
       </SkipNavContent>
@@ -144,6 +261,62 @@ export const query = graphql`
             gatsbyImageData(placeholder: BLURRED, formats: [AUTO, WEBP, AVIF], quality: 90)
           }
         }
+      }
+    }
+    repoGh1: github {
+      repository(name: "go-bittrex", owner: "alexjorgef") {
+        stargazerCount
+        description
+        name
+        url
+      }
+    }
+    repoGh2: github {
+      repository(name: "cv", owner: "alexjorgef") {
+        stargazerCount
+        description
+        name
+        url
+      }
+    }
+    repoGh3: github {
+      repository(name: "website", owner: "alexjorgef") {
+        stargazerCount
+        description
+        name
+        url
+      }
+    }
+    repoGh4: github {
+      repository(name: "signalr", owner: "alexjorgef") {
+        stargazerCount
+        description
+        name
+        url
+      }
+    }
+    repoGh5: github {
+      repository(name: "telegram-git-bot", owner: "alexjorgef") {
+        stargazerCount
+        description
+        name
+        url
+      }
+    }
+    repoGl1: gitlab {
+      repository: project(fullPath: "alexjorgef/alexjorgef.gitlab.io") {
+        stargazerCount: starCount
+        description
+        name
+        url: webUrl
+      }
+    }
+    repoGl2: gitlab {
+      repository: project(fullPath: "alexjorgef/test") {
+        stargazerCount: starCount
+        description
+        name
+        url: webUrl
       }
     }
   }

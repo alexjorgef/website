@@ -17,40 +17,17 @@
 
 import * as React from "react"
 import { PageProps, graphql } from "gatsby"
-import { FaStar } from "react-icons/fa"
-import {
-  Container,
-  Stack,
-  Text,
-  Badge,
-  Box,
-  Flex,
-  Grid,
-  useColorModeValue,
-  Link as ChakraLink,
-  Tag,
-  TagLeftIcon,
-  TagLabel,
-  usePrefersReducedMotion,
-} from "@chakra-ui/react"
+import { Stack, Text, Badge, Box, Flex, Grid, usePrefersReducedMotion } from "@chakra-ui/react"
 import { Link } from "../components/link"
 import { Layout } from "../components/blocks/layout"
 import { MotionBox } from "../components/blocks/motion-box"
 import { FullWidthContainer } from "../components/blocks/full-width-container"
-import { Spacer } from "../components/blocks/spacer"
 import { SkipNavContent } from "../components/a11y/skip-nav"
 import { Heading } from "../components/typography/heading"
 import { PrimaryButton, SubtleButton } from "../components/buttons"
 import { space } from "../constants/space"
 import { SEO } from "../components/seo"
 import { homepage } from "../constants/json-ld"
-
-type RepositoryInfo = {
-  stargazerCount: number
-  description: string
-  name: string
-  url: string
-}
 
 type DataProps = {
   posts: {
@@ -66,12 +43,6 @@ type DataProps = {
       title: string
       slug: string
     }[]
-  }
-  primaryRepo?: {
-    repository?: RepositoryInfo
-  }
-  secondaryRepo?: {
-    repository?: RepositoryInfo
   }
   locales: {
     nodes: {
@@ -89,34 +60,11 @@ const cardGradients = [
   `linear(to-tr, #243949, #517FA4)`,
 ]
 
-const openSourceRepos = [
-  {
-    name: `cv`,
-    url: `https://github.com/alexjorgef/cv`,
-  },
-  {
-    name: `sliverbot`,
-    url: `https://github.com/alexjorgef/sliverbot`,
-  },
-  {
-    name: `invisiblespider`,
-    url: `https://github.com/alexjorgef/invisiblespider`,
-  },
-  {
-    name: `website`,
-    url: `https://github.com/alexjorgef/website`,
-  },
-]
-
 const Index: React.FC<PageProps<DataProps>> = ({ data }) => {
-  const secondaryRepoBg = useColorModeValue(`blueGray.100`, `blueGray.800`)
   const shouldReduceMotion = usePrefersReducedMotion()
   const [firstPost, ...rest] = data.posts.nodes
   const otherPosts = [...rest]
   const localeDefault = data.locales.nodes[0].name
-  const primRepo = data?.primaryRepo?.repository
-  const secRepo = data?.secondaryRepo?.repository
-
   return (
     <Layout>
       <SEO>
@@ -217,74 +165,10 @@ const Index: React.FC<PageProps<DataProps>> = ({ data }) => {
             </Stack>
           </Stack>
         </FullWidthContainer>
-        <Container>
+        {/* <Container>
           <Flex alignItems="center" flexDirection="column" pb={space.paddingSmall}>
-            <Heading as="h2">Open Source</Heading>
-            <Text variant="prominent" maxWidth="40ch" textAlign="center">
-              Highly motivated by the entire ecosystem, I love working with modern technologies, building, and designing
-              awesome projects.
-            </Text>
-            <Spacer axis="vertical" size={20} />
-            <Stack direction="column" width="100%" spacing={6}>
-              <Flex justifyContent="space-between" alignItems="center">
-                <Badge variant="dark">Featured Projects</Badge>
-                <SubtleButton isExternal to="https://www.github.com/alexjorgef">
-                  GitHub
-                </SubtleButton>
-              </Flex>
-              <Grid gridTemplateColumns={[`1fr`, null, null, `2fr 1fr`]} gap={6}>
-                {primRepo && secRepo ? (
-                  <>
-                    <Box bg="primaryBg" color="#e7f1ff" p={6} borderRadius="lg">
-                      <Flex flexDirection="row" justifyContent="space-between" mb={6}>
-                        <ChakraLink
-                          fontSize={[`lg`, null, null, null, `1.3125rem`]}
-                          color="white"
-                          fontWeight="bold"
-                          href={primRepo.url}
-                        >
-                          {primRepo.name}
-                        </ChakraLink>
-                        <Tag variant="subtle" colorScheme="blue">
-                          <TagLeftIcon as={FaStar} />
-                          <TagLabel>{primRepo.stargazerCount}</TagLabel>
-                        </Tag>
-                      </Flex>
-                      <Text>{primRepo.description}</Text>
-                    </Box>
-                    <Box bg={secondaryRepoBg} p={6} borderRadius="lg">
-                      <Flex flexDirection="row" justifyContent="space-between" mb={6}>
-                        <ChakraLink
-                          fontSize={[`lg`, null, null, null, `1.3125rem`]}
-                          fontWeight="bold"
-                          href={secRepo.url}
-                        >
-                          {secRepo.name}
-                        </ChakraLink>
-                        <Tag variant="subtle" colorScheme="gray">
-                          <TagLeftIcon as={FaStar} />
-                          <TagLabel>{secRepo.stargazerCount}</TagLabel>
-                        </Tag>
-                      </Flex>
-                      <Text>{secRepo.description}</Text>
-                    </Box>
-                  </>
-                ) : (
-                  <Box p={2} borderRadius="lg">
-                    <strong>GATSBY_GITHUB_TOKEN</strong> for gatsby-source-graphql necessary.
-                  </Box>
-                )}
-              </Grid>
-              <Flex justifyContent="space-between" flexWrap="wrap">
-                {openSourceRepos.map((repo) => (
-                  <ChakraLink key={repo.url} href={repo.url} p={2}>
-                    {repo.name}
-                  </ChakraLink>
-                ))}
-              </Flex>
-            </Stack>
           </Flex>
-        </Container>
+        </Container> */}
       </SkipNavContent>
     </Layout>
   )
@@ -294,7 +178,7 @@ export default Index
 
 export const query = graphql`
   {
-    posts: allPost(filter: { published: { eq: true } }, sort: { fields: date, order: DESC }, limit: 4) {
+    posts: allPost(filter: { published: { eq: true } }, sort: { fields: date, order: DESC }, limit: 7) {
       nodes {
         title
         description
@@ -317,16 +201,56 @@ export const query = graphql`
         name
       }
     }
-    primaryRepo: github {
-      repository(name: "alexjorgef", owner: "alexjorgef") {
+    repoGh1: github {
+      repository(name: "go-bittrex", owner: "alexjorgef") {
         stargazerCount
         description
         name
         url
       }
     }
-    secondaryRepo: gitlab {
+    repoGh2: github {
+      repository(name: "cv", owner: "alexjorgef") {
+        stargazerCount
+        description
+        name
+        url
+      }
+    }
+    repoGh3: github {
+      repository(name: "website", owner: "alexjorgef") {
+        stargazerCount
+        description
+        name
+        url
+      }
+    }
+    repoGh4: github {
+      repository(name: "signalr", owner: "alexjorgef") {
+        stargazerCount
+        description
+        name
+        url
+      }
+    }
+    repoGh5: github {
+      repository(name: "telegram-git-bot", owner: "alexjorgef") {
+        stargazerCount
+        description
+        name
+        url
+      }
+    }
+    repoGl1: gitlab {
       repository: project(fullPath: "alexjorgef/alexjorgef.gitlab.io") {
+        stargazerCount: starCount
+        description
+        name
+        url: webUrl
+      }
+    }
+    repoGl2: gitlab {
+      repository: project(fullPath: "alexjorgef/test") {
         stargazerCount: starCount
         description
         name

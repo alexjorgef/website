@@ -76,9 +76,6 @@ export const onRenderBody: GatsbySSR["onRenderBody"] = ({ setHeadComponents, set
           __html: panelbearSnippet,
         }}
       />,
-      <noscript>
-        <style>{`.only-no-js {display: flex !important;}`}</style>
-      </noscript>,
     ])
   }
   return null

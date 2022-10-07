@@ -19,7 +19,7 @@ import { CreateNodeArgs, GatsbyNode, PluginOptions } from "gatsby"
 import path from "path"
 import Prando from "prando"
 import get from "lodash.get"
-import { mdxResolverPassthrough, slugify, withDefaults, shuffle, findKey } from "utils"
+import { mdxResolverPassthrough, slugify, withDefaults, shuffle } from "utils"
 
 export const createSchemaCustomization: GatsbyNode["createSchemaCustomization"] = ({ actions }): void => {
   const { createTypes, createFieldExtension } = actions
@@ -252,7 +252,7 @@ type WritingNode = {
   frontmatter: {
     slug?: string
     image?: string
-    category: "JavaScript" | "Environment"
+    category: "JavaScript" | "Environment" | "Mathematics" | "Artificial Intelligence"
     date: string
     lastUpdated?: string
     description: string
