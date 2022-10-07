@@ -19,7 +19,7 @@ import { CreateNodeArgs, GatsbyNode, PluginOptions } from "gatsby"
 import path from "path"
 import Prando from "prando"
 import get from "lodash.get"
-import { mdxResolverPassthrough, slugify, withDefaults, shuffle, findKey } from "utils"
+import { mdxResolverPassthrough, slugify, withDefaults, shuffle } from "utils"
 
 export const createSchemaCustomization: GatsbyNode["createSchemaCustomization"] = ({ actions }): void => {
   const { createTypes, createFieldExtension } = actions
@@ -252,7 +252,7 @@ type WritingNode = {
   frontmatter: {
     slug?: string
     image?: string
-    category: "JavaScript" | "Environment"
+    category: "JavaScript" | "Environment" | "Mathematics" | "Artificial Intelligence"
     date: string
     lastUpdated?: string
     description: string
@@ -322,7 +322,7 @@ export const onCreateNode = (
   }
 
   const { createNode, createParentChildLink, createNodeField } = actions
-  const { writingSource, gardenSource, portfolioSource, awesomeSource, locales } = withDefaults(themeOptions)
+  const { writingSource, gardenSource, portfolioSource, awesomeSource, localeInitial } = withDefaults(themeOptions)
 
   const fileNode = getNode(node.parent)
   const source = fileNode.sourceInstanceName
@@ -330,8 +330,7 @@ export const onCreateNode = (
   if (source === writingSource) {
     const name = path.basename(node.fileAbsolutePath, `.mdx`)
     const isDefault = name === `index`
-    const defaultKey = findKey(locales, (o) => o.default === true)
-    const lang = isDefault ? defaultKey : name.split(`.`)[1]
+    const lang = isDefault ? localeInitial : name.split(`.`)[1]
 
     const langs: string[] = []
     const nodes = getNodesByType(`File`)
@@ -342,8 +341,7 @@ export const onCreateNode = (
             if (refNode.relativeDirectory === fileNode.relativeDirectory) {
               const refName = path.basename(`${refNode.absolutePath}`, `.mdx`)
               const refIsDefault = refName === `index`
-              const refDefaultKey = findKey(locales, (o) => o.default === true)
-              const refLang = refIsDefault ? refDefaultKey : refName.split(`.`)[1]
+              const refLang = refIsDefault ? localeInitial : refName.split(`.`)[1]
               langs.push(refLang)
             }
           }
