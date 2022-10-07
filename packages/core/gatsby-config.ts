@@ -21,7 +21,7 @@ import remarkSmartyPants from "remark-smartypants"
 import camelCase from "lodash.camelcase"
 import { withDefaults, capitalize } from "utils"
 
-const { GATSBY_GITHUB_TOKEN, GATSBY_GITLAB_TOKEN } = process.env
+const { GATSBY_GITHUB_TOKEN, GATSBY_GITLAB_TOKEN, GATSBY_DISCOGS_TOKEN } = process.env
 
 const gatsbyConfig = (themeOptions: PluginOptions): GatsbyConfig => {
   const options = withDefaults(themeOptions)
@@ -131,6 +131,13 @@ const gatsbyConfig = (themeOptions: PluginOptions): GatsbyConfig => {
         resolve: `gatsby-source-bandcamp`,
         options: {
           username: `alexjorgef`,
+        },
+      },
+      {
+        resolve: `gatsby-source-discogs`,
+        options: {
+          username: `alexjorgef`,
+          token: GATSBY_DISCOGS_TOKEN,
         },
       },
     ].filter(Boolean),

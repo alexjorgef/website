@@ -91,6 +91,7 @@ jobs:
         env:
           GATSBY_GITHUB_TOKEN: ${{ secrets.GATSBY_GITHUB_TOKEN }}
           GATSBY_GITLAB_TOKEN: ${{ secrets.GATSBY_GITLAB_TOKEN }}
+          GATSBY_DISCOGS_TOKEN: ${{ secrets.GATSBY_DISCOGS_TOKEN }}
           GATSBY_FORMSPREE_ID: ${{ secrets.GATSBY_FORMSPREE_ID }}
           GATSBY_RECAPTCHA_V2_SITE_KEY: ${{ secrets.GATSBY_RECAPTCHA_V2_SITE_KEY }}
           GATSBY_DISQUS_NAME: ${{ secrets.GATSBY_DISQUS_NAME }}
@@ -101,6 +102,7 @@ jobs:
         env:
           GATSBY_GITHUB_TOKEN: ${{ secrets.GATSBY_GITHUB_TOKEN }}
           GATSBY_GITLAB_TOKEN: ${{ secrets.GATSBY_GITLAB_TOKEN }}
+          GATSBY_DISCOGS_TOKEN: ${{ secrets.GATSBY_DISCOGS_TOKEN }}
           GATSBY_FORMSPREE_ID: ${{ secrets.GATSBY_FORMSPREE_ID }}
           GATSBY_RECAPTCHA_V2_SITE_KEY: ${{ secrets.GATSBY_RECAPTCHA_V2_SITE_KEY }}
           GATSBY_DISQUS_NAME: ${{ secrets.GATSBY_DISQUS_NAME }}

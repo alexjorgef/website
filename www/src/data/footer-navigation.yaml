@@ -10,11 +10,11 @@
     name: Library
     link: /lib
   items:
+    - name: Inspiration
+      link: /lib/inspiration
     - name: Mixtapes
       link: /lib/mixtapes
-    - name: Wishlist
-      link: /lib/wishlist
-    - name: Generative
+    - name: Generative Art
       link: /lib/generative
 - heading:
     name: About

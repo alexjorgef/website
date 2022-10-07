@@ -1,7 +1,7 @@
 {
   "name": "gatsby-source-mixcloud",
   "version": "0.0.1",
-  "description": "Gatsby Mixcloud Api Source",
+  "description": "Gatsby Mixcloud API Source",
   "repository": "https://github.com/alexjorgef/gatsby-source-mixcloud.git",
   "main": "index.js",
   "keywords": [
