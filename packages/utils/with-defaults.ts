@@ -23,9 +23,9 @@ export const defaults = {
   awesomeSource: `content/awesome`,
   portfolioSource: `content/portfolio`,
   dataSource: `src/data`,
+  localeInitial: `en`,
   locales: {
     en: {
-      default: true,
       path: `en`,
       locale: `en-US`,
       dateFormat: `DD/MM/YYYY`,
@@ -33,7 +33,6 @@ export const defaults = {
       ogLanguage: `en_US`,
     },
     pt: {
-      default: false,
       path: `pt`,
       locale: `pt-PT`,
       dateFormat: `DD-MM-YYYY`,
@@ -55,6 +54,7 @@ export const withDefaults = (themeOptions: PluginOptions) => {
   const portfolioSource = (themeOptions.portfolioSource as string) || defaults.portfolioSource
   const dataSource = (themeOptions.dataSource as string) || defaults.dataSource
   const locales = (themeOptions.locales as string) || defaults.locales
+  const localeInitial = (themeOptions.localeInitial as string) || defaults.localeInitial
 
   return {
     writingSource,
@@ -63,5 +63,6 @@ export const withDefaults = (themeOptions: PluginOptions) => {
     portfolioSource,
     dataSource,
     locales,
+    localeInitial,
   }
 }
