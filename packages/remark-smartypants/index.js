@@ -15,9 +15,10 @@
  * Copyright (C) 2022  Alexandre Ferreira
  */
 
+import smartypants from "retext-smartypants"
+
 const retext = require(`retext`)
 const visit = require(`unist-util-visit`)
-const smartypants = require(`retext-smartypants`)
 
 const remarkSmartypants = (options) => {
   const processor = retext().use(smartypants, options)
