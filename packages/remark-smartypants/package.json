@@ -6,8 +6,8 @@
   "main": "index.js",
   "license": "GPLv3",
   "dependencies": {
-    "retext": "^7.0.1",
-    "retext-smartypants": "^4.0.0",
+    "retext": "^8.1.0",
+    "retext-smartypants": "^5.2.0",
     "unist-util-visit": "^2.0.3"
   }
 }
