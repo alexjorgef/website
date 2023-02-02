@@ -47,7 +47,7 @@
     "babel-jest": "^28.1.0",
     "babel-preset-gatsby": "^2.14.0",
     "cross-env": "^7.0.3",
-    "cspell": "^5.20.0",
+    "cspell": "^6.20.1",
     "eslint": "^8.15.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^8.5.0",
