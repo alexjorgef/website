@@ -23,33 +23,10 @@ import interVariableWoff2 from "./src/assets/fonts/Inter-roman.var.woff2"
 // @ts-ignore
 import crimsonProVariableWoff2 from "./src/assets/fonts/Crimson-Pro.var.woff2"
 
-const PANELBEAR_SITE_ID = process.env.GATSBY_PANELBEAR_SITE_ID
-
-const PANELBEAR_CONFIG = {
-  site: PANELBEAR_SITE_ID,
-  spaMode: `history`,
-  debug: false,
-}
-
 export const onRenderBody: GatsbySSR["onRenderBody"] = ({ setHeadComponents, setPostBodyComponents }) => {
   if (process.env.NODE_ENV === `production`) {
-    const panelbearScriptProps = {
-      src: `https://cdn.panelbear.com/analytics.js?site=${PANELBEAR_SITE_ID}`,
-    }
 
-    const panelbearSnippet = `window.panelbear = window.panelbear || function() { (window.panelbear.q = window.panelbear.q || []).push(arguments); }; panelbear('config', ${JSON.stringify(
-      PANELBEAR_CONFIG
-    )});`
-
-    setPostBodyComponents([
-      <script key="panelbear-analytics-src" async {...panelbearScriptProps} />,
-      <script
-        key="panelbear-analytics-code"
-        dangerouslySetInnerHTML={{
-          __html: panelbearSnippet,
-        }}
-      />,
-    ])
+    setPostBodyComponents([])
 
     return setHeadComponents([
       <link rel="preload" href="/icons.svg" as="image" type="image/svg+xml" key="svgIcons" />,
@@ -68,13 +45,6 @@ export const onRenderBody: GatsbySSR["onRenderBody"] = ({ setHeadComponents, set
         type="font/woff2"
         crossOrigin="anonymous"
         key="crimsonFont"
-      />,
-      <script key="panelbear-analytics-src" async {...panelbearScriptProps} />,
-      <script
-        key="panelbear-analytics-code"
-        dangerouslySetInnerHTML={{
-          __html: panelbearSnippet,
-        }}
       />,
     ])
   }

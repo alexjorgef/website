@@ -21,8 +21,4 @@ import { I8nProvider } from "./src/context/i18n-provider"
 
 export const wrapRootElement: GatsbyBrowser["wrapRootElement"] = ({ element }) => <I8nProvider>{element}</I8nProvider>
 
-export const onRouteUpdate: GatsbyBrowser["onRouteUpdate"] = () => {
-  if (process.env.NODE_ENV === `production` && typeof window.panelbear !== `undefined`) {
-    window.panelbear(`track`, document.location.pathname)
-  }
-}
+export const onRouteUpdate: GatsbyBrowser["onRouteUpdate"] = () => {}

@@ -25,7 +25,5 @@ declare module "react" {
 }
 
 declare global {
-  interface Window {
-    panelbear: (command: string, event: string) => void
-  }
+  interface Window {}
 }

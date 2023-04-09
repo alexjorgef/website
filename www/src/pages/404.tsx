@@ -26,10 +26,6 @@ import { Heading } from "../components/typography/heading"
 import { Link } from "../components/link"
 
 const NotFound: React.FC<PageProps> = () => {
-  React.useEffect(() => {
-    window.panelbear(`track`, document.location.pathname)
-  }, [])
-
   return (
     <Layout>
       <SEO title="404 - Not Found" description="Sorry, there is nothing at this URL." />

@@ -138,7 +138,6 @@ jobs:
           GATSBY_FORMSPREE_ID: ${{ secrets.GATSBY_FORMSPREE_ID }}
           GATSBY_RECAPTCHA_V2_SITE_KEY: ${{ secrets.GATSBY_RECAPTCHA_V2_SITE_KEY }}
           GATSBY_DISQUS_NAME: ${{ secrets.GATSBY_DISQUS_NAME }}
-          GATSBY_PANELBEAR_SITE_ID: ${{ secrets.GATSBY_PANELBEAR_SITE_ID }}
 
       - name: Run Playwright 🧪
         run: yarn e2e:build
@@ -149,7 +148,6 @@ jobs:
           GATSBY_FORMSPREE_ID: ${{ secrets.GATSBY_FORMSPREE_ID }}
           GATSBY_RECAPTCHA_V2_SITE_KEY: ${{ secrets.GATSBY_RECAPTCHA_V2_SITE_KEY }}
           GATSBY_DISQUS_NAME: ${{ secrets.GATSBY_DISQUS_NAME }}
-          GATSBY_PANELBEAR_SITE_ID: ${{ secrets.GATSBY_PANELBEAR_SITE_ID }}
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v3

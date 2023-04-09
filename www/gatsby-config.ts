@@ -47,11 +47,6 @@ if (!process.env.GATSBY_DISQUS_NAME || process.env.GATSBY_DISQUS_NAME === `xxx`)
   A Disqus shortname as GATSBY_DISQUS_NAME is required to build some parts of the website.`)
 }
 
-if (!process.env.GATSBY_PANELBEAR_SITE_ID || process.env.GATSBY_PANELBEAR_SITE_ID === `xxx`) {
-  throw Error(`Check the README https://github.com/alexjorgef/website#readme\n
-  A site id for Panelbear as GATSBY_PANELBEAR_SITE_ID is required to build some parts of the website.`)
-}
-
 const shouldAnalyseBundle = process.env.ANALYSE_BUNDLE
 
 const gatsbyConfig: GatsbyConfig = {
