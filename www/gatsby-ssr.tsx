@@ -25,7 +25,6 @@ import crimsonProVariableWoff2 from "./src/assets/fonts/Crimson-Pro.var.woff2"
 
 export const onRenderBody: GatsbySSR["onRenderBody"] = ({ setHeadComponents, setPostBodyComponents }) => {
   if (process.env.NODE_ENV === `production`) {
-
     setPostBodyComponents([])
 
     return setHeadComponents([
