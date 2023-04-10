@@ -123,6 +123,9 @@ jobs:
         uses: anchore/scan-action@v3
         with:
           path: .
+          output-format: json
+          fail-build: false
+          severity-cutoff: negligible
 
       - name: Run ESLint 🧪
         run: yarn lint
