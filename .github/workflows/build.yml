@@ -119,6 +119,14 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable
 
+      - name: Scan current project
+        uses: anchore/scan-action@v3
+        with:
+          path: .
+          output-format: table
+          fail-build: false
+          severity-cutoff: negligible
+
       - name: Run ESLint 🧪
         run: yarn lint
 
