@@ -139,6 +139,11 @@ jobs:
           GATSBY_RECAPTCHA_V2_SITE_KEY: ${{ secrets.GATSBY_RECAPTCHA_V2_SITE_KEY }}
           GATSBY_DISQUS_NAME: ${{ secrets.GATSBY_DISQUS_NAME }}
 
+      - name: Scan current project
+        uses: anchore/scan-action@v3
+        with:
+          path: www/public
+
       - name: Run Playwright 🧪
         run: yarn e2e:build
         env:
