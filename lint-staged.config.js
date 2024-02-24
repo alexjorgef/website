@@ -16,6 +16,6 @@
  */
 
 module.exports = {
-  "*.{js,ts,tsx}": [`eslint --ignore-path .gitignore --ignore-path .prettierignore --fix`],
-  "*.{md,mdx,json,yaml}": [`prettier "**/*.{md,mdx,json,yaml}" --write`],
+  "*.{js,ts,tsx,mdx,mjs}": [`eslint --ignore-path .gitignore --ignore-path .prettierignore --fix`],
+  "*.{md,json,yaml}": [`prettier "**/*.{md,json,yaml}" --write`],
 }

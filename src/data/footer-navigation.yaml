@@ -1,0 +1,39 @@
+- heading:
+    name: Writing
+    link: /writing
+    isExternal: false
+  items:
+    - name: Notebook
+      link: /notebook
+      isExternal: false
+    - name: Awesomes
+      link: /awesomes
+      isExternal: false
+- heading:
+    name: Library
+    link: /lib
+    isExternal: false
+  items:
+    - name: Inspiration
+      link: /lib/inspiration
+      isExternal: false
+    - name: Mixtapes
+      link: /lib/mixtapes
+      isExternal: false
+    - name: Generative Art
+      link: /lib/generative
+      isExternal: false
+- heading:
+    name: About
+    link: /about
+    isExternal: false
+  items:
+    - name: Portfolio
+      link: /about/portfolio
+      isExternal: false
+    - name: Uses
+      link: /about/uses
+      isExternal: false
+    - name: Contact
+      link: /contact
+      isExternal: false
