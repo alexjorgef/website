@@ -75,5 +75,5 @@ module.exports = {
     `pageview`,
     `Entrypoints`,
   ],
-  flagWords: [`hte`, `Gastby`],
+  flagWords: [`hte`, `Gastby`, `reponsive`, `GatsbyJS`, `GastbyJS`, `Alexandre`, `Ferreira`],
 }

@@ -1,6 +1,5 @@
 typings.d.ts
 index.d.ts
-cypress/e2e/build
 logs
 *.log
 npm-debug.log*
@@ -27,8 +26,11 @@ public
 *.jpg
 *.ico
 *.md
-*.mdx
 *.json
 LICENSE
 *.txt
 *.toml
+results
+**/static/**
+**/*.hbs
+scripts
