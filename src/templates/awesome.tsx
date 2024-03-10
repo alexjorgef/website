@@ -17,7 +17,6 @@
 
 import * as React from "react"
 import { PageProps, graphql } from "gatsby"
-import { MDXRenderer } from "gatsby-plugin-mdx"
 import { MDXProvider } from "@mdx-js/react"
 import { RiPlantFill as PlantIcon } from "react-icons/ri"
 import {
@@ -56,10 +55,10 @@ type DataProps = {
     seoDate: string
     yearDate: string
     tableOfContents?: {
-      items?: TocItem[]
+      items?: Array<TocItem>
     }
     date: string
-    tags: string[]
+    tags: Array<string>
     excerpt: string
     parent: {
       parent: {

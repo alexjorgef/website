@@ -15,7 +15,7 @@
  * Copyright (C) 2022  Alexandre Ferreira
  */
 
-const Container = {
+export const Container = {
   baseStyle: {
     w: `100%`,
     mx: `auto`,
@@ -32,5 +32,3 @@ const Container = {
     },
   },
 }
-
-export default Container

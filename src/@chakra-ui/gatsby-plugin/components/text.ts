@@ -18,7 +18,7 @@
 import { mode } from "@chakra-ui/theme-tools"
 import { textStyles as foundationTextStyles } from "../foundations/typography"
 
-const Text = {
+export const Text = {
   variants: {
     heading: (props) => ({
       color: mode(`black`, `white`)(props),
@@ -39,5 +39,3 @@ const Text = {
     }),
   },
 }
-
-export default Text

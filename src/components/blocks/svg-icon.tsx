@@ -30,7 +30,7 @@ export type SVGIconNames =
 
 type SVGIconProps = {
   id: SVGIconNames
-  [x: string]: any
+  [x: string]: unknown
 }
 
 /**

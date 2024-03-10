@@ -20,7 +20,7 @@ import { colorPalette, colors } from "./colors"
 
 const navBgTransparency = 0.85
 
-const semanticTokens = {
+export const semanticTokens = {
   colors: {
     primary: {
       default: `blue.600`,
@@ -104,5 +104,3 @@ const semanticTokens = {
     },
   },
 }
-
-export default semanticTokens

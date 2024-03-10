@@ -38,7 +38,7 @@ type RepositoryInfo = {
 }
 
 type GitRepoGalleryProps = {
-  repositories?: RepositoryInfo[]
+  repositories?: Array<RepositoryInfo>
   inverted?: boolean
 }
 

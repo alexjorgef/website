@@ -16,7 +16,7 @@
  */
 
 import * as React from "react"
-import { PageProps, graphql } from "gatsby"
+import { PageProps } from "gatsby"
 import { Container, Stack, Text, Grid, Link as ExternalLink, Image } from "@chakra-ui/react"
 import { Layout } from "../../components/blocks/layout"
 import { SkipNavContent } from "../../components/a11y/skip-nav"
@@ -26,18 +26,18 @@ import { SEO } from "../../components/seo"
 
 type DataProps = {
   userLists: {
-    nodes: {
+    nodes: Array<{
       id: string
       image_url: string
       name: string
       uri: string
-      items: {
+      items: Array<{
         id: string
         display_title: string
         image_url: string
         uri: string
-      }[]
-    }[]
+      }>
+    }>
   }
 }
 

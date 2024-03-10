@@ -31,23 +31,23 @@ import { homepage } from "../constants/json-ld"
 
 type DataProps = {
   posts: {
-    nodes: {
+    nodes: Array<{
       title: string
       description: string
       slug: string
       locale: string
-    }[]
+    }>
   }
   garden: {
-    nodes: {
+    nodes: Array<{
       title: string
       slug: string
-    }[]
+    }>
   }
   locales: {
-    nodes: {
+    nodes: Array<{
       name: string
-    }[]
+    }>
   }
 }
 

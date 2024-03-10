@@ -65,6 +65,11 @@ if (!GATSBY_DISQUS_NAME || GATSBY_DISQUS_NAME === `xxx`) {
   A Disqus shortname as GATSBY_DISQUS_NAME is required to build some parts of the website.`)
 }
 
+if (!GATSBY_DISCOGS_TOKEN || GATSBY_DISCOGS_TOKEN === `xxx`) {
+  console.warn(`Check the README https://github.com/alexjorgef/website#readme\n
+  A Disqus shortname as GATSBY_DISQUS_NAME is required to build some parts of the website.`)
+}
+
 const options = withDefaults({})
 
 /**

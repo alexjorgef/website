@@ -30,20 +30,20 @@ import { useI18nContext } from "../context/i18n-provider"
 
 type WritingProps = {
   posts: {
-    nodes: {
+    nodes: Array<{
       title: string
       date: string
       slug: string
       subtitle: string
       description: string
       locale: string
-      locales: string[]
-    }[]
+      locales: Array<string>
+    }>
   }
   locales: {
-    nodes: {
+    nodes: Array<{
       name: string
-    }[]
+    }>
   }
 }
 

@@ -19,7 +19,7 @@ import { mode } from "@chakra-ui/theme-tools"
 import { colors } from "../foundations/colors"
 import InnerContainerStyles from "./container"
 
-const FullWidthContainer = {
+export const FullWidthContainer = {
   parts: [`outer`, `inner`],
   baseStyle: {
     outer: {
@@ -121,5 +121,3 @@ const FullWidthContainer = {
     },
   },
 }
-
-export default FullWidthContainer

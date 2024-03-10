@@ -20,7 +20,7 @@ import { IconButton, useColorMode } from "@chakra-ui/react"
 import { FaMoon as MoonIcon } from "react-icons/fa"
 import { MdWbSunny as SunIcon } from "react-icons/md"
 
-export const Toggle: React.FC<React.PropsWithChildren<any>> = ({ ...props }) => {
+export const Toggle: React.FC<React.PropsWithChildren<unknown>> = ({ ...props }) => {
   const { colorMode, toggleColorMode } = useColorMode()
   const isLight = colorMode === `light`
   return (

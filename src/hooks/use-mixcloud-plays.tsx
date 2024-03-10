@@ -15,15 +15,15 @@
  * Copyright (C) 2022  Alexandre Ferreira
  */
 
-import { graphql, useStaticQuery } from "gatsby"
+// import { graphql, useStaticQuery } from "gatsby"
 
-type Props = {
-  cloudcasts: {
-    nodes: Array<{
-      play_count: number
-    }>
-  }
-}
+// type Props = {
+//   cloudcasts: {
+//     nodes: Array<{
+//       play_count: number
+//     }>
+//   }
+// }
 
 export const useMixcloudPlays = () => {
   // const data = useStaticQuery<Props>(graphql`
@@ -36,10 +36,11 @@ export const useMixcloudPlays = () => {
   //   }
   // `)
 
-  let totalPlays = 0
+  // let totalPlays = 0
   // data.cloudcasts.nodes.forEach((cloudcast) => {
   //   totalPlays += cloudcast.play_count
   // })
 
-  return totalPlays
+  const totalPlaysTemp = 0
+  return totalPlaysTemp
 }

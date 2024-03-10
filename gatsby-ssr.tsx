@@ -63,7 +63,9 @@ export const onRenderBody: GatsbySSR["onRenderBody"] = ({ setHeadComponents, set
     }
 
     setHeadComponents([
-      <script key="test-a">a</script>,
+      <script key="test-a" {...scriptProps}>
+        a
+      </script>,
     ])
   }
 }

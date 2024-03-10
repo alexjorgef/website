@@ -41,7 +41,7 @@ import { SkipNavContent } from "../components/a11y/skip-nav"
 import { Heading } from "../components/typography/heading"
 import { space } from "../constants/space"
 
-type DataProps = {}
+type DataProps = unknown
 
 const Contact: React.FC<PageProps<DataProps>> = () => {
   const [sendState, handleSubmit] = useForm(process.env.GATSBY_FORMSPREE_ID)
@@ -60,10 +60,11 @@ const Contact: React.FC<PageProps<DataProps>> = () => {
     }
   }, [sendState.succeeded, toast])
 
-  interface ContactFormProps {
+  interface IContactFormProps {
     name: string
     email: string
     message: string
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     "g-recaptcha-response": string
   }
 
@@ -77,7 +78,7 @@ const Contact: React.FC<PageProps<DataProps>> = () => {
     "g-recaptcha-response": Yup.string().required(`Robots are not welcome yet!`),
   })
 
-  const initialValues: ContactFormProps = {
+  const initialValues: IContactFormProps = {
     name: ``,
     email: ``,
     message: ``,

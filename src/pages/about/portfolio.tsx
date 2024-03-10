@@ -53,7 +53,7 @@ type RepositoryInfo = {
 
 type DataProps = {
   portfolio: {
-    nodes: {
+    nodes: Array<{
       title: string
       date: string
       slug: string
@@ -61,7 +61,7 @@ type DataProps = {
       description: string
       archived: boolean
       featureImage: IGatsbyImageData
-    }[]
+    }>
   }
   repoGh1?: {
     repository?: RepositoryInfo

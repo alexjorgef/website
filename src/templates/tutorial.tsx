@@ -18,7 +18,7 @@
 import * as React from "react"
 import { PageProps, graphql } from "gatsby"
 import { Divider, Text, Flex, Tag, TagLabel } from "@chakra-ui/react"
-import WritingView, { WritingViewDataProps } from "../components/writing/writing-view"
+import { WritingViewDataProps, WritingView } from "../components/writing/writing-view"
 import { Heading } from "../components/typography/heading"
 import { Spacer } from "../components/blocks/spacer"
 import { Link } from "../components/link"

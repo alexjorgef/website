@@ -21,7 +21,7 @@ import { MdLanguage as LanguageIcon } from "react-icons/md"
 import { useI18nContext } from "../../context/i18n-provider"
 import { useLocales } from "../../hooks/use-locales"
 
-export const LangSwitcher: React.FC<React.PropsWithChildren<any>> = ({ ...props }) => {
+export const LangSwitcher: React.FC<React.PropsWithChildren<unknown>> = ({ ...props }) => {
   const [locales] = useLocales()
   const { updateState, data: language } = useI18nContext()
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

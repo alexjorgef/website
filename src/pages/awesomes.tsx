@@ -46,21 +46,21 @@ import { SVGIconNames, SVGIcon } from "../components/blocks/svg-icon"
 
 type DataProps = {
   awesomes: {
-    group: {
+    group: Array<{
       title: string
-    }[]
-    nodes: {
+    }>
+    nodes: Array<{
       title: string
       slug: string
       icon: SVGIconNames
       lastUpdated: string
-      tags: string[]
-    }[]
+      tags: Array<string>
+    }>
   }
 }
 
-interface State {
-  tags: string[]
+interface IState {
+  tags: Array<string>
   searchQuery: string
 }
 
@@ -69,12 +69,12 @@ type Action =
   | { type: `REMOVE_TAG`; payload: string }
   | { type: `SET_QUERY`; payload: string }
 
-const initialState: State = {
+const initialState: IState = {
   tags: [],
   searchQuery: ``,
 }
 
-const reducer = (state: State, action: Action) => {
+const reducer = (state: IState, action: Action) => {
   switch (action.type) {
     case `ADD_TAG`:
       return { ...state, tags: state.tags.concat(action.payload) }
@@ -94,7 +94,7 @@ const reducer = (state: State, action: Action) => {
 }
 
 const Awesomes: React.FC<PageProps<DataProps>> = ({ data: { awesomes }, location }) => {
-  const [state, dispatch] = useQueryStringReducer<State, Action>({
+  const [state, dispatch] = useQueryStringReducer<IState, Action>({
     initialState,
     location,
     reducer,

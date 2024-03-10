@@ -28,7 +28,7 @@ type CodeProps = {
   language: string
   withLineNumbers?: boolean
   metastring?: string
-  [key: string]: any
+  [key: string]: unknown
 }
 
 export const Code = ({

@@ -17,7 +17,6 @@
 
 import * as React from "react"
 import { PageProps, graphql } from "gatsby"
-import { MDXRenderer } from "gatsby-plugin-mdx"
 import { MDXProvider } from "@mdx-js/react"
 import { RiPlantFill as PlantIcon } from "react-icons/ri"
 import { Container, Text, Divider, Flex, Tag, TagLabel, Grid, Box, Icon, Image } from "@chakra-ui/react"
@@ -43,13 +42,13 @@ type DataProps = {
     yearDate: string
     date: string
     lastUpdated: string
-    tags: string[]
+    tags: Array<string>
     excerpt: string
     archived: boolean
-    images: {
+    images: Array<{
       image: IGatsbyImageData
       description: string
-    }[]
+    }>
     parent: {
       parent: {
         relativePath: string

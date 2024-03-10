@@ -19,19 +19,11 @@
 
 import * as React from "react"
 import * as Gatsby from "gatsby"
-import * as ReachRouter from "@reach/router"
-import { HelmetProvider } from "react-helmet-async"
 import { render } from "@testing-library/react"
+import { vi } from "vitest"
 import { SEO } from "../seo"
-import serializer from "../../../../jest/jest-serializer-react-helmet-async"
 
-expect.addSnapshotSerializer(serializer)
-
-const useStaticQuery = jest.spyOn(Gatsby, `useStaticQuery`)
-const useLocation = jest.spyOn(ReachRouter, `useLocation`)
-const mockUseLocationValue = {
-  href: `https://www.dev.cool`,
-}
+const useStaticQuery = vi.spyOn(Gatsby, `useStaticQuery`)
 const mockUseStaticQuery = {
   site: {
     siteMetadata: {
@@ -46,25 +38,19 @@ const mockUseStaticQuery = {
 }
 
 describe(`SEO component`, () => {
-  beforeEach(() => {
+  beforeAll(() => {
     useStaticQuery.mockImplementation(() => mockUseStaticQuery)
-    // @ts-ignore
-    useLocation.mockImplementation(() => mockUseLocationValue)
   })
 
-  afterEach(() => {
-    jest.clearAllMocks()
+  afterAll(() => {
+    vi.restoreAllMocks()
   })
 
   it(`should have sensible defaults`, () => {
-    const context: { helmet?: object } = {}
-    render(
-      <HelmetProvider context={context}>
-        <SEO />
-      </HelmetProvider>
-    )
+    const result = render(<SEO />, { container: document.head }).baseElement.parentElement?.firstChild
 
-    expect(context.helmet).toMatchInlineSnapshot(`
+    expect(result).toMatchInlineSnapshot(
+      `
       <html
         lang="en-US"
       >
@@ -193,23 +179,22 @@ describe(`SEO component`, () => {
         </head>
         <body />
       </html>
-    `)
+    `
+    )
   })
   it(`should accept all common props`, () => {
-    const context: { helmet?: object } = {}
-    render(
-      <HelmetProvider context={context}>
-        <SEO
-          title="Custom Title"
-          image="/path/to/image.png"
-          description="Custom Description"
-          pathname="/custom-path"
-          breadcrumbListItems={[{ name: `Hermione`, url: `/granger` }]}
-        />
-      </HelmetProvider>
-    )
+    const result = render(
+      <SEO
+        title="Custom Title"
+        image="/path/to/image.png"
+        description="Custom Description"
+        pathname="/custom-path"
+        breadcrumbListItems={[{ name: `Hermione`, url: `/granger` }]}
+      />,
+      { container: document.head }
+    ).baseElement.parentElement?.firstChild
 
-    expect(context.helmet).toMatchInlineSnapshot(`
+    expect(result).toMatchInlineSnapshot(`
       <html
         lang="en-US"
       >
@@ -350,14 +335,9 @@ describe(`SEO component`, () => {
     `)
   })
   it(`should hide with noIndex`, () => {
-    const context: { helmet?: object } = {}
-    render(
-      <HelmetProvider context={context}>
-        <SEO noIndex />
-      </HelmetProvider>
-    )
+    const result = render(<SEO noIndex />, { container: document.head }).baseElement.parentElement?.firstChild
 
-    expect(context.helmet).toMatchInlineSnapshot(`
+    expect(result).toMatchInlineSnapshot(`
       <html
         lang="en-US"
       >

@@ -16,9 +16,9 @@
  */
 
 import { mode } from "@chakra-ui/theme-tools"
-import sizes from "./foundations/sizes"
+import { sizes } from "./foundations/sizes"
 
-const styles = {
+export const styles = {
   global: (props) => ({
     html: {
       scrollPaddingTop: `calc(${sizes.navigationHeight} + 1rem)`,
@@ -50,5 +50,3 @@ const styles = {
     },
   }),
 }
-
-export default styles

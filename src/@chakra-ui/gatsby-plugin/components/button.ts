@@ -17,7 +17,7 @@
 
 import { mode } from "@chakra-ui/theme-tools"
 
-const Button = {
+export const Button = {
   baseStyle: {
     fontWeight: `normal`,
   },
@@ -57,5 +57,3 @@ const Button = {
     }),
   },
 }
-
-export default Button

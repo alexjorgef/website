@@ -17,7 +17,7 @@
 
 import { headingBaseStyles } from "../custom/typography"
 
-const Heading = {
+export const Heading = {
   defaultProps: {},
   baseStyle: {
     fontFamily: `heading`,
@@ -74,5 +74,3 @@ const Heading = {
     },
   },
 }
-
-export default Heading

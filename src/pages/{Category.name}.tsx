@@ -17,7 +17,7 @@
 
 import * as React from "react"
 import { PageProps, graphql } from "gatsby"
-import { IGatsbyImageData, GatsbyImage } from "gatsby-plugin-image"
+import { IGatsbyImageData } from "gatsby-plugin-image"
 import { CategoryHero } from "../components/writing/category-hero"
 import { CategoryView } from "../components/writing/category-view"
 import { SEO } from "../components/seo"
