@@ -51,134 +51,104 @@ describe(`SEO component`, () => {
 
     expect(result).toMatchInlineSnapshot(
       `
-      <html
-        lang="en-US"
-      >
-        <head>
-          <link
-            data-rh={true}
-            href="https://www.dev.cool"
-            rel="canonical"
-          />
-          <link
-            data-rh={true}
-            href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🔥</text></svg>"
-            rel="icon"
-            type="image/svg+xml"
-          />
-          <link
-            data-rh={true}
-            href="/apple-touch-icon.png"
-            rel="apple-touch-icon"
-          />
-          <meta
-            content="Hogwarts is magical"
-            data-rh={true}
-            name="description"
-          />
-          <meta
-            content="https://www.dev.cool/social/harry-potter.png"
-            data-rh={true}
-            name="image"
-          />
-          <meta
-            content="Harry Potter - Wizard"
-            data-rh={true}
-            property="og:title"
-          />
-          <meta
-            content="https://www.dev.cool"
-            data-rh={true}
-            property="og:url"
-          />
-          <meta
-            content="Hogwarts is magical"
-            data-rh={true}
-            property="og:description"
-          />
-          <meta
-            content="https://www.dev.cool/social/harry-potter.png"
-            data-rh={true}
-            property="og:image"
-          />
-          <meta
-            content="website"
-            data-rh={true}
-            property="og:type"
-          />
-          <meta
-            content="https://github.com/alexjorgef"
-            data-rh={true}
-            property="og:see_also"
-          />
-          <meta
-            content="https://www.behance.net/alexjorgef"
-            data-rh={true}
-            property="og:see_also"
-          />
-          <meta
-            content="https://dribbble.com/alexjorgef"
-            data-rh={true}
-            property="og:see_also"
-          />
-          <meta
-            content="https://youtube.com/AlexandreFerreiraJorge"
-            data-rh={true}
-            property="og:see_also"
-          />
-          <meta
-            content="https://twitter.com/alexandrejorgef"
-            data-rh={true}
-            property="og:see_also"
-          />
-          <meta
-            content="summary_large_image"
-            data-rh={true}
-            name="twitter:card"
-          />
-          <meta
-            content="Harry Potter - Wizard"
-            data-rh={true}
-            name="twitter:title"
-          />
-          <meta
-            content="https://www.dev.cool"
-            data-rh={true}
-            name="twitter:url"
-          />
-          <meta
-            content="Hogwarts is magical"
-            data-rh={true}
-            name="twitter:description"
-          />
-          <meta
-            content="https://www.dev.cool/social/harry-potter.png"
-            data-rh={true}
-            name="twitter:image"
-          />
-          <meta
-            content="@cool"
-            data-rh={true}
-            name="twitter:creator"
-          />
-          <meta
-            content="Alexandre Ferreira"
-            data-rh={true}
-            name="creator"
-          />
-          <meta
-            content="#0f172a"
-            data-rh={true}
-            name="msapplication-TileColor"
-          />
-          <title
-            data-rh={true}
-          >
-            Harry Potter - Wizard
-          </title>
-        </head>
-        <body />
-      </html>
+      <head>
+        <title>
+          Harry Potter - Wizard
+        </title>
+        <meta
+          content="Hogwarts is magical"
+          name="description"
+        />
+        <meta
+          content="https://www.dev.cool/social/harry-potter.png"
+          name="image"
+        />
+        <link
+          href="https://www.dev.cool"
+          rel="canonical"
+        />
+        <meta
+          content="Harry Potter - Wizard"
+          property="og:title"
+        />
+        <meta
+          content="https://www.dev.cool"
+          property="og:url"
+        />
+        <meta
+          content="Hogwarts is magical"
+          property="og:description"
+        />
+        <meta
+          content="https://www.dev.cool/social/harry-potter.png"
+          property="og:image"
+        />
+        <meta
+          content="website"
+          property="og:type"
+        />
+        <meta
+          content="https://github.com/alexjorgef"
+          property="og:see_also"
+        />
+        <meta
+          content="https://www.behance.net/alexjorgef"
+          property="og:see_also"
+        />
+        <meta
+          content="https://dribbble.com/alexjorgef"
+          property="og:see_also"
+        />
+        <meta
+          content="https://youtube.com/AlexandreFerreiraJorge"
+          property="og:see_also"
+        />
+        <meta
+          content="https://twitter.com/alexandrejorgef"
+          property="og:see_also"
+        />
+        <meta
+          content="summary_large_image"
+          name="twitter:card"
+        />
+        <meta
+          content="Harry Potter - Wizard"
+          name="twitter:title"
+        />
+        <meta
+          content="https://www.dev.cool"
+          name="twitter:url"
+        />
+        <meta
+          content="Hogwarts is magical"
+          name="twitter:description"
+        />
+        <meta
+          content="https://www.dev.cool/social/harry-potter.png"
+          name="twitter:image"
+        />
+        <meta
+          content="@cool"
+          name="twitter:creator"
+        />
+        <meta
+          content="Alexandre Ferreira"
+          name="creator"
+        />
+        <link
+          href="/favicon.svg"
+          rel="icon"
+          type="image/svg+xml"
+        />
+        <link
+          href="/apple-touch-icon.png"
+          rel="apple-touch-icon"
+        />
+        <meta
+          content="#0f172a"
+          name="msapplication-TileColor"
+        />
+      </head>
     `
     )
   })
@@ -195,282 +165,218 @@ describe(`SEO component`, () => {
     ).baseElement.parentElement?.firstChild
 
     expect(result).toMatchInlineSnapshot(`
-      <html
-        lang="en-US"
-      >
-        <head>
-          <link
-            data-rh={true}
-            href="https://www.dev.cool/custom-path"
-            rel="canonical"
-          />
-          <link
-            data-rh={true}
-            href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🔥</text></svg>"
-            rel="icon"
-            type="image/svg+xml"
-          />
-          <link
-            data-rh={true}
-            href="/apple-touch-icon.png"
-            rel="apple-touch-icon"
-          />
-          <meta
-            content="Custom Description"
-            data-rh={true}
-            name="description"
-          />
-          <meta
-            content="https://www.dev.cool/path/to/image.png"
-            data-rh={true}
-            name="image"
-          />
-          <meta
-            content="Custom Title"
-            data-rh={true}
-            property="og:title"
-          />
-          <meta
-            content="https://www.dev.cool/custom-path"
-            data-rh={true}
-            property="og:url"
-          />
-          <meta
-            content="Custom Description"
-            data-rh={true}
-            property="og:description"
-          />
-          <meta
-            content="https://www.dev.cool/path/to/image.png"
-            data-rh={true}
-            property="og:image"
-          />
-          <meta
-            content="website"
-            data-rh={true}
-            property="og:type"
-          />
-          <meta
-            content="https://github.com/alexjorgef"
-            data-rh={true}
-            property="og:see_also"
-          />
-          <meta
-            content="https://www.behance.net/alexjorgef"
-            data-rh={true}
-            property="og:see_also"
-          />
-          <meta
-            content="https://dribbble.com/alexjorgef"
-            data-rh={true}
-            property="og:see_also"
-          />
-          <meta
-            content="https://youtube.com/AlexandreFerreiraJorge"
-            data-rh={true}
-            property="og:see_also"
-          />
-          <meta
-            content="https://twitter.com/alexandrejorgef"
-            data-rh={true}
-            property="og:see_also"
-          />
-          <meta
-            content="summary_large_image"
-            data-rh={true}
-            name="twitter:card"
-          />
-          <meta
-            content="Custom Title"
-            data-rh={true}
-            name="twitter:title"
-          />
-          <meta
-            content="https://www.dev.cool/custom-path"
-            data-rh={true}
-            name="twitter:url"
-          />
-          <meta
-            content="Custom Description"
-            data-rh={true}
-            name="twitter:description"
-          />
-          <meta
-            content="https://www.dev.cool/path/to/image.png"
-            data-rh={true}
-            name="twitter:image"
-          />
-          <meta
-            content="@cool"
-            data-rh={true}
-            name="twitter:creator"
-          />
-          <meta
-            content="Alexandre Ferreira"
-            data-rh={true}
-            name="creator"
-          />
-          <meta
-            content="#0f172a"
-            data-rh={true}
-            name="msapplication-TileColor"
-          />
-          <script
-            dangerouslySetInnerHTML={
-              Object {
-                "__html": "{\\"@context\\":\\"https://schema.org\\",\\"@type\\":\\"BreadcrumbList\\",\\"description\\":\\"Breadcrumbs list\\",\\"itemListElement\\":[{\\"@type\\":\\"ListItem\\",\\"item\\":{\\"@id\\":\\"https://www.alexjorgef.com\\",\\"name\\":\\"Homepage\\"},\\"position\\":1},{\\"@type\\":\\"ListItem\\",\\"item\\":{\\"@id\\":\\"https://www.alexjorgef.com/granger\\",\\"name\\":\\"Hermione\\"},\\"position\\":2}],\\"name\\":\\"Breadcrumbs\\"}",
-              }
-            }
-            data-rh={true}
-            type="application/ld+json"
-          />
-          <title
-            data-rh={true}
-          >
-            Custom Title | Harry Potter
-          </title>
-        </head>
-        <body />
-      </html>
+
+      <head>
+        <title>
+          Custom Title | Harry Potter
+        </title>
+        <meta
+          content="Custom Description"
+          name="description"
+        />
+        <meta
+          content="https://www.dev.cool/path/to/image.png"
+          name="image"
+        />
+        <link
+          href="https://www.dev.cool/custom-path"
+          rel="canonical"
+        />
+        <meta
+          content="Custom Title | Harry Potter"
+          property="og:title"
+        />
+        <meta
+          content="https://www.dev.cool/custom-path"
+          property="og:url"
+        />
+        <meta
+          content="Custom Description"
+          property="og:description"
+        />
+        <meta
+          content="https://www.dev.cool/path/to/image.png"
+          property="og:image"
+        />
+        <meta
+          content="website"
+          property="og:type"
+        />
+        <meta
+          content="https://github.com/alexjorgef"
+          property="og:see_also"
+        />
+        <meta
+          content="https://www.behance.net/alexjorgef"
+          property="og:see_also"
+        />
+        <meta
+          content="https://dribbble.com/alexjorgef"
+          property="og:see_also"
+        />
+        <meta
+          content="https://youtube.com/AlexandreFerreiraJorge"
+          property="og:see_also"
+        />
+        <meta
+          content="https://twitter.com/alexandrejorgef"
+          property="og:see_also"
+        />
+        <meta
+          content="summary_large_image"
+          name="twitter:card"
+        />
+        <meta
+          content="Custom Title | Harry Potter"
+          name="twitter:title"
+        />
+        <meta
+          content="https://www.dev.cool/custom-path"
+          name="twitter:url"
+        />
+        <meta
+          content="Custom Description"
+          name="twitter:description"
+        />
+        <meta
+          content="https://www.dev.cool/path/to/image.png"
+          name="twitter:image"
+        />
+        <meta
+          content="@cool"
+          name="twitter:creator"
+        />
+        <meta
+          content="Alexandre Ferreira"
+          name="creator"
+        />
+        <link
+          href="/favicon.svg"
+          rel="icon"
+          type="image/svg+xml"
+        />
+        <link
+          href="/apple-touch-icon.png"
+          rel="apple-touch-icon"
+        />
+        <meta
+          content="#0f172a"
+          name="msapplication-TileColor"
+        />
+        <script
+          type="application/ld+json"
+        >
+          {"@context":"https://schema.org","@type":"BreadcrumbList","description":"Breadcrumbs list","itemListElement":[{"@type":"ListItem","item":{"@id":"https://www.alexjorgef.com","name":"Homepage"},"position":1},{"@type":"ListItem","item":{"@id":"https://www.alexjorgef.com/granger","name":"Hermione"},"position":2}],"name":"Breadcrumbs"}
+        </script>
+      </head>
     `)
   })
   it(`should hide with noIndex`, () => {
     const result = render(<SEO noIndex />, { container: document.head }).baseElement.parentElement?.firstChild
 
     expect(result).toMatchInlineSnapshot(`
-      <html
-        lang="en-US"
-      >
-        <head>
-          <link
-            data-rh={true}
-            href="https://www.dev.cool"
-            rel="canonical"
-          />
-          <link
-            data-rh={true}
-            href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🔥</text></svg>"
-            rel="icon"
-            type="image/svg+xml"
-          />
-          <link
-            data-rh={true}
-            href="/apple-touch-icon.png"
-            rel="apple-touch-icon"
-          />
-          <meta
-            content="Hogwarts is magical"
-            data-rh={true}
-            name="description"
-          />
-          <meta
-            content="https://www.dev.cool/social/harry-potter.png"
-            data-rh={true}
-            name="image"
-          />
-          <meta
-            content="Harry Potter - Wizard"
-            data-rh={true}
-            property="og:title"
-          />
-          <meta
-            content="https://www.dev.cool"
-            data-rh={true}
-            property="og:url"
-          />
-          <meta
-            content="Hogwarts is magical"
-            data-rh={true}
-            property="og:description"
-          />
-          <meta
-            content="https://www.dev.cool/social/harry-potter.png"
-            data-rh={true}
-            property="og:image"
-          />
-          <meta
-            content="website"
-            data-rh={true}
-            property="og:type"
-          />
-          <meta
-            content="https://github.com/alexjorgef"
-            data-rh={true}
-            property="og:see_also"
-          />
-          <meta
-            content="https://www.behance.net/alexjorgef"
-            data-rh={true}
-            property="og:see_also"
-          />
-          <meta
-            content="https://dribbble.com/alexjorgef"
-            data-rh={true}
-            property="og:see_also"
-          />
-          <meta
-            content="https://youtube.com/AlexandreFerreiraJorge"
-            data-rh={true}
-            property="og:see_also"
-          />
-          <meta
-            content="https://twitter.com/alexandrejorgef"
-            data-rh={true}
-            property="og:see_also"
-          />
-          <meta
-            content="summary_large_image"
-            data-rh={true}
-            name="twitter:card"
-          />
-          <meta
-            content="Harry Potter - Wizard"
-            data-rh={true}
-            name="twitter:title"
-          />
-          <meta
-            content="https://www.dev.cool"
-            data-rh={true}
-            name="twitter:url"
-          />
-          <meta
-            content="Hogwarts is magical"
-            data-rh={true}
-            name="twitter:description"
-          />
-          <meta
-            content="https://www.dev.cool/social/harry-potter.png"
-            data-rh={true}
-            name="twitter:image"
-          />
-          <meta
-            content="@cool"
-            data-rh={true}
-            name="twitter:creator"
-          />
-          <meta
-            content="Alexandre Ferreira"
-            data-rh={true}
-            name="creator"
-          />
-          <meta
-            content="#0f172a"
-            data-rh={true}
-            name="msapplication-TileColor"
-          />
-          <meta
-            content="noindex, nofollow"
-            data-rh={true}
-            name="robots"
-          />
-          <title
-            data-rh={true}
-          >
-            Harry Potter - Wizard
-          </title>
-        </head>
-        <body />
-      </html>
+      <head>
+        <title>
+          Harry Potter - Wizard
+        </title>
+        <meta
+          content="Hogwarts is magical"
+          name="description"
+        />
+        <meta
+          content="https://www.dev.cool/social/harry-potter.png"
+          name="image"
+        />
+        <link
+          href="https://www.dev.cool"
+          rel="canonical"
+        />
+        <meta
+          content="Harry Potter - Wizard"
+          property="og:title"
+        />
+        <meta
+          content="https://www.dev.cool"
+          property="og:url"
+        />
+        <meta
+          content="Hogwarts is magical"
+          property="og:description"
+        />
+        <meta
+          content="https://www.dev.cool/social/harry-potter.png"
+          property="og:image"
+        />
+        <meta
+          content="website"
+          property="og:type"
+        />
+        <meta
+          content="https://github.com/alexjorgef"
+          property="og:see_also"
+        />
+        <meta
+          content="https://www.behance.net/alexjorgef"
+          property="og:see_also"
+        />
+        <meta
+          content="https://dribbble.com/alexjorgef"
+          property="og:see_also"
+        />
+        <meta
+          content="https://youtube.com/AlexandreFerreiraJorge"
+          property="og:see_also"
+        />
+        <meta
+          content="https://twitter.com/alexandrejorgef"
+          property="og:see_also"
+        />
+        <meta
+          content="summary_large_image"
+          name="twitter:card"
+        />
+        <meta
+          content="Harry Potter - Wizard"
+          name="twitter:title"
+        />
+        <meta
+          content="https://www.dev.cool"
+          name="twitter:url"
+        />
+        <meta
+          content="Hogwarts is magical"
+          name="twitter:description"
+        />
+        <meta
+          content="https://www.dev.cool/social/harry-potter.png"
+          name="twitter:image"
+        />
+        <meta
+          content="@cool"
+          name="twitter:creator"
+        />
+        <meta
+          content="Alexandre Ferreira"
+          name="creator"
+        />
+        <link
+          href="/favicon.svg"
+          rel="icon"
+          type="image/svg+xml"
+        />
+        <link
+          href="/apple-touch-icon.png"
+          rel="apple-touch-icon"
+        />
+        <meta
+          content="#0f172a"
+          name="msapplication-TileColor"
+        />
+        <meta
+          content="noindex, nofollow"
+          name="robots"
+        />
+      </head>
     `)
   })
 })
