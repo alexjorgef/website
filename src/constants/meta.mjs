@@ -31,7 +31,7 @@ export const site = {
   url: `https://www.alexjorgef.com`, // Without a trailing slash!
   dataDomain: `alexjorgef.com`,
   description: `Alex is a software developer and passionate about working on open source products & building communities around them. He currently works at Gatsby on the open source project.`,
-  image: `/social/default-og-image.png?v=1`,
+  defaultOgImage: `/social/default-og-image.png?v=1`,
   wakatime: `@alexjorgef`,
   stackoverflow: `2042014`,
   linkedin: `alexjferreira`,
