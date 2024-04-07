@@ -87,7 +87,6 @@ const Garden: React.FC<PageProps<DataProps>> = ({ data: { garden }, location }) 
     initialState,
     location,
     reducer,
-    // @ts-ignore - Somehow doesn't work
     iso: queryStringIso,
   })
   const prefersReducedMotion = usePrefersReducedMotion()
@@ -110,7 +109,7 @@ const Garden: React.FC<PageProps<DataProps>> = ({ data: { garden }, location }) 
             exciting 😉
           </Text>
           <Spacer size={6} axis="vertical" />
-          <Wrap>
+          {/* <Wrap>
             {garden.group.map((tag) => {
               const isActive = state.tags.includes(tag.title)
 
@@ -141,9 +140,9 @@ const Garden: React.FC<PageProps<DataProps>> = ({ data: { garden }, location }) 
                 </WrapItem>
               )
             })}
-          </Wrap>
+          </Wrap> */}
           <Spacer size={20} axis="vertical" />
-          <Stack
+          {/* <Stack
             spacing={0}
             divider={<Spacer axis="horizontal" size="100%" bg={dividerColor} border="none" />}
             mx={[`-2`, null, null, `-6`]}
@@ -196,7 +195,7 @@ const Garden: React.FC<PageProps<DataProps>> = ({ data: { garden }, location }) 
                   </span>
                 </Link>
               ))}
-          </Stack>
+          </Stack> */}
         </Container>
       </SkipNavContent>
     </Layout>

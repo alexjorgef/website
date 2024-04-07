@@ -60,7 +60,7 @@ type DataProps = {
       subtitle: string
       description: string
       archived: boolean
-      featureImage: IGatsbyImageData
+      image: IGatsbyImageData
     }>
   }
   repoGh1?: {
@@ -156,7 +156,7 @@ const Portfolio: React.FC<PageProps<DataProps>> = ({ data }) => {
               width={[`100%`, null, null, `calc(100% + 3rem)`]}
             >
               {data?.portfolio.nodes.map((project, i) => {
-                const imageSrc = getSrc(project.featureImage)
+                const imageSrc = getSrc(project.image)
                 return (
                   <Container key={project.slug}>
                     <GatsbyLink to={project.slug}>
@@ -255,11 +255,7 @@ export const query = graphql`
         archived
         slug
         description
-        featureImage {
-          childImageSharp {
-            gatsbyImageData(placeholder: BLURRED, formats: [AUTO, WEBP, AVIF], quality: 90)
-          }
-        }
+        image
       }
     }
     repoGh1: github {

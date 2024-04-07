@@ -45,7 +45,7 @@ type DataProps = {
     tags: Array<string>
     excerpt: string
     archived: boolean
-    images: Array<{
+    gallery: Array<{
       image: IGatsbyImageData
       description: string
     }>
@@ -127,7 +127,7 @@ const ProjectTemplate: React.FC<PageProps<DataProps>> = ({ data: { project }, ch
             <MDXProvider components={components}>{children}</MDXProvider>
             <Heading as="h2">Previews</Heading>
             <Flex>
-              {project.images.map((img) => {
+              {project.gallery.map((img) => {
                 const imageSrc = getSrc(img.image)
                 const imageDescription = img.description
                 return (
@@ -189,12 +189,9 @@ export const query = graphql`
       seoLastUpdated: lastUpdated
       lastUpdated(formatString: "MMM DD, YYYY")
       yearDate: date(formatString: "YYYY")
-      images {
-        image {
-          childImageSharp {
-            gatsbyImageData(placeholder: BLURRED, formats: [AUTO, WEBP, AVIF], quality: 90)
-          }
-        }
+      image
+      gallery {
+        image
         description
       }
       excerpt

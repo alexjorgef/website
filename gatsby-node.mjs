@@ -121,6 +121,7 @@ export const createSchemaCustomization = ({ actions }) => {
     interface Garden implements Node {
       id: ID!
       slug: String! @slugify(prefix: "garden")
+      description: String
       excerpt(pruneLength: Int = 160): String!
       timeToRead: Int
       date: Date! @dateformat
@@ -134,6 +135,7 @@ export const createSchemaCustomization = ({ actions }) => {
 
     type MdxGarden implements Node & Garden {
       slug: String! @slugify(prefix: "garden")
+      description: String
       excerpt(pruneLength: Int = 140): String! @mdxpassthrough(fieldName: "excerpt")
       timeToRead: Int
       date: Date! @dateformat
@@ -145,8 +147,8 @@ export const createSchemaCustomization = ({ actions }) => {
       image: String
     }
 
-    type ProjectImage implements Node {
-      image: File! @fileByRelativePath
+    type GalleryImage implements Node {
+      image: String!
       description: String!
     }
 
@@ -158,8 +160,8 @@ export const createSchemaCustomization = ({ actions }) => {
       lastUpdated: Date! @dateformat
       title: String!
       description: String
-      featureImage: File! @fileByRelativePath
-      images: [ProjectImage!]!
+      image: String
+      gallery: [GalleryImage]
       archived: Boolean
       tags: [String!]!
       contentFilePath: String!
@@ -172,9 +174,9 @@ export const createSchemaCustomization = ({ actions }) => {
       lastUpdated: Date! @dateformat
       title: String!
       description: String
-      featureImage: File! @fileByRelativePath
+      image: String
       archived: Boolean
-      images: [ProjectImage!]!
+      gallery: [GalleryImage]
       tags: [String!]!
       contentFilePath: String!
     }
@@ -408,6 +410,7 @@ export const onCreateNode = (
       icon: f.icon,
       tags: f.tags,
       contentFilePath: fileNode.absolutePath,
+      gallery: f.gallery,
       timeToRead,
       image: f.image ? f.image : undefined,
     }

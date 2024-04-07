@@ -124,7 +124,7 @@ const Awesomes: React.FC<PageProps<DataProps>> = ({ data: { awesomes }, location
             During my research time I usually write down some resources that I find useful. Here they are:
           </Text>
           <Spacer size={6} axis="vertical" />
-          <Wrap>
+          {/* <Wrap>
             {awesomes.group.map((tag) => {
               const isActive = state.tags.includes(tag.title)
 
@@ -155,10 +155,10 @@ const Awesomes: React.FC<PageProps<DataProps>> = ({ data: { awesomes }, location
                 </WrapItem>
               )
             })}
-          </Wrap>
+          </Wrap> */}
           <Input onChange={handleInputChange} width={350} mt={6} id="filter" placeholder="Type to filter awesomes..." />
           <Spacer size={20} axis="vertical" />
-          <Stack
+          {/* <Stack
             spacing={0}
             divider={<Spacer axis="horizontal" size="100%" bg={dividerColor} border="none" />}
             mx={[`-2`, null, null, `-6`]}
@@ -222,7 +222,7 @@ const Awesomes: React.FC<PageProps<DataProps>> = ({ data: { awesomes }, location
                   </span>
                 </Link>
               ))}
-          </Stack>
+          </Stack> */}
         </Container>
       </SkipNavContent>
     </Layout>

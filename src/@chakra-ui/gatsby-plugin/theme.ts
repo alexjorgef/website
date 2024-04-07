@@ -16,7 +16,6 @@
  */
 
 import { extendTheme } from "@chakra-ui/react"
-import { createBreakpoints } from "@chakra-ui/theme-tools"
 
 // Global style overrides
 import { styles } from "./styles"
@@ -37,15 +36,15 @@ import { Badge } from "./components/badge"
 import { Button } from "./components/button"
 
 // Custom breakpoints
-const breakpoints = createBreakpoints({
+const breakpoints = {
   sm: `640px`,
   md: `768px`,
   lg: `1024px`,
   xl: `1280px`,
   "2xl": `1536px`,
-})
+}
 
-export const theme = extendTheme({
+export const theme = {
   styles,
   colors,
   sizes,
@@ -70,4 +69,6 @@ export const theme = extendTheme({
     initialColorMode: `system`,
     useSystemColorMode: true,
   },
-})
+}
+
+export default extendTheme(theme)

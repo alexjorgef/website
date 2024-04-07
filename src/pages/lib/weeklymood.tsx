@@ -41,51 +41,53 @@ type DataProps = {
   }
 }
 
-const WeeklyMood: React.FC<PageProps<DataProps>> = ({ data: { userLists } }) => (
-  <Layout>
-    <SEO title="Wishlist" breadcrumbListItems={[{ name: `Wishlist`, url: `/lib/wishlist` }]} />
-    <SkipNavContent>
-      <Container py={space.paddingMedium}>
-        <Stack spacing="20" align="center">
-          <Stack spacing="3" align="center">
-            <Heading as="h1">Weekly Mood</Heading>
-            <Text variant="prominent" maxWidth="45ch" textAlign="center">
-              This is my weekly mood of albums/eps. Feel free to check the entire
-              {` `}
-              <ExternalLink href={userLists.nodes[0].uri} isExternal>
-                list
-              </ExternalLink>
-              {` `}.
-            </Text>
-          </Stack>
-          <Grid
-            gridTemplateColumns={[`1fr`, null, `repeat(3, 1fr)`]}
-            gap={8}
-            width={[`100%`, null, null, `calc(100% + 3rem)`]}
-          >
-            {userLists.nodes.map((userList) => (
-              <>
-                {userList.items.map((item) => (
-                  <Container key={item.id}>
-                    <ExternalLink href={item.uri} isExternal>
-                      <Image
-                        borderRadius="lg"
-                        src={item.image_url}
-                        alt={item.display_title}
-                        boxSize="300px"
-                        objectFit="cover"
-                      />
-                    </ExternalLink>
-                  </Container>
-                ))}
-              </>
-            ))}
-          </Grid>
-        </Stack>
-      </Container>
-    </SkipNavContent>
-  </Layout>
-)
+const WeeklyMood: React.FC<PageProps<DataProps>> = () => (<></>)
+
+// const WeeklyMood: React.FC<PageProps<DataProps>> = ({ data: { userLists } }) => (
+//   <Layout>
+//     <SEO title="Wishlist" breadcrumbListItems={[{ name: `Wishlist`, url: `/lib/wishlist` }]} />
+//     <SkipNavContent>
+//       <Container py={space.paddingMedium}>
+//         <Stack spacing="20" align="center">
+//           <Stack spacing="3" align="center">
+//             <Heading as="h1">Weekly Mood</Heading>
+//             <Text variant="prominent" maxWidth="45ch" textAlign="center">
+//               This is my weekly mood of albums/eps. Feel free to check the entire
+//               {` `}
+//               <ExternalLink href={userLists.nodes[0].uri} isExternal>
+//                 list
+//               </ExternalLink>
+//               {` `}.
+//             </Text>
+//           </Stack>
+//           <Grid
+//             gridTemplateColumns={[`1fr`, null, `repeat(3, 1fr)`]}
+//             gap={8}
+//             width={[`100%`, null, null, `calc(100% + 3rem)`]}
+//           >
+//             {userLists.nodes.map((userList) => (
+//               <>
+//                 {userList.items.map((item) => (
+//                   <Container key={item.id}>
+//                     <ExternalLink href={item.uri} isExternal>
+//                       <Image
+//                         borderRadius="lg"
+//                         src={item.image_url}
+//                         alt={item.display_title}
+//                         boxSize="300px"
+//                         objectFit="cover"
+//                       />
+//                     </ExternalLink>
+//                   </Container>
+//                 ))}
+//               </>
+//             ))}
+//           </Grid>
+//         </Stack>
+//       </Container>
+//     </SkipNavContent>
+//   </Layout>
+// )
 
 export default WeeklyMood
 
