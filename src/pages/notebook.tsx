@@ -113,7 +113,7 @@ const Garden: React.FC<PageProps<DataProps>> = ({ data: { garden }, location }) 
             Here I will discuss problems, bugs and other quick information that I think relevant to share with you. How
             exciting 😉
           </Text>
-          <Spacer size={6} axis="vertical" />
+          {/* <Spacer size={6} axis="vertical" />
           <Wrap>
             {garden.group.map(({ title: name }) => {
               const isActive = state.tags.includes(name) && isMounted
@@ -145,7 +145,7 @@ const Garden: React.FC<PageProps<DataProps>> = ({ data: { garden }, location }) 
                 </WrapItem>
               )
             })}
-          </Wrap>
+          </Wrap> */}
           <Spacer size={20} axis="vertical" />
           <Stack
             spacing={0}

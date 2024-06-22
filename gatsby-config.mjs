@@ -37,7 +37,7 @@ const {
   GATSBY_RECAPTCHA_V2_SITE_KEY,
   GATSBY_DISQUS_NAME,
   ANALYSE_BUNDLE,
-  GATSBY_DISCOGS_TOKEN,
+  // GATSBY_DISCOGS_TOKEN,
 } = process.env
 
 if (!GATSBY_GITHUB_TOKEN || GATSBY_GITHUB_TOKEN === `xxx`) {
@@ -157,7 +157,7 @@ const gatsbyConfig = {
         fetchOptions: {},
       },
     },
-    {
+    GATSBY_GITLAB_TOKEN && {
       resolve: `gatsby-source-graphql`,
       options: {
         typeName: `GitLab`,

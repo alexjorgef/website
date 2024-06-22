@@ -71,4 +71,5 @@ export const theme = {
   },
 }
 
-export const extendedTheme = extendTheme(theme)
+// eslint-disable-next-line import/no-default-export
+export default extendTheme(theme)
