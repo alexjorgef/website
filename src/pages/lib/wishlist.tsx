@@ -17,12 +17,12 @@
 
 import * as React from "react"
 import { PageProps } from "gatsby"
-import { Container, Stack, Text, Grid, Link as ExternalLink, Image } from "@chakra-ui/react"
-import { Layout } from "../../components/blocks/layout"
-import { SkipNavContent } from "../../components/a11y/skip-nav"
-import { Heading } from "../../components/typography/heading"
-import { space } from "../../constants/space"
-import { SEO } from "../../components/seo"
+// import { Container, Stack, Text, Grid, Link as ExternalLink, Image } from "@chakra-ui/react"
+// import { Layout } from "../../components/blocks/layout"
+// import { SkipNavContent } from "../../components/a11y/skip-nav"
+// import { Heading } from "../../components/typography/heading"
+// import { space } from "../../constants/space"
+// import { SEO } from "../../components/seo"
 
 type DataProps = {
   wishlist: {
@@ -36,7 +36,7 @@ type DataProps = {
   }
 }
 
-const Wishlist: React.FC<PageProps<DataProps>> = () => (<></>)
+const Wishlist: React.FC<PageProps<DataProps>> = () => <div>Wishlist</div>
 
 // const Wishlist: React.FC<PageProps<DataProps>> = ({ data: { wishlist } }) => (
 //   <Layout>

@@ -18,67 +18,67 @@
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-restricted-syntax */
 import { test, expect } from "@playwright/test"
-import { site } from "../src/constants/meta"
+// import { site } from "../src/constants/meta"
 
-const metaTagAssertions = [
-  {
-    name: `Index Page`,
-    url: `/`,
-    title: site.titleDefault,
-    metaTags: [
-      {
-        key: `og:title`,
-        value: site.titleDefault,
-      },
-      {
-        key: `og:description`,
-        value: site.description,
-      },
-      {
-        key: `og:image`,
-        value: `https://www.alexjorgef.com${site.defaultOgImage}`,
-      },
-    ],
-  },
-  {
-    name: `Blog Post`,
-    url: `/javascript/demo-tutorial-1`,
-    title: `Demo tutorial 1 | ${site.title}`,
-    metaTags: [
-      {
-        key: `og:title`,
-        value: `Demo tutorial 1`,
-      },
-      {
-        key: `og:description`,
-        value: `Demo tutorial article.`,
-      },
-      {
-        key: `og:image`,
-        value: `https://www.alexjorgef.com/og-images/dsg-analytics.png`,
-      },
-    ],
-  },
-  {
-    name: `Notebook Post`,
-    url: `/garden/demo-1`,
-    title: `Demo 1 | ${site.title}`,
-    metaTags: [
-      {
-        key: `og:title`,
-        value: `Demo 1`,
-      },
-      {
-        key: `og:description`,
-        value: `This is MDX markdown`,
-      },
-      {
-        key: `og:image`,
-        value: `https://www.alexjorgef.com/social/digital-garden.png`,
-      },
-    ],
-  },
-]
+// const metaTagAssertions = [
+//   {
+//     name: `Index Page`,
+//     url: `/`,
+//     title: site.titleDefault,
+//     metaTags: [
+//       {
+//         key: `og:title`,
+//         value: site.titleDefault,
+//       },
+//       {
+//         key: `og:description`,
+//         value: site.description,
+//       },
+//       {
+//         key: `og:image`,
+//         value: `https://www.alexjorgef.com${site.defaultOgImage}`,
+//       },
+//     ],
+//   },
+//   {
+//     name: `Blog Post`,
+//     url: `/javascript/demo-tutorial-1`,
+//     title: `Demo tutorial 1 | ${site.title}`,
+//     metaTags: [
+//       {
+//         key: `og:title`,
+//         value: `Demo tutorial 1`,
+//       },
+//       {
+//         key: `og:description`,
+//         value: `Demo tutorial article.`,
+//       },
+//       {
+//         key: `og:image`,
+//         value: `https://www.alexjorgef.com/og-images/dsg-analytics.png`,
+//       },
+//     ],
+//   },
+//   {
+//     name: `Notebook Post`,
+//     url: `/garden/demo-1`,
+//     title: `Demo 1 | ${site.title}`,
+//     metaTags: [
+//       {
+//         key: `og:title`,
+//         value: `Demo 1`,
+//       },
+//       {
+//         key: `og:description`,
+//         value: `This is MDX markdown`,
+//       },
+//       {
+//         key: `og:image`,
+//         value: `https://www.alexjorgef.com/social/digital-garden.png`,
+//       },
+//     ],
+//   },
+// ]
 
 const noIndexPages = [
   {

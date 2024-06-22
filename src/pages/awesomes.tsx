@@ -17,24 +17,22 @@
 
 import * as React from "react"
 import { graphql, PageProps } from "gatsby"
-import { BsArrowRight } from "react-icons/bs"
 import {
   Container,
-  Tag,
-  TagLabel,
-  TagCloseButton,
-  Wrap,
-  WrapItem,
-  Heading as ChakraHeading,
-  Stack,
   Text,
-  Box,
-  useColorModeValue,
-  usePrefersReducedMotion,
+  // useColorModeValue,
+  // usePrefersReducedMotion,
   Input,
+  // Tag,
+  // TagLabel,
+  // TagCloseButton,
+  // Wrap,
+  // WrapItem,
+  // Heading as ChakraHeading,
+  // Stack,
+  // Box,
 } from "@chakra-ui/react"
 import { Layout } from "../components/blocks/layout"
-import { Link } from "../components/link"
 import { SkipNavContent } from "../components/a11y/skip-nav"
 import { space } from "../constants/space"
 import { Heading } from "../components/typography/heading"
@@ -42,7 +40,10 @@ import { Spacer } from "../components/blocks/spacer"
 import { SEO } from "../components/seo"
 import { useQueryStringReducer } from "../hooks/use-query-string-reducer"
 import { queryStringIso } from "../utils/query-string-iso"
-import { SVGIconNames, SVGIcon } from "../components/blocks/svg-icon"
+import { SVGIconNames } from "../components/blocks/svg-icon"
+// import { SVGIconNames, SVGIcon } from "../components/blocks/svg-icon"
+// import { BsArrowRight } from "react-icons/bs"
+// import { Link } from "../components/link"
 
 type DataProps = {
   awesomes: {
@@ -94,16 +95,16 @@ const reducer = (state: IState, action: Action) => {
 }
 
 const Awesomes: React.FC<PageProps<DataProps>> = ({ data: { awesomes }, location }) => {
-  const [state, dispatch] = useQueryStringReducer<IState, Action>({
+  const [_, dispatch] = useQueryStringReducer<IState, Action>({
     initialState,
     location,
     reducer,
     // @ts-ignore - Somehow doesn't work
     iso: queryStringIso,
   })
-  const prefersReducedMotion = usePrefersReducedMotion()
-  const dividerColor = useColorModeValue(`blueGray.100`, `blueGray.800`)
-  const bgHoverColor = useColorModeValue(`blueGray.100`, `blueGray.800`)
+  // const prefersReducedMotion = usePrefersReducedMotion()
+  // const dividerColor = useColorModeValue(`blueGray.100`, `blueGray.800`)
+  // const bgHoverColor = useColorModeValue(`blueGray.100`, `blueGray.800`)
 
   const handleInputChange = (event) => {
     dispatch({ type: `SET_QUERY`, payload: event.target.value })

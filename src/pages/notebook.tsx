@@ -42,6 +42,7 @@ import { SEO } from "../components/seo"
 import { useQueryStringReducer } from "../hooks/use-query-string-reducer"
 import { queryStringIso } from "../utils/query-string-iso"
 import { SVGIconNames, SVGIcon } from "../components/blocks/svg-icon"
+// import { initialState, reducer, TagAction, TagGroup, TagGroupItem, ITagState } from "../components/blocks/tag-group"
 
 type DataProps = {
   garden: {
@@ -83,6 +84,10 @@ const reducer = (state: IState, action: Action) => {
 }
 
 const Garden: React.FC<PageProps<DataProps>> = ({ data: { garden }, location }) => {
+  const [isMounted, setIsMounted] = React.useState(false)
+  React.useEffect(() => {
+    setIsMounted(true)
+  }, [])
   const [state, dispatch] = useQueryStringReducer<IState, Action>({
     initialState,
     location,
@@ -109,18 +114,18 @@ const Garden: React.FC<PageProps<DataProps>> = ({ data: { garden }, location }) 
             exciting 😉
           </Text>
           <Spacer size={6} axis="vertical" />
-          {/* <Wrap>
-            {garden.group.map((tag) => {
-              const isActive = state.tags.includes(tag.title)
+          <Wrap>
+            {garden.group.map(({ title: name }) => {
+              const isActive = state.tags.includes(name) && isMounted
 
               return (
                 <WrapItem
                   as="button"
                   onClick={() => {
-                    if (state.tags.includes(tag.title)) {
-                      dispatch({ type: `REMOVE_TAG`, payload: tag.title })
+                    if (state.tags.includes(name)) {
+                      dispatch({ type: `REMOVE_TAG`, payload: name })
                     } else {
-                      dispatch({ type: `ADD_TAG`, payload: tag.title })
+                      dispatch({ type: `ADD_TAG`, payload: name })
                     }
                   }}
                   borderRadius="md"
@@ -131,24 +136,25 @@ const Garden: React.FC<PageProps<DataProps>> = ({ data: { garden }, location }) 
                     boxShadow: `outline`,
                     outline: `none`,
                   }}
-                  key={`${tag.title}-${isActive}`}
+                  key={`${name}-${isActive}`}
                 >
                   <Tag colorScheme={isActive ? `blue` : `gray`} size="lg">
-                    <TagLabel>{tag.title}</TagLabel>
+                    <TagLabel>{name}</TagLabel>
                     {isActive && <TagCloseButton as="span" aria-hidden aria-label="" />}
                   </Tag>
                 </WrapItem>
               )
             })}
-          </Wrap> */}
+          </Wrap>
           <Spacer size={20} axis="vertical" />
-          {/* <Stack
+          <Stack
             spacing={0}
             divider={<Spacer axis="horizontal" size="100%" bg={dividerColor} border="none" />}
             mx={[`-2`, null, null, `-6`]}
           >
             {garden.nodes
               .filter(({ tags = [] }) => {
+                if (!isMounted) return true
                 if (state.tags.length === 0) {
                   return true
                 }
@@ -195,7 +201,7 @@ const Garden: React.FC<PageProps<DataProps>> = ({ data: { garden }, location }) 
                   </span>
                 </Link>
               ))}
-          </Stack> */}
+          </Stack>
         </Container>
       </SkipNavContent>
     </Layout>

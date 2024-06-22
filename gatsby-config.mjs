@@ -91,7 +91,7 @@ const gatsbyConfig = {
     siteAuthorAddressCountry: site.authorAddressCountry,
     siteUrl: site.url,
     siteDescription: site.description,
-    siteImage: site.image,
+    siteImage: site.defaultOgImage,
     linkedin: site.linkedin,
     github: site.github,
     gitlab: site.gitlab,
