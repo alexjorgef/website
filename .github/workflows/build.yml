@@ -191,6 +191,7 @@ jobs:
           path_to_add: public
           proof: ${{ secrets.W3_PROOF }}
           secret_key: ${{ secrets.W3_PRINCIPAL }}
+          wrap: false
 
       - name: Deploy _dnslink to Cloudflare 🚀
         run: |
