@@ -42,6 +42,5 @@ export const useMixcloudPlays = () => {
     totalPlays += cloudcast.play_count
   })
 
-  const totalPlaysTemp = 0
-  return totalPlaysTemp
+  return totalPlays
 }

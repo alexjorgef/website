@@ -184,7 +184,7 @@ const gatsbyConfig = {
         username: GATSBY_MIXCLOUD_USERNAME,
       },
     },
-    GATSBY_DISCOGS_USERNAME && GATSBY_DISCOGS_TOKEN && {
+    GATSBY_DISCOGS_TOKEN && {
       resolve: `@alexjorgef/gatsby-source-discogs`,
       options: {
         username: GATSBY_DISCOGS_USERNAME,

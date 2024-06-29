@@ -20,11 +20,11 @@ import { graphql, PageProps } from "gatsby"
 import { BsArrowRight } from "react-icons/bs"
 import {
   Container,
-  Tag,
-  TagLabel,
-  TagCloseButton,
-  Wrap,
-  WrapItem,
+  // Tag,
+  // TagLabel,
+  // TagCloseButton,
+  // Wrap,
+  // WrapItem,
   Heading as ChakraHeading,
   Stack,
   Text,
@@ -39,8 +39,8 @@ import { space } from "../constants/space"
 import { Heading } from "../components/typography/heading"
 import { Spacer } from "../components/blocks/spacer"
 import { SEO } from "../components/seo"
-import { useQueryStringReducer } from "../hooks/use-query-string-reducer"
-import { queryStringIso } from "../utils/query-string-iso"
+// import { useQueryStringReducer } from "../hooks/use-query-string-reducer"
+// import { queryStringIso } from "../utils/query-string-iso"
 import { SVGIconNames, SVGIcon } from "../components/blocks/svg-icon"
 // import { initialState, reducer, TagAction, TagGroup, TagGroupItem, ITagState } from "../components/blocks/tag-group"
 
@@ -59,41 +59,41 @@ type DataProps = {
   }
 }
 
-interface IState {
-  tags: Array<string>
-}
+// interface IState {
+//   tags: Array<string>
+// }
 
-type Action = { type: `ADD_TAG`; payload: string } | { type: `REMOVE_TAG`; payload: string }
+// type Action = { type: `ADD_TAG`; payload: string } | { type: `REMOVE_TAG`; payload: string }
 
-const initialState: IState = {
-  tags: [],
-}
+// const initialState: IState = {
+//   tags: [],
+// }
 
-const reducer = (state: IState, action: Action) => {
-  switch (action.type) {
-    case `ADD_TAG`:
-      return { ...state, tags: state.tags.concat(action.payload) }
-    case `REMOVE_TAG`:
-      return {
-        ...state,
-        tags: state.tags.filter((tag) => tag !== action.payload),
-      }
-    default:
-      throw new Error(`Unknown action passed to filter reducer`)
-  }
-}
+// const reducer = (state: IState, action: Action) => {
+//   switch (action.type) {
+//     case `ADD_TAG`:
+//       return { ...state, tags: state.tags.concat(action.payload) }
+//     case `REMOVE_TAG`:
+//       return {
+//         ...state,
+//         tags: state.tags.filter((tag) => tag !== action.payload),
+//       }
+//     default:
+//       throw new Error(`Unknown action passed to filter reducer`)
+//   }
+// }
 
 const Garden: React.FC<PageProps<DataProps>> = ({ data: { garden }, location }) => {
-  const [isMounted, setIsMounted] = React.useState(false)
-  React.useEffect(() => {
-    setIsMounted(true)
-  }, [])
-  const [state, dispatch] = useQueryStringReducer<IState, Action>({
-    initialState,
-    location,
-    reducer,
-    iso: queryStringIso,
-  })
+  // const [isMounted, setIsMounted] = React.useState(false)
+  // React.useEffect(() => {
+  //   setIsMounted(true)
+  // }, [])
+  // const [state, dispatch] = useQueryStringReducer<IState, Action>({
+  //   initialState,
+  //   location,
+  //   reducer,
+  //   iso: queryStringIso,
+  // })
   const prefersReducedMotion = usePrefersReducedMotion()
   const dividerColor = useColorModeValue(`blueGray.100`, `blueGray.800`)
   const bgHoverColor = useColorModeValue(`blueGray.100`, `blueGray.800`)
@@ -153,13 +153,13 @@ const Garden: React.FC<PageProps<DataProps>> = ({ data: { garden }, location }) 
             mx={[`-2`, null, null, `-6`]}
           >
             {garden.nodes
-              .filter(({ tags = [] }) => {
-                if (!isMounted) return true
-                if (state.tags.length === 0) {
-                  return true
-                }
-                return state.tags.some((tag) => tags.includes(tag))
-              })
+              // .filter(({ tags = [] }) => {
+              //   if (!isMounted) return true
+              //   if (state.tags.length === 0) {
+              //     return true
+              //   }
+              //   return state.tags.some((tag) => tags.includes(tag))
+              // })
               .map((post) => (
                 <Link
                   to={post.slug}
