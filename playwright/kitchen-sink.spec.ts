@@ -51,8 +51,8 @@ test.describe(`Kitchen Sink`, () => {
     await page.locator(`footer[role="contentinfo"] >> text=Notebook`).click()
     await expect(page).toHaveURL(`/notebook`)
 
-    // await page.locator(`footer[role="contentinfo"] >> text=Awesomes`).click()
-    // await expect(page).toHaveURL(`/awesomes`)
+    await page.locator(`footer[role="contentinfo"] >> text=Awesomes`).click()
+    await expect(page).toHaveURL(`/awesomes`)
   })
   test(`content pages`, async ({ page }) => {
     await page.goto(`/javascript/demo-tutorial-1`)

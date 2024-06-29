@@ -185,12 +185,12 @@ jobs:
           path: public
 
       - name: Upload and pin to Web3-Storage 🚀
-        uses: web3-storage/add-to-web3@59774ff5ca3e7fd57fbd25ad62557a408a6122fc
-        id: web3storage
+        uses: web3-storage/add-to-web3@v3
+        id: w3up
         with:
-          web3_token: ${{ secrets.WEB3STORAGE_TOKEN }}
           path_to_add: public
-          wrap_with_directory: false
+          proof: ${{ secrets.W3_PROOF }}
+          secret_key: ${{ secrets.W3_PRINCIPAL }}
 
       - name: Deploy _dnslink to Cloudflare 🚀
         run: |
@@ -198,4 +198,4 @@ jobs:
             -H "X-Auth-Email: ${{ secrets.CLOUDFLARE_XAUTH_EMAIL }}" \
             -H "X-Auth-Key: ${{ secrets.CLOUDFLARE_XAUTH_KEY }}" \
             -H "Content-Type: application/json" \
-            --data '{"type":"TXT","name":"${{ secrets.CLOUDFLARE_RECORD_NAME }}","content":"dnslink=/ipfs/${{ steps.web3storage.outputs.cid }}","ttl":1}' > /dev/null 2>&1
+            --data '{"type":"TXT","name":"${{ secrets.CLOUDFLARE_RECORD_NAME }}","content":"dnslink=/ipfs/${{ steps.w3up.outputs.cid }}","ttl":1}' > /dev/null 2>&1
