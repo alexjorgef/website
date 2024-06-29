@@ -43,7 +43,7 @@ jobs:
         id: gatsby-cache
         env:
           files: >-
-            ${{ hashFiles('www/gatsby-config.ts', 'www/gatsby-node.ts') }}
+            ${{ hashFiles('gatsby-config.mjs', 'gatsby-node.mjs') }}
         with:
           path: |
             public
@@ -106,7 +106,7 @@ jobs:
         id: gatsby-cache
         env:
           files: >-
-            ${{ hashFiles('www/gatsby-config.ts', 'www/gatsby-node.ts') }}
+            ${{ hashFiles('gatsby-config.mjs', 'gatsby-node.mjs') }}
         with:
           path: |
             public
@@ -167,7 +167,7 @@ jobs:
         if: github.ref == 'refs/heads/main'
         with:
           name: public
-          path: www/public
+          path: public
 
   deploy:
     needs:
