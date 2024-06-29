@@ -164,7 +164,7 @@ jobs:
           GATSBY_BANDCAMP_USERNAME: ${{ secrets.GATSBY_BANDCAMP_USERNAME }}
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: github.ref == 'refs/heads/main'
         with:
           name: public
