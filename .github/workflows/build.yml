@@ -73,9 +73,8 @@ jobs:
 
       - name: Inject private data 🔨
         run: |
-          rm -rf www/content/
-          cp -rp website-data/production/www/* www/
-          cp -rp website-data/production/playwright/ .
+          rm -rf content/
+          cp -rp website-data/production/* .
 
       - uses: actions/setup-node@v3
         with:
