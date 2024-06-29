@@ -75,6 +75,7 @@ jobs:
         run: |
           rm -rf content/
           cp -rp website-data/production/* .
+          rm -rf website-data/
 
       - uses: actions/setup-node@v3
         with:
