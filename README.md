@@ -11,6 +11,7 @@ Source code of my personal website, mainly inspired by [Lennart](https://github.
 ```bash
 git clone git@github.com:alexjorgef/website.git
 cd website
+nvm use
 yarn
 yarn dev
 ```
@@ -19,7 +20,7 @@ yarn dev
 
 All code is licensed under the [GPL-3.0-only](https://spdx.org/licenses/GPL-3.0-only.html), see full license [here](LICENSE).
 
-```
+```text
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, version 3 of the License.

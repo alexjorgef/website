@@ -45,7 +45,6 @@ const config: PlaywrightTestConfig = {
       },
     },
   ],
-  outputDir: `./playwright/test-results`,
 }
 
 export default config

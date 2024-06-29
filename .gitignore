@@ -65,3 +65,6 @@ cypress/e2e/build
 !.yarn/versions
 .swc
 playwright/test-results
+dist
+test-results
+.netlify

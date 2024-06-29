@@ -14,7 +14,7 @@ jobs:
 
       - uses: actions/setup-node@v3
         with:
-          node-version: "16.x"
+          node-version: "18.x"
 
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
@@ -65,6 +65,10 @@ jobs:
           GATSBY_FORMSPREE_ID: ${{ secrets.GATSBY_FORMSPREE_ID }}
           GATSBY_RECAPTCHA_V2_SITE_KEY: ${{ secrets.GATSBY_RECAPTCHA_V2_SITE_KEY }}
           GATSBY_DISQUS_NAME: ${{ secrets.GATSBY_DISQUS_NAME }}
+          GATSBY_MIXCLOUD_USERNAME: ${{ secrets.GATSBY_MIXCLOUD_USERNAME }}
+          GATSBY_DISCOGS_TOKEN: ${{ secrets.GATSBY_DISCOGS_TOKEN }}
+          GATSBY_DISCOGS_USERNAME: ${{ secrets.GATSBY_DISCOGS_USERNAME }}
+          GATSBY_BANDCAMP_USERNAME: ${{ secrets.GATSBY_BANDCAMP_USERNAME }}
 
       - name: Run Playwright 🧪
         run: yarn e2e:build
@@ -74,3 +78,7 @@ jobs:
           GATSBY_FORMSPREE_ID: ${{ secrets.GATSBY_FORMSPREE_ID }}
           GATSBY_RECAPTCHA_V2_SITE_KEY: ${{ secrets.GATSBY_RECAPTCHA_V2_SITE_KEY }}
           GATSBY_DISQUS_NAME: ${{ secrets.GATSBY_DISQUS_NAME }}
+          GATSBY_MIXCLOUD_USERNAME: ${{ secrets.GATSBY_MIXCLOUD_USERNAME }}
+          GATSBY_DISCOGS_TOKEN: ${{ secrets.GATSBY_DISCOGS_TOKEN }}
+          GATSBY_DISCOGS_USERNAME: ${{ secrets.GATSBY_DISCOGS_USERNAME }}
+          GATSBY_BANDCAMP_USERNAME: ${{ secrets.GATSBY_BANDCAMP_USERNAME }}
