@@ -155,44 +155,44 @@ const Portfolio: React.FC<PageProps<DataProps>> = ({ data }) => {
               width={[`100%`, null, null, `calc(100% + 3rem)`]}
             >
               {data?.portfolio.nodes.map((project, i) => (
-                  <Container key={project.slug}>
-                    <GatsbyLink to={project.slug}>
-                      <GridItem colSpan={1} colStart={i % 2 === 0 ? 0 : 1}>
-                        <Flex justifyContent="flex-start" width="100%">
-                          <Image
-                            display={imageDisplay}
-                            borderRadius="lg"
-                            src={project.image}
-                            alt={project.title}
-                            width={`100%`}
-                            height={`250px`}
-                            objectFit="cover"
-                          />
-                        </Flex>
-                        <VStack spacing="8px" align="flex-start" justify="left" marginTop={`16px`}>
-                          <Box>
-                            <ChakraHeading as="h2" size="2xl">
-                              {project.title}
-                            </ChakraHeading>
-                          </Box>
-                          <Box>
-                            {project.archived ? (
-                              <Tag colorScheme="blue">
-                                <TagLabel>Archived</TagLabel>
-                              </Tag>
-                            ) : (
-                              <Tag colorScheme="green">
-                                <TagLabel>Active</TagLabel>
-                              </Tag>
-                            )}
-                          </Box>
-                        </VStack>
-                        <Divider mt={4} orientation="horizontal" />
-                        <Text mt={4}>{project.description}</Text>
-                      </GridItem>
-                    </GatsbyLink>
-                    {/* {i + 1 !== portfolioMapped.length && <Divider mt={4} orientation="horizontal" />} */}
-                  </Container>
+                <Container key={project.slug}>
+                  <GatsbyLink to={project.slug}>
+                    <GridItem colSpan={1} colStart={i % 2 === 0 ? 0 : 1}>
+                      <Flex justifyContent="flex-start" width="100%">
+                        <Image
+                          display={imageDisplay}
+                          borderRadius="lg"
+                          src={project.image}
+                          alt={project.title}
+                          width={`100%`}
+                          height={`250px`}
+                          objectFit="cover"
+                        />
+                      </Flex>
+                      <VStack spacing="8px" align="flex-start" justify="left" marginTop={`16px`}>
+                        <Box>
+                          <ChakraHeading as="h2" size="2xl">
+                            {project.title}
+                          </ChakraHeading>
+                        </Box>
+                        <Box>
+                          {project.archived ? (
+                            <Tag colorScheme="blue">
+                              <TagLabel>Archived</TagLabel>
+                            </Tag>
+                          ) : (
+                            <Tag colorScheme="green">
+                              <TagLabel>Active</TagLabel>
+                            </Tag>
+                          )}
+                        </Box>
+                      </VStack>
+                      <Divider mt={4} orientation="horizontal" />
+                      <Text mt={4}>{project.description}</Text>
+                    </GridItem>
+                  </GatsbyLink>
+                  {/* {i + 1 !== portfolioMapped.length && <Divider mt={4} orientation="horizontal" />} */}
+                </Container>
                 )
               )}
             </Grid>
