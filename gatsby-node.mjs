@@ -264,8 +264,6 @@ export const onCreateNode = (
     const name = path.basename(node.internal.contentFilePath)
     const isDefault = name === `index.mdx`
     const lang = isDefault ? localeInitial : name.split(`.`)[1]
-    console.log("LANG DEFAULT " + isDefault)
-    console.log("LANG LANG " + lang)
 
     /** @type {Array<String>} */
     const langs = []

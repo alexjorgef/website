@@ -35,7 +35,6 @@ import {
   TagLabel,
   useBreakpointValue,
 } from "@chakra-ui/react"
-import { getSrc, IGatsbyImageData, GatsbyImage, getImage } from "gatsby-plugin-image"
 import { Layout } from "../../components/blocks/layout"
 import { SkipNavContent } from "../../components/a11y/skip-nav"
 import { Heading } from "../../components/typography/heading"
@@ -156,7 +155,6 @@ const Portfolio: React.FC<PageProps<DataProps>> = ({ data }) => {
               width={[`100%`, null, null, `calc(100% + 3rem)`]}
             >
               {data?.portfolio.nodes.map((project, i) => {
-                // const imageSrc = getSrc(project.image)
                 return (
                   <Container key={project.slug}>
                     <GatsbyLink to={project.slug}>
@@ -167,7 +165,6 @@ const Portfolio: React.FC<PageProps<DataProps>> = ({ data }) => {
                             borderRadius="lg"
                             src={project.image}
                             alt={project.title}
-                            // width={`300px`}
                             width={`100%`}
                             height={`250px`}
                             objectFit="cover"
