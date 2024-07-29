@@ -193,8 +193,7 @@ const Portfolio: React.FC<PageProps<DataProps>> = ({ data }) => {
                   </GatsbyLink>
                   {/* {i + 1 !== portfolioMapped.length && <Divider mt={4} orientation="horizontal" />} */}
                 </Container>
-                )
-              )}
+              ))}
             </Grid>
           </Stack>
           <Stack spacing="32" align="center" paddingTop="32">
