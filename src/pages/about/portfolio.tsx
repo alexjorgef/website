@@ -154,8 +154,7 @@ const Portfolio: React.FC<PageProps<DataProps>> = ({ data }) => {
               gap={8}
               width={[`100%`, null, null, `calc(100% + 3rem)`]}
             >
-              {data?.portfolio.nodes.map((project, i) => {
-                return (
+              {data?.portfolio.nodes.map((project, i) => (
                   <Container key={project.slug}>
                     <GatsbyLink to={project.slug}>
                       <GridItem colSpan={1} colStart={i % 2 === 0 ? 0 : 1}>
@@ -195,7 +194,7 @@ const Portfolio: React.FC<PageProps<DataProps>> = ({ data }) => {
                     {/* {i + 1 !== portfolioMapped.length && <Divider mt={4} orientation="horizontal" />} */}
                   </Container>
                 )
-              })}
+              )}
             </Grid>
           </Stack>
           <Stack spacing="32" align="center" paddingTop="32">
