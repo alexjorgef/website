@@ -262,7 +262,7 @@ export const onCreateNode = (
   // WritingNode
   if (source === writingSource) {
     const name = path.basename(node.internal.contentFilePath)
-    const isDefault = name === `index`
+    const isDefault = name === `index.mdx`
     const lang = isDefault ? localeInitial : name.split(`.`)[1]
 
     /** @type {Array<String>} */
