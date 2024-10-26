@@ -161,7 +161,7 @@ const gatsbyConfig = {
         fieldName: `github`,
         url: `https://api.github.com/graphql`,
         headers: {
-          Authorization: `bearer ${GATSBY_GITHUB_TOKEN}`,
+          Authorization: `Bearer ${GATSBY_GITHUB_TOKEN}`,
         },
         fetchOptions: {},
       },
@@ -173,7 +173,7 @@ const gatsbyConfig = {
         fieldName: `gitlab`,
         url: `https://gitlab.com/api/graphql`,
         headers: {
-          Authorization: `bearer ${GATSBY_GITLAB_TOKEN}`,
+          Authorization: `Bearer ${GATSBY_GITLAB_TOKEN}`,
         },
         fetchOptions: {},
       },
