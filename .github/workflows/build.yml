@@ -100,40 +100,40 @@ jobs:
         with:
           node-version: "18.x"
 
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
+      # - name: Get yarn cache directory path
+      #   id: yarn-cache-dir-path
+      #   run: echo "::set-output name=dir::$(yarn cache dir)"
 
-      - name: Cache node modules
-        uses: actions/cache@v4
-        id: yarn-cache
-        with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
+      # - name: Cache node modules
+      #   uses: actions/cache@v4
+      #   id: yarn-cache
+      #   with:
+      #     path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+      #     key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-yarn-
 
-      - uses: actions/cache@v4
-        id: playwright-cache
-        with:
-          path: |
-            ~/.cache/ms-playwright
-          key: ${{ runner.os }}-playwright-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-playwright-
+      # - uses: actions/cache@v4
+      #   id: playwright-cache
+      #   with:
+      #     path: |
+      #       ~/.cache/ms-playwright
+      #     key: ${{ runner.os }}-playwright-${{ hashFiles('**/yarn.lock') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-playwright-
 
-      - uses: actions/cache@v4
-        id: gatsby-cache
-        env:
-          files: >-
-            ${{ hashFiles('gatsby-config.mjs', 'gatsby-node.mjs') }}
-        with:
-          path: |
-            public
-            .cache
-          key: ${{ runner.os }}-gatsby-${{ env.files }}-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-gatsby-
+      # - uses: actions/cache@v4
+      #   id: gatsby-cache
+      #   env:
+      #     files: >-
+      #       ${{ hashFiles('gatsby-config.mjs', 'gatsby-node.mjs') }}
+      #   with:
+      #     path: |
+      #       public
+      #       .cache
+      #     key: ${{ runner.os }}-gatsby-${{ env.files }}-${{ hashFiles('**/yarn.lock') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-gatsby-
 
       - name: Install dependencies
         run: yarn install --immutable
@@ -247,7 +247,7 @@ jobs:
           name: build-vercel
           path: .vercel/output/
 
-  deploy:
+  deploy-vercel:
     needs:
       - build-vercel
     if: success() && github.ref == 'refs/heads/main'
