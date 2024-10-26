@@ -162,7 +162,7 @@ const gatsbyConfig = {
         url: `https://api.github.com/graphql`,
         headers: {
           Authorization: `bearer ${GATSBY_GITHUB_TOKEN}`,
-        }
+        },
       },
     },
     GATSBY_GITLAB_TOKEN && {
@@ -173,7 +173,7 @@ const gatsbyConfig = {
         url: `https://gitlab.com/api/graphql`,
         headers: {
           Authorization: `bearer ${GATSBY_GITLAB_TOKEN}`,
-        }
+        },
       },
     },
     GATSBY_MIXCLOUD_USERNAME && {
