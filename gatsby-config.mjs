@@ -158,30 +158,30 @@ const gatsbyConfig = {
         path: `src/pages`,
       },
     },
-    // GATSBY_GITHUB_TOKEN && {
-    //   resolve: `gatsby-source-graphql`,
-    //   options: {
-    //     typeName: `GitHub`,
-    //     fieldName: `github`,
-    //     url: `https://api.github.com/graphql`,
-    //     headers: {
-    //       Authorization: `Bearer ${GATSBY_GITHUB_TOKEN}`,
-    //     },
-    //     fetchOptions: {},
-    //   },
-    // },
-    // GATSBY_GITLAB_TOKEN && {
-    //   resolve: `gatsby-source-graphql`,
-    //   options: {
-    //     typeName: `GitLab`,
-    //     fieldName: `gitlab`,
-    //     url: `https://gitlab.com/api/graphql`,
-    //     headers: {
-    //       Authorization: `Bearer ${GATSBY_GITLAB_TOKEN}`,
-    //     },
-    //     fetchOptions: {},
-    //   },
-    // },
+    GATSBY_GITHUB_TOKEN && {
+      resolve: `gatsby-source-graphql`,
+      options: {
+        typeName: `GitHub`,
+        fieldName: `github`,
+        url: `https://api.github.com/graphql`,
+        headers: {
+          Authorization: `Bearer ${GATSBY_GITHUB_TOKEN}`,
+        },
+        fetchOptions: {},
+      },
+    },
+    GATSBY_GITLAB_TOKEN && {
+      resolve: `gatsby-source-graphql`,
+      options: {
+        typeName: `GitLab`,
+        fieldName: `gitlab`,
+        url: `https://gitlab.com/api/graphql`,
+        headers: {
+          Authorization: `Bearer ${GATSBY_GITLAB_TOKEN}`,
+        },
+        fetchOptions: {},
+      },
+    },
     GATSBY_MIXCLOUD_USERNAME && {
       resolve: `@alexjorgef/gatsby-source-mixcloud`,
       options: {
