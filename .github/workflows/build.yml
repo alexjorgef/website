@@ -58,8 +58,7 @@ jobs:
       - name: Build demo Gatsby site 🔨
         run: yarn build
 
-  build:
-    if: ${{ github.actor != 'dependabot[bot]' }}
+  inject-data:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -77,45 +76,64 @@ jobs:
           cp -rp website-data/production/* .
           rm -rf website-data/
 
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        if: github.ref == 'refs/heads/main'
+        with:
+          name: injected
+          path: ./
+
+  tests:
+    needs:
+      - inject-data
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: injected
+          path: ./
+
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "18.x"
 
-      # - name: Get yarn cache directory path
-      #   id: yarn-cache-dir-path
-      #   run: echo "::set-output name=dir::$(yarn cache dir)"
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
 
-      # - name: Cache node modules
-      #   uses: actions/cache@v4
-      #   id: yarn-cache
-      #   with:
-      #     path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-      #     key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-      #     restore-keys: |
-      #       ${{ runner.os }}-yarn-
+      - name: Cache node modules
+        uses: actions/cache@v4
+        id: yarn-cache
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
 
-      # - uses: actions/cache@v4
-      #   id: playwright-cache
-      #   with:
-      #     path: |
-      #       ~/.cache/ms-playwright
-      #     key: ${{ runner.os }}-playwright-${{ hashFiles('**/yarn.lock') }}
-      #     restore-keys: |
-      #       ${{ runner.os }}-playwright-
+      - uses: actions/cache@v4
+        id: playwright-cache
+        with:
+          path: |
+            ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-playwright-
 
-      # - uses: actions/cache@v4
-      #   id: gatsby-cache
-      #   env:
-      #     files: >-
-      #       ${{ hashFiles('gatsby-config.mjs', 'gatsby-node.mjs') }}
-      #   with:
-      #     path: |
-      #       public
-      #       .cache
-      #     key: ${{ runner.os }}-gatsby-${{ env.files }}-${{ hashFiles('**/yarn.lock') }}
-      #     restore-keys: |
-      #       ${{ runner.os }}-gatsby-
+      - uses: actions/cache@v4
+        id: gatsby-cache
+        env:
+          files: >-
+            ${{ hashFiles('gatsby-config.mjs', 'gatsby-node.mjs') }}
+        with:
+          path: |
+            public
+            .cache
+          key: ${{ runner.os }}-gatsby-${{ env.files }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gatsby-
 
       - name: Install dependencies
         run: yarn install --immutable
@@ -138,6 +156,38 @@ jobs:
         if: steps.playwright-cache.outputs.cache-hit != 'true'
         run: npx playwright install chromium --with-deps
 
+      - name: Run Playwright 🧪
+        run: yarn e2e:build
+        env:
+          GATSBY_GITHUB_TOKEN: ${{ secrets.GATSBY_GITHUB_TOKEN }}
+          GATSBY_GITLAB_TOKEN: ${{ secrets.GATSBY_GITLAB_TOKEN }}
+          GATSBY_FORMSPREE_ID: ${{ secrets.GATSBY_FORMSPREE_ID }}
+          GATSBY_RECAPTCHA_V2_SITE_KEY: ${{ secrets.GATSBY_RECAPTCHA_V2_SITE_KEY }}
+          GATSBY_DISQUS_NAME: ${{ secrets.GATSBY_DISQUS_NAME }}
+          GATSBY_MIXCLOUD_USERNAME: ${{ secrets.GATSBY_MIXCLOUD_USERNAME }}
+          GATSBY_DISCOGS_TOKEN: ${{ secrets.GATSBY_DISCOGS_TOKEN }}
+          GATSBY_DISCOGS_USERNAME: ${{ secrets.GATSBY_DISCOGS_USERNAME }}
+          GATSBY_BANDCAMP_USERNAME: ${{ secrets.GATSBY_BANDCAMP_USERNAME }}
+
+  build:
+    needs:
+      - tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: injected
+          path: ./
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18.x"
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
       - name: Validate tokens
         run: |
           curl -X POST -H "Authorization: bearer ${{ secrets.GATSBY_GITHUB_TOKEN }}" -H "Content-Type: application/json" -d '{"query": "{ viewer { login } }"}' https://api.github.com/graphql
@@ -155,44 +205,31 @@ jobs:
           GATSBY_DISCOGS_USERNAME: ${{ secrets.GATSBY_DISCOGS_USERNAME }}
           GATSBY_BANDCAMP_USERNAME: ${{ secrets.GATSBY_BANDCAMP_USERNAME }}
 
-      - name: Run Playwright 🧪
-        run: yarn e2e:build
-        env:
-          GATSBY_GITHUB_TOKEN: ${{ secrets.GATSBY_GITHUB_TOKEN }}
-          GATSBY_GITLAB_TOKEN: ${{ secrets.GATSBY_GITLAB_TOKEN }}
-          GATSBY_FORMSPREE_ID: ${{ secrets.GATSBY_FORMSPREE_ID }}
-          GATSBY_RECAPTCHA_V2_SITE_KEY: ${{ secrets.GATSBY_RECAPTCHA_V2_SITE_KEY }}
-          GATSBY_DISQUS_NAME: ${{ secrets.GATSBY_DISQUS_NAME }}
-          GATSBY_MIXCLOUD_USERNAME: ${{ secrets.GATSBY_MIXCLOUD_USERNAME }}
-          GATSBY_DISCOGS_TOKEN: ${{ secrets.GATSBY_DISCOGS_TOKEN }}
-          GATSBY_DISCOGS_USERNAME: ${{ secrets.GATSBY_DISCOGS_USERNAME }}
-          GATSBY_BANDCAMP_USERNAME: ${{ secrets.GATSBY_BANDCAMP_USERNAME }}
-
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         if: github.ref == 'refs/heads/main'
         with:
-          name: public
+          name: build
           path: public
 
-  deploy:
+  build-vercel:
     needs:
-      - build
-    if: success() && github.ref == 'refs/heads/main'
+      - tests
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
-          name: public
-          path: public
+          name: injected
+          path: ./
 
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "18.x"
+
+      - name: Install dependencies
+        run: yarn install --immutable
 
       - name: Install Vercel CLI
         run: yarn global add vercel@canary
@@ -202,6 +239,27 @@ jobs:
 
       - name: Build Project Artifacts
         run: vercel build --yes --prod --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        if: github.ref == 'refs/heads/main'
+        with:
+          name: build-vercel
+          path: .vercel/output/
+
+  deploy:
+    needs:
+      - build-vercel
+    if: success() && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build-vercel
+          path: .vercel/output/
 
       - name: Deploy Project Artifacts to Vercel
         run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
@@ -217,7 +275,7 @@ jobs:
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
-          name: public
+          name: build
           path: public
 
       - name: Upload and pin to Web3-Storage 🚀
