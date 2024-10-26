@@ -153,6 +153,19 @@ jobs:
       - name: Run Jest 🧪
         run: yarn test:ci
 
+      - name: Build Gatsby site 🔨
+        run: yarn build
+        env:
+          GATSBY_GITHUB_TOKEN: ${{ secrets.GATSBY_GITHUB_TOKEN }}
+          GATSBY_GITLAB_TOKEN: ${{ secrets.GATSBY_GITLAB_TOKEN }}
+          GATSBY_FORMSPREE_ID: ${{ secrets.GATSBY_FORMSPREE_ID }}
+          GATSBY_RECAPTCHA_V2_SITE_KEY: ${{ secrets.GATSBY_RECAPTCHA_V2_SITE_KEY }}
+          GATSBY_DISQUS_NAME: ${{ secrets.GATSBY_DISQUS_NAME }}
+          GATSBY_MIXCLOUD_USERNAME: ${{ secrets.GATSBY_MIXCLOUD_USERNAME }}
+          GATSBY_DISCOGS_TOKEN: ${{ secrets.GATSBY_DISCOGS_TOKEN }}
+          GATSBY_DISCOGS_USERNAME: ${{ secrets.GATSBY_DISCOGS_USERNAME }}
+          GATSBY_BANDCAMP_USERNAME: ${{ secrets.GATSBY_BANDCAMP_USERNAME }}
+
       - name: Install Playwright
         if: steps.playwright-cache.outputs.cache-hit != 'true'
         run: npx playwright install chromium --with-deps
@@ -210,6 +223,7 @@ jobs:
         uses: actions/upload-artifact@v4
         if: github.ref == 'refs/heads/main'
         with:
+          include-hidden-files: true
           name: build
           path: public
 
@@ -245,6 +259,7 @@ jobs:
         uses: actions/upload-artifact@v4
         if: github.ref == 'refs/heads/main'
         with:
+          include-hidden-files: true
           name: build-vercel
           path: .vercel/output/
 
