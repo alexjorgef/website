@@ -195,7 +195,7 @@ jobs:
           node-version: "18.x"
 
       - name: Install Vercel CLI
-        run: yarn global add vercel@latest
+        run: yarn global add vercel@canary
 
       - name: Pull Vercel Environment Information
         run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
