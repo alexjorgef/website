@@ -44,15 +44,15 @@ const {
   // GATSBY_DISCOGS_TOKEN,
 } = process.env
 
-if (!GATSBY_GITHUB_TOKEN || GATSBY_GITHUB_TOKEN.trim() === ``) {
-  throw Error(`Check the README https://github.com/alexjorgef/website#readme\n
-  A GitHub access token as GATSBY_GITHUB_TOKEN is required to build some parts of the website.`)
-}
+// if (!GATSBY_GITHUB_TOKEN || GATSBY_GITHUB_TOKEN.trim() === ``) {
+//   throw Error(`Check the README https://github.com/alexjorgef/website#readme\n
+//   A GitHub access token as GATSBY_GITHUB_TOKEN is required to build some parts of the website.`)
+// }
 
-if (!GATSBY_GITLAB_TOKEN || GATSBY_GITLAB_TOKEN.trim() === ``) {
-  throw Error(`Check the README https://github.com/alexjorgef/website#readme\n
-  A GitLab access token as GATSBY_GITLAB_TOKEN is required to build some parts of the website.`)
-}
+// if (!GATSBY_GITLAB_TOKEN || GATSBY_GITLAB_TOKEN.trim() === ``) {
+//   throw Error(`Check the README https://github.com/alexjorgef/website#readme\n
+//   A GitLab access token as GATSBY_GITLAB_TOKEN is required to build some parts of the website.`)
+// }
 
 if (!GATSBY_FORMSPREE_ID || GATSBY_FORMSPREE_ID.trim() === ``) {
   throw Error(`Check the README https://github.com/alexjorgef/website#readme\n
@@ -158,30 +158,30 @@ const gatsbyConfig = {
         path: `src/pages`,
       },
     },
-    GATSBY_GITHUB_TOKEN && {
-      resolve: `gatsby-source-graphql`,
-      options: {
-        typeName: `GitHub`,
-        fieldName: `github`,
-        url: `https://api.github.com/graphql`,
-        headers: {
-          Authorization: `Bearer ${GATSBY_GITHUB_TOKEN}`,
-        },
-        fetchOptions: {},
-      },
-    },
-    GATSBY_GITLAB_TOKEN && {
-      resolve: `gatsby-source-graphql`,
-      options: {
-        typeName: `GitLab`,
-        fieldName: `gitlab`,
-        url: `https://gitlab.com/api/graphql`,
-        headers: {
-          Authorization: `Bearer ${GATSBY_GITLAB_TOKEN}`,
-        },
-        fetchOptions: {},
-      },
-    },
+    // GATSBY_GITHUB_TOKEN && {
+    //   resolve: `gatsby-source-graphql`,
+    //   options: {
+    //     typeName: `GitHub`,
+    //     fieldName: `github`,
+    //     url: `https://api.github.com/graphql`,
+    //     headers: {
+    //       Authorization: `Bearer ${GATSBY_GITHUB_TOKEN}`,
+    //     },
+    //     fetchOptions: {},
+    //   },
+    // },
+    // GATSBY_GITLAB_TOKEN && {
+    //   resolve: `gatsby-source-graphql`,
+    //   options: {
+    //     typeName: `GitLab`,
+    //     fieldName: `gitlab`,
+    //     url: `https://gitlab.com/api/graphql`,
+    //     headers: {
+    //       Authorization: `Bearer ${GATSBY_GITLAB_TOKEN}`,
+    //     },
+    //     fetchOptions: {},
+    //   },
+    // },
     GATSBY_MIXCLOUD_USERNAME && {
       resolve: `@alexjorgef/gatsby-source-mixcloud`,
       options: {
