@@ -247,7 +247,7 @@ jobs:
         run: yarn install --immutable
 
       - name: Install Vercel CLI
-        run: yarn global add vercel@canary
+        run: yarn dlx vercel@canary
 
       - name: Pull Vercel Environment Information
         run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
