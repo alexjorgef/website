@@ -137,6 +137,10 @@ jobs:
         if: steps.playwright-cache.outputs.cache-hit != 'true'
         run: npx playwright install chromium --with-deps
 
+      - name: Validate tokens
+        run: |
+          curl -X POST -H "Authorization: bearer ${{ secrets.GATSBY_GITHUB_TOKEN }}" -H "Content-Type: application/json" -d '{"query": "{ viewer { login } }"}' https://api.github.com/graphql
+
       - name: Build Gatsby site 🔨
         run: yarn build
         env:
