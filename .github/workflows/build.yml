@@ -120,7 +120,7 @@ jobs:
         run: yarn install --immutable
 
       - name: Scan current project
-        uses: anchore/scan-action@v3
+        uses: anchore/scan-action@v4
         with:
           path: .
           output-format: table
@@ -171,6 +171,35 @@ jobs:
           path: public
 
   deploy:
+    needs:
+      - build
+    if: success() && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: public
+          path: public
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+
+      - name: Install Vercel CLI
+        run: yarn global add vercel@latest
+
+      - name: Pull Vercel Environment Information
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Build Project Artifacts
+        run: vercel build --yes --prod --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Deploy Project Artifacts to Vercel
+        run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
+
+  deploy-web3:
     needs:
       - build
     if: success() && github.ref == 'refs/heads/main'
