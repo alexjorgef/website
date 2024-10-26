@@ -46,7 +46,7 @@ type DataProps = {
     excerpt: string
     archived: boolean
     gallery: Array<{
-      image: IGatsbyImageData
+      image: string
       description: string
     }>
     parent: {
@@ -127,17 +127,13 @@ const ProjectTemplate: React.FC<PageProps<DataProps>> = ({ data: { project }, ch
             <MDXProvider components={components}>{children}</MDXProvider>
             <Heading as="h2">Previews</Heading>
             <Flex>
-              {project.gallery.map((img) => {
-                const imageSrc = getSrc(img.image)
-                const imageDescription = img.description
-                return (
-                  <Box p={2} key={img.description}>
-                    <Link to={imageSrc}>
-                      <Image src={imageSrc} alt={imageDescription} width="500px" objectFit="cover" />
-                    </Link>
-                  </Box>
-                )
-              })}
+              {project.gallery.map((img) => (
+                <Box p={2} key={img.description}>
+                  <Link to={img.image}>
+                    <Image src={img.image} alt={img.description} width="500px" objectFit="cover" />
+                  </Link>
+                </Box>
+              ))}
             </Flex>
           </Prose>
           <Spacer size={6} axis="vertical" />

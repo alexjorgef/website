@@ -55,7 +55,7 @@ import { test, expect } from "@playwright/test"
 //       },
 //       {
 //         key: `og:image`,
-//         value: `https://www.alexjorgef.com/og-images/dsg-analytics.png`,
+//         value: `https://www.alexjorgef.com/writing/2022-01-01--demo-tutorial-1.webp`,
 //       },
 //     ],
 //   },

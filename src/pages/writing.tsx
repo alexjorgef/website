@@ -50,7 +50,7 @@ type WritingProps = {
 const Writing: React.FC<PageProps<WritingProps>> = ({ data: { posts, locales } }) => {
   const { data: language } = useI18nContext()
   const localeDefault = locales.nodes[0].name
-  const postsShow = posts.nodes.filter((post) => (post.locales.length === 0 ? true : post.locale === language.data))
+  const postsShow = posts.nodes.filter((post) => (post.locales.length === 0 ? true : post.locale === language))
 
   return (
     <Layout subnavigation={<WritingSubNavigation />}>
@@ -73,7 +73,7 @@ const Writing: React.FC<PageProps<WritingProps>> = ({ data: { posts, locales } }
               {postsShow.map((post) => (
                 <Card
                   key={post.slug}
-                  slug={language.data === localeDefault ? post.slug : `/${language.data}${post.slug}`}
+                  slug={language === localeDefault ? post.slug : `/${language}${post.slug}`}
                   title={post.title}
                   subtitle={post.subtitle}
                   description={post.description}
