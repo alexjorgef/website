@@ -163,6 +163,7 @@ const gatsbyConfig = {
         headers: {
           Authorization: `bearer ${GATSBY_GITHUB_TOKEN}`,
         },
+        fetchOptions: {},
       },
     },
     GATSBY_GITLAB_TOKEN && {
@@ -174,6 +175,7 @@ const gatsbyConfig = {
         headers: {
           Authorization: `bearer ${GATSBY_GITLAB_TOKEN}`,
         },
+        fetchOptions: {},
       },
     },
     GATSBY_MIXCLOUD_USERNAME && {

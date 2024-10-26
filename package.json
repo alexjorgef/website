@@ -7,7 +7,7 @@
   "license": "GPLv3",
   "scripts": {
     "bootstrap": "yarn && yarn playwright:init",
-    "build": "gatsby build",
+    "build": "gatsby build --verbose",
     "clean": "gatsby clean",
     "dev": "gatsby develop",
     "serve": "gatsby serve",
