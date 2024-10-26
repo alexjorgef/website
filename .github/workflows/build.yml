@@ -80,6 +80,7 @@ jobs:
         uses: actions/upload-artifact@v4
         if: github.ref == 'refs/heads/main'
         with:
+          include-hidden-files: true
           name: injected
           path: ./
 
