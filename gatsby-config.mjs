@@ -44,41 +44,41 @@ const {
   // GATSBY_DISCOGS_TOKEN,
 } = process.env
 
-if (!GATSBY_GITHUB_TOKEN || GATSBY_GITHUB_TOKEN.trim() === "") {
+if (!GATSBY_GITHUB_TOKEN || GATSBY_GITHUB_TOKEN.trim() === ``) {
   throw Error(`Check the README https://github.com/alexjorgef/website#readme\n
   A GitHub access token as GATSBY_GITHUB_TOKEN is required to build some parts of the website.`)
 }
 
-if (!GATSBY_GITLAB_TOKEN || GATSBY_GITLAB_TOKEN.trim() === "") {
+if (!GATSBY_GITLAB_TOKEN || GATSBY_GITLAB_TOKEN.trim() === ``) {
   throw Error(`Check the README https://github.com/alexjorgef/website#readme\n
   A GitLab access token as GATSBY_GITLAB_TOKEN is required to build some parts of the website.`)
 }
 
-if (!GATSBY_FORMSPREE_ID || GATSBY_FORMSPREE_ID.trim() === "") {
+if (!GATSBY_FORMSPREE_ID || GATSBY_FORMSPREE_ID.trim() === ``) {
   throw Error(`Check the README https://github.com/alexjorgef/website#readme\n
   A Formspree identifier as GATSBY_FORMSPREE_ID is required to build some parts of the website.`)
 }
 
-if (!GATSBY_RECAPTCHA_V2_SITE_KEY || GATSBY_RECAPTCHA_V2_SITE_KEY.trim() === "") {
+if (!GATSBY_RECAPTCHA_V2_SITE_KEY || GATSBY_RECAPTCHA_V2_SITE_KEY.trim() === ``) {
   throw Error(`Check the README https://github.com/alexjorgef/website#readme\n
   A reCAPTCHA v2 site key as GATSBY_RECAPTCHA_V2_SITE_KEY is required to build some parts of the website.`)
 }
 
-if (!GATSBY_DISQUS_NAME || GATSBY_DISQUS_NAME.trim() === "") {
+if (!GATSBY_DISQUS_NAME || GATSBY_DISQUS_NAME.trim() === ``) {
   throw Error(`Check the README https://github.com/alexjorgef/website#readme\n
   A Disqus shortname as GATSBY_DISQUS_NAME is required to build some parts of the website.`)
 }
 
-if (!GATSBY_BANDCAMP_USERNAME || GATSBY_BANDCAMP_USERNAME.trim() === "") {
+if (!GATSBY_BANDCAMP_USERNAME || GATSBY_BANDCAMP_USERNAME.trim() === ``) {
   throw Error(`Check the README https://github.com/alexjorgef/website#readme\n
   A Bandcamp username as GATSBY_BANDCAMP_USERNAME is required to build some parts of the website.`)
 }
 
-if (!GATSBY_DISCOGS_USERNAME || GATSBY_DISCOGS_USERNAME.trim() === "") {
+if (!GATSBY_DISCOGS_USERNAME || GATSBY_DISCOGS_USERNAME.trim() === ``) {
   console.warn(`Check the README https://github.com/alexjorgef/website#readme\n
   A Disqus shortname as GATSBY_DISCOGS_USERNAME is required to build some parts of the website.`)
 }
-if (!GATSBY_DISCOGS_TOKEN || GATSBY_DISCOGS_TOKEN.trim() === "") {
+if (!GATSBY_DISCOGS_TOKEN || GATSBY_DISCOGS_TOKEN.trim() === ``) {
   console.warn(`Check the README https://github.com/alexjorgef/website#readme\n
   A Disqus token GATSBY_DISCOGS_TOKEN is required to build some parts of the website.`)
 }
