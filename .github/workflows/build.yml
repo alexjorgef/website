@@ -77,7 +77,8 @@ jobs:
           cp -rp website-data/production/* .
           rm -rf website-data/
 
-      - uses: actions/setup-node@v4
+      - name: Install Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: "18.x"
 
@@ -189,7 +190,9 @@ jobs:
           path: public
 
       - name: Install Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18.x"
 
       - name: Install Vercel CLI
         run: yarn global add vercel@latest
