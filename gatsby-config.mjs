@@ -82,6 +82,10 @@ if (!GATSBY_DISCOGS_TOKEN || GATSBY_DISCOGS_TOKEN.trim() === ``) {
   console.warn(`Check the README https://github.com/alexjorgef/website#readme\n
   A Disqus token GATSBY_DISCOGS_TOKEN is required to build some parts of the website.`)
 }
+if (!GATSBY_MIXCLOUD_USERNAME || GATSBY_MIXCLOUD_USERNAME.trim() === ``) {
+  console.warn(`Check the README https://github.com/alexjorgef/website#readme\n
+  A Disqus token GATSBY_MIXCLOUD_USERNAME is required to build some parts of the website.`)
+}
 
 const options = withDefaults({})
 
