@@ -40,14 +40,18 @@ const tagColorSwitch = (name) => {
   }
 }
 
-const TutorialTemplate: React.FC<PageProps<WritingViewDataProps>> = ({ data: { post }, location: { pathname } }) => {
+const TutorialTemplate: React.FC<PageProps<WritingViewDataProps>> = ({
+  data: { post },
+  location: { pathname },
+  children: mdxContent,
+}) => {
   const { updateState } = useI18nContext()
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     updateState({ data: event.target.text })
   }
   const [defaultLocale] = useLocales()
   return (
-    <WritingView post={post} pathname={pathname} type="tutorial">
+    <WritingView post={post} mdxContent={mdxContent as unknown as string} pathname={pathname} type="tutorial">
       <Heading as="h1">{post.title}</Heading>
       <Spacer size={6} axis="vertical" />
       <Divider />

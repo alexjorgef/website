@@ -24,13 +24,17 @@ import { Spacer } from "../components/blocks/spacer"
 import { Link } from "../components/link"
 import { useI18nContext } from "../context/i18n-provider"
 
-const ProseTemplate: React.FC<PageProps<WritingViewDataProps>> = ({ data: { post }, location: { pathname } }) => {
+const ProseTemplate: React.FC<PageProps<WritingViewDataProps>> = ({
+  data: { post },
+  location: { pathname },
+  children: mdxContent,
+}) => {
   const { updateState } = useI18nContext()
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     updateState({ data: event.target.text })
   }
   return (
-    <WritingView post={post} pathname={pathname} type="prose">
+    <WritingView post={post} mdxContent={mdxContent as unknown as string} pathname={pathname} type="prose">
       <Text
         color="textEmphasized"
         fontWeight={500}

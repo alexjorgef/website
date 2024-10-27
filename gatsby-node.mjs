@@ -28,11 +28,11 @@ import { site } from "./src/constants/meta.mjs"
 /**
  * @type {import('gatsby').GatsbyNode['createSchemaCustomization']}
  */
-export const createSchemaCustomization = ({ actions }) => {
+export const createSchemaCustomization = ({ actions, reporter }) => {
   const { createTypes, createFieldExtension } = actions
-
   const getFieldValue = (fieldName, source) => get(source, fieldName)
 
+  reporter.info(`Creating Gastby field extensions`)
   createFieldExtension({
     name: `slugify`,
     args: {
@@ -50,7 +50,6 @@ export const createSchemaCustomization = ({ actions }) => {
       }
     },
   })
-
   createFieldExtension({
     name: `mdxpassthrough`,
     args: {
@@ -62,8 +61,9 @@ export const createSchemaCustomization = ({ actions }) => {
       }
     },
   })
+  reporter.success(`Gastby field extensions created`)
 
-  // Create Gastby type definitions
+  reporter.info(`Creating Gastby type definitions`)
   createTypes(`#graphql
     enum PostTypeEnum {
       prose
@@ -231,13 +231,14 @@ export const createSchemaCustomization = ({ actions }) => {
     }
 
   `)
+  reporter.success(`Gastby type definitions created`)
 }
 
 /**
  * @type {import('gatsby').GatsbyNode['onCreateNode']}
  */
 export const onCreateNode = (
-  { node, actions, getNode, createNodeId, createContentDigest, getNodesByType },
+  { node, actions, getNode, createNodeId, createContentDigest, getNodesByType, reporter },
   themeOptions
 ) => {
   if (node.internal.type !== `Mdx`) {
@@ -249,7 +250,6 @@ export const onCreateNode = (
 
   const { createNode, createParentChildLink, createNodeField } = actions
   const { writingSource, gardenSource, portfolioSource, awesomeSource, localeInitial } = withDefaults(themeOptions)
-
   const fileNode = getNode(node.parent)
 
   if (!fileNode) {
@@ -259,7 +259,6 @@ export const onCreateNode = (
   const source = fileNode.sourceInstanceName
   const timeToRead = Math.round(readingTime(node.body).minutes)
 
-  // WritingNode
   if (source === writingSource) {
     const name = path.basename(node.internal.contentFilePath)
     const isDefault = name === `index.mdx`
@@ -322,10 +321,7 @@ export const onCreateNode = (
     })
 
     createParentChildLink({ parent: node, child: getNode(mdxPostId) })
-  }
-
-  // GardenNode
-  if (source === gardenSource) {
+  } else if (source === gardenSource) {
     /** @type {GardenNode} */
     const f = node.frontmatter
     /** @type {GardenNode} */
@@ -358,10 +354,7 @@ export const onCreateNode = (
     })
 
     createParentChildLink({ parent: node, child: getNode(mdxGardenId) })
-  }
-
-  // AwesomeNode
-  if (source === awesomeSource) {
+  } else if (source === awesomeSource) {
     /** @type {AwesomeNode} */
     const f = node.frontmatter
     /** @type {AwesomeNode} */
@@ -394,10 +387,7 @@ export const onCreateNode = (
     })
 
     createParentChildLink({ parent: node, child: getNode(mdxAwesomeId) })
-  }
-
-  // ProjectNode
-  if (source === portfolioSource) {
+  } else if (source === portfolioSource) {
     /** @type {ProjectNode} */
     const f = node.frontmatter
     /** @type {ProjectNode} */
@@ -431,6 +421,8 @@ export const onCreateNode = (
     })
 
     createParentChildLink({ parent: node, child: getNode(mdxProjectId) })
+  } else {
+    reporter.warn(`Source not found: ${source}: ${node.frontmatter}`)
   }
 }
 

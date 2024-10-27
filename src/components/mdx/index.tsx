@@ -16,14 +16,18 @@
  */
 
 import * as React from "react"
+import type { Components } from "@mdx-js/react/lib/index"
 import { headings } from "./heading"
 import { Code } from "./code"
 import { Alert } from "./alert"
 import { Collapsible } from "./collapsible"
 import { preToCodeBlock } from "../../utils/code"
+import { MarkdownLink } from "./link"
 
-export const components = {
+// @ts-ignore
+export const components: Components = {
   pre: (preProps) => {
+    // @ts-ignore
     const props = preToCodeBlock(preProps)
     // if there's a codeString and some props, we passed the test
     if (props) {
@@ -32,6 +36,8 @@ export const components = {
     // it's possible to have a pre without a code in it
     return <pre {...preProps} />
   },
+  // @ts-ignore
+  a: (props) => <MarkdownLink {...props} />,
   Alert,
   Collapsible,
   wrapper: ({ children }) => children,
