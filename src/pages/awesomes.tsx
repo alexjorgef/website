@@ -32,6 +32,7 @@ import {
   Stack,
   Box,
 } from "@chakra-ui/react"
+import { BsArrowRight } from "react-icons/bs"
 import { Layout } from "../components/blocks/layout"
 import { SkipNavContent } from "../components/a11y/skip-nav"
 import { space } from "../constants/space"
@@ -42,7 +43,6 @@ import { useQueryStringReducer } from "../hooks/use-query-string-reducer"
 import { queryStringIso } from "../utils/query-string-iso"
 // import { SVGIconNames } from "../components/blocks/svg-icon"
 import { SVGIconNames, SVGIcon } from "../components/blocks/svg-icon"
-import { BsArrowRight } from "react-icons/bs"
 import { Link } from "../components/link"
 
 type DataProps = {

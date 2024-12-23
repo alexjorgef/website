@@ -31,8 +31,8 @@ import { site } from "./src/constants/meta.mjs"
 dotenv.config()
 
 const {
-  GATSBY_GITHUB_TOKEN,
-  GATSBY_GITLAB_TOKEN,
+  // GATSBY_GITHUB_TOKEN,
+  // GATSBY_GITLAB_TOKEN,
   GATSBY_FORMSPREE_ID,
   GATSBY_RECAPTCHA_V2_SITE_KEY,
   GATSBY_DISQUS_NAME,

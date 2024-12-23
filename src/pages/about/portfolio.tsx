@@ -30,9 +30,9 @@ import {
   Box,
   VStack,
   Link as ChakraLink,
-  Tag,
+  // Tag,
   Heading as ChakraHeading,
-  TagLabel,
+  // TagLabel,
   useBreakpointValue,
 } from "@chakra-ui/react"
 import { Layout } from "../../components/blocks/layout"

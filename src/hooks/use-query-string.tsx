@@ -33,7 +33,6 @@ export function useQueryString<State extends ITagState>(opts: {
   const { initialState, iso, location } = opts
 
   const [desiredState, setDesiredState] = React.useState(() => {
-
     if (location.search.length === 0) {
       return initialState
     }
