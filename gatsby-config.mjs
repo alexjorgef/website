@@ -319,7 +319,7 @@ const gatsbyConfig = {
       },
     },
     {
-      resolve: `gatsby-plugin-feed`,
+      resolve: `@alexjorgef/gatsby-plugin-feed`,
       options: {
         query: `#graphql
         {

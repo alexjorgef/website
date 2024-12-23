@@ -58,7 +58,6 @@ type DataProps = {
       slug: string
       subtitle: string
       description: string
-      archived: boolean
       image: string
     }>
   }
@@ -179,17 +178,6 @@ const Portfolio: React.FC<PageProps<DataProps>> = ({ data }) => {
                             {project.title}
                           </ChakraHeading>
                         </Box>
-                        <Box>
-                          {project.archived ? (
-                            <Tag colorScheme="blue">
-                              <TagLabel>Archived</TagLabel>
-                            </Tag>
-                          ) : (
-                            <Tag colorScheme="green">
-                              <TagLabel>Active</TagLabel>
-                            </Tag>
-                          )}
-                        </Box>
                       </VStack>
                       <Divider mt={4} orientation="horizontal" />
                       <Text mt={4}>{project.description}</Text>
@@ -251,7 +239,6 @@ export default Portfolio
 //       nodes {
 //         title
 //         date
-//         archived
 //         slug
 //         description
 //         image
@@ -322,7 +309,6 @@ export const query = graphql`
       nodes {
         title
         date
-        archived
         slug
         description
         image

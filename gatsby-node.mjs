@@ -162,7 +162,6 @@ export const createSchemaCustomization = ({ actions, reporter }) => {
       description: String
       image: String
       gallery: [GalleryImage]
-      archived: Boolean
       tags: [String!]!
       contentFilePath: String!
     }
@@ -175,7 +174,6 @@ export const createSchemaCustomization = ({ actions, reporter }) => {
       title: String!
       description: String
       image: String
-      archived: Boolean
       gallery: [GalleryImage]
       tags: [String!]!
       contentFilePath: String!
@@ -421,8 +419,6 @@ export const onCreateNode = (
     })
 
     createParentChildLink({ parent: node, child: getNode(mdxProjectId) })
-  } else {
-    reporter.warn(`Source not found: ${source}: ${node.frontmatter}`)
   }
 }
 
@@ -467,7 +463,6 @@ export const onCreateNode = (
  *   title: string
  *   tags: Array<string>
  *   icon: string
- *   archived: boolean
  *   contentFilePath: string
  *   timeToRead: number
  *   image: string

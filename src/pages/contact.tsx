@@ -70,7 +70,7 @@ const Contact: React.FC<PageProps<DataProps>> = () => {
 
   const contactSchema = Yup.object({
     name: Yup.string().min(2, `Name is too short!`).max(71, `Name is too long!`),
-    email: Yup.string().max(255, `Email is too long!`).email(`Invalid email`).required(`Email is required`),
+    email: Yup.string().max(255, `Email is too long!`).email(`Invalid email`),
     message: Yup.string()
       .min(2, `Message is too short!`)
       .max(280, `Message is too long!`)
@@ -143,7 +143,7 @@ const Contact: React.FC<PageProps<DataProps>> = () => {
                   </Field>
                   <Field name="email">
                     {({ field, form }) => (
-                      <FormControl isRequired isInvalid={form.errors.email && form.touched.email}>
+                      <FormControl isInvalid={form.errors.email && form.touched.email}>
                         <FormLabel mt={4} htmlFor="email">
                           Your email
                         </FormLabel>

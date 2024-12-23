@@ -26,6 +26,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@alexjorgef/gatsby-plugin-feed": "5.12.4",
     "@alexjorgef/gatsby-source-bandcamp": "^0.0.1",
     "@alexjorgef/gatsby-source-discogs": "^0.0.1",
     "@alexjorgef/gatsby-source-mixcloud": "^0.0.2",
@@ -51,7 +52,6 @@
     "framer-motion": "^7.5.2",
     "gatsby": "^5.12.12",
     "gatsby-plugin-catch-links": "^5.12.0",
-    "gatsby-plugin-feed": "^5.12.3",
     "gatsby-plugin-image": "^3.12.3",
     "gatsby-plugin-manifest": "^5.12.3",
     "gatsby-plugin-mdx": "^5.12.3",

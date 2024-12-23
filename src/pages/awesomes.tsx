@@ -20,17 +20,17 @@ import { graphql, PageProps } from "gatsby"
 import {
   Container,
   Text,
-  // useColorModeValue,
-  // usePrefersReducedMotion,
+  useColorModeValue,
+  usePrefersReducedMotion,
   Input,
-  // Tag,
-  // TagLabel,
-  // TagCloseButton,
-  // Wrap,
-  // WrapItem,
-  // Heading as ChakraHeading,
-  // Stack,
-  // Box,
+  Tag,
+  TagLabel,
+  TagCloseButton,
+  Wrap,
+  WrapItem,
+  Heading as ChakraHeading,
+  Stack,
+  Box,
 } from "@chakra-ui/react"
 import { Layout } from "../components/blocks/layout"
 import { SkipNavContent } from "../components/a11y/skip-nav"
@@ -40,10 +40,10 @@ import { Spacer } from "../components/blocks/spacer"
 import { SEO } from "../components/seo"
 import { useQueryStringReducer } from "../hooks/use-query-string-reducer"
 import { queryStringIso } from "../utils/query-string-iso"
-import { SVGIconNames } from "../components/blocks/svg-icon"
-// import { SVGIconNames, SVGIcon } from "../components/blocks/svg-icon"
-// import { BsArrowRight } from "react-icons/bs"
-// import { Link } from "../components/link"
+// import { SVGIconNames } from "../components/blocks/svg-icon"
+import { SVGIconNames, SVGIcon } from "../components/blocks/svg-icon"
+import { BsArrowRight } from "react-icons/bs"
+import { Link } from "../components/link"
 
 type DataProps = {
   awesomes: {
@@ -95,16 +95,16 @@ const reducer = (state: IState, action: Action) => {
 }
 
 const Awesomes: React.FC<PageProps<DataProps>> = ({ data: { awesomes }, location }) => {
-  const [_, dispatch] = useQueryStringReducer<IState, Action>({
-    initialState,
-    location,
+  const [state, dispatch] = useQueryStringReducer<IState, Action>({
     reducer,
+    initialState,
     // @ts-ignore - Somehow doesn't work
     iso: queryStringIso,
+    location,
   })
-  // const prefersReducedMotion = usePrefersReducedMotion()
-  // const dividerColor = useColorModeValue(`blueGray.100`, `blueGray.800`)
-  // const bgHoverColor = useColorModeValue(`blueGray.100`, `blueGray.800`)
+  const prefersReducedMotion = usePrefersReducedMotion()
+  const dividerColor = useColorModeValue(`blueGray.100`, `blueGray.800`)
+  const bgHoverColor = useColorModeValue(`blueGray.100`, `blueGray.800`)
 
   const handleInputChange = (event) => {
     dispatch({ type: `SET_QUERY`, payload: event.target.value })
@@ -125,7 +125,7 @@ const Awesomes: React.FC<PageProps<DataProps>> = ({ data: { awesomes }, location
             During my research time I usually write down some resources that I find useful. Here they are:
           </Text>
           <Spacer size={6} axis="vertical" />
-          {/* <Wrap>
+          <Wrap>
             {awesomes.group.map((tag) => {
               const isActive = state.tags.includes(tag.title)
 
@@ -156,10 +156,10 @@ const Awesomes: React.FC<PageProps<DataProps>> = ({ data: { awesomes }, location
                 </WrapItem>
               )
             })}
-          </Wrap> */}
+          </Wrap>
           <Input onChange={handleInputChange} width={350} mt={6} id="filter" placeholder="Type to filter awesomes..." />
           <Spacer size={20} axis="vertical" />
-          {/* <Stack
+          <Stack
             spacing={0}
             divider={<Spacer axis="horizontal" size="100%" bg={dividerColor} border="none" />}
             mx={[`-2`, null, null, `-6`]}
@@ -223,7 +223,7 @@ const Awesomes: React.FC<PageProps<DataProps>> = ({ data: { awesomes }, location
                   </span>
                 </Link>
               ))}
-          </Stack> */}
+          </Stack>
         </Container>
       </SkipNavContent>
     </Layout>

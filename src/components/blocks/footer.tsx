@@ -119,18 +119,18 @@ export const Footer: React.FC = () => {
                 <Link to="/legal-notice">Legal Notice</Link>.
               </div>
               <div>
-                <Link href={`https://www.linkedin.com/in/${meta.linkedin}`}>
+                <ExternalLink href={`https://www.linkedin.com/in/${meta.linkedin}`}>
                   <Icon fontSize="1.45rem" as={LinkedinIcon} />
-                </Link>
-                <Link href={`https://github.com/${meta.github}`} ml="16px">
+                </ExternalLink>
+                <ExternalLink href={`https://github.com/${meta.github}`} ml="16px">
                   <Icon fontSize="1.45rem" as={GithubIcon} />
-                </Link>
-                <Link href={`https://gitlab.com/${meta.gitlab}`} ml="16px">
+                </ExternalLink>
+                <ExternalLink href={`https://gitlab.com/${meta.gitlab}`} ml="16px">
                   <Icon fontSize="1.45rem" as={GitlabIcon} />
-                </Link>
-                <Link href={`https://instagram.com/${meta.instagram}`} ml="16px">
+                </ExternalLink>
+                <ExternalLink href={`https://instagram.com/${meta.instagram}`} ml="16px">
                   <Icon fontSize="1.45rem" as={InstagramIcon} />
-                </Link>
+                </ExternalLink>
                 <Link to="/rss.xml" ml="16px">
                   <Icon fontSize="1.45rem" as={RssIcon} />
                 </Link>

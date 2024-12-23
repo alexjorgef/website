@@ -33,6 +33,11 @@ export function useQueryString<State extends ITagState>(opts: {
   const { initialState, iso, location } = opts
 
   const [desiredState, setDesiredState] = React.useState(() => {
+
+    if (location.search.length === 0) {
+      return initialState
+    }
+
     const parsed = iso.from(location.search.slice(1))
 
     if (parsed) {
@@ -44,7 +49,7 @@ export function useQueryString<State extends ITagState>(opts: {
 
   React.useEffect(() => {
     const handler = setTimeout(() => {
-      if (desiredState.tags.length === 0) {
+      if (desiredState.tags && desiredState.tags.length === 0) {
         navigate(`${location.pathname}`, { replace: true })
       } else {
         navigate(`${location.pathname}?${iso.to(desiredState)}`, { replace: true })

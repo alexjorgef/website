@@ -44,7 +44,6 @@ type DataProps = {
     lastUpdated: string
     tags: Array<string>
     excerpt: string
-    archived: boolean
     gallery: Array<{
       image: string
       description: string
@@ -112,15 +111,6 @@ const ProjectTemplate: React.FC<PageProps<DataProps>> = ({ data: { project }, ch
                 </Box>
               ))}
             </Flex>
-            {project.archived ? (
-              <Tag colorScheme="blue" justifySelf="flex-start">
-                <TagLabel>Archived</TagLabel>
-              </Tag>
-            ) : (
-              <Tag colorScheme="green" justifySelf="flex-start">
-                <TagLabel>Active</TagLabel>
-              </Tag>
-            )}
           </Grid>
           <Spacer size={12} axis="vertical" />
           <Prose>
@@ -179,7 +169,6 @@ export const query = graphql`
       description
       slug
       tags
-      archived
       seoDate: date
       date(formatString: "MMM DD, YYYY")
       seoLastUpdated: lastUpdated
