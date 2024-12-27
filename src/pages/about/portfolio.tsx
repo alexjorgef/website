@@ -125,20 +125,16 @@ const openSourceRepos = [
 
 const Portfolio: React.FC<PageProps<DataProps>> = ({ data }) => {
   const imageDisplay = useBreakpointValue({ base: `none`, md: `block` }, `md`)
-  // const repoGh1 = data?.repoGh1?.repository
-  // const repoGh2 = data?.repoGh2?.repository
-  // const repoGh3 = data?.repoGh3?.repository
-  // const repoGh4 = data?.repoGh4?.repository
-  // const repoGh5 = data?.repoGh5?.repository
-  // const repoGl1 = data?.repoGl1?.repository
-  // const repoGl2 = data?.repoGl2?.repository
-  // const isReposFetched = repoGh1 && repoGh2 && repoGh3 && repoGh4 && repoGh5 && repoGl1 && repoGl2
-  // const reposGh = [repoGh1, repoGh2, repoGh3, repoGh4, repoGh5]
-  // const reposGl = [repoGl1, repoGl2]
-
-  const isReposFetched = true
-  const reposGh = []
-  const reposGl = []
+  const repoGh1 = data?.repoGh1?.repository ?? ({} as RepositoryInfo)
+  const repoGh2 = data?.repoGh2?.repository ?? ({} as RepositoryInfo)
+  const repoGh3 = data?.repoGh3?.repository ?? ({} as RepositoryInfo)
+  const repoGh4 = data?.repoGh4?.repository ?? ({} as RepositoryInfo)
+  const repoGh5 = data?.repoGh5?.repository ?? ({} as RepositoryInfo)
+  const repoGl1 = data?.repoGl1?.repository ?? ({} as RepositoryInfo)
+  const repoGl2 = data?.repoGl2?.repository ?? ({} as RepositoryInfo)
+  const isReposFetched = repoGh1 && repoGh2 && repoGh3 && repoGh4 && repoGh5 && repoGl1 && repoGl2
+  const reposGh = [repoGh1, repoGh2, repoGh3, repoGh4, repoGh5]
+  const reposGl = [repoGl1, repoGl2]
 
   return (
     <Layout>
@@ -233,76 +229,6 @@ const Portfolio: React.FC<PageProps<DataProps>> = ({ data }) => {
 
 export default Portfolio
 
-// export const query = graphql`
-//   {
-//     portfolio: allProject(sort: { date: DESC }) {
-//       nodes {
-//         title
-//         date
-//         slug
-//         description
-//         image
-//       }
-//     }
-//     repoGh1: github {
-//       repository(name: "go-bittrex", owner: "alexjorgef") {
-//         stargazerCount
-//         description
-//         name
-//         url
-//       }
-//     }
-//     repoGh2: github {
-//       repository(name: "cv", owner: "alexjorgef") {
-//         stargazerCount
-//         description
-//         name
-//         url
-//       }
-//     }
-//     repoGh3: github {
-//       repository(name: "website", owner: "alexjorgef") {
-//         stargazerCount
-//         description
-//         name
-//         url
-//       }
-//     }
-//     repoGh4: github {
-//       repository(name: "signalr", owner: "alexjorgef") {
-//         stargazerCount
-//         description
-//         name
-//         url
-//       }
-//     }
-//     repoGh5: github {
-//       repository(name: "telegram-git-bot", owner: "alexjorgef") {
-//         stargazerCount
-//         description
-//         name
-//         url
-//       }
-//     }
-//     repoGl1: gitlab {
-//       repository: project(fullPath: "alexjorgef/alexjorgef.gitlab.io") {
-//         stargazerCount: starCount
-//         description
-//         name
-//         url: webUrl
-//       }
-//     }
-//     repoGl2: gitlab {
-//       repository: project(fullPath: "alexjorgef/test") {
-//         stargazerCount: starCount
-//         description
-//         name
-//         url: webUrl
-//       }
-//     }
-//   }
-// `
-
 export const query = graphql`
   {
     portfolio: allProject(sort: { date: DESC }) {
@@ -312,6 +238,62 @@ export const query = graphql`
         slug
         description
         image
+      }
+    }
+    repoGh1: github {
+      repository(name: "go-bittrex", owner: "alexjorgef") {
+        stargazerCount
+        description
+        name
+        url
+      }
+    }
+    repoGh2: github {
+      repository(name: "cv", owner: "alexjorgef") {
+        stargazerCount
+        description
+        name
+        url
+      }
+    }
+    repoGh3: github {
+      repository(name: "website", owner: "alexjorgef") {
+        stargazerCount
+        description
+        name
+        url
+      }
+    }
+    repoGh4: github {
+      repository(name: "signalr", owner: "alexjorgef") {
+        stargazerCount
+        description
+        name
+        url
+      }
+    }
+    repoGh5: github {
+      repository(name: "telegram-git-bot", owner: "alexjorgef") {
+        stargazerCount
+        description
+        name
+        url
+      }
+    }
+    repoGl1: gitlab {
+      repository: project(fullPath: "alexjorgef/alexjorgef.gitlab.io") {
+        stargazerCount: starCount
+        description
+        name
+        url: webUrl
+      }
+    }
+    repoGl2: gitlab {
+      repository: project(fullPath: "alexjorgef/test") {
+        stargazerCount: starCount
+        description
+        name
+        url: webUrl
       }
     }
   }
