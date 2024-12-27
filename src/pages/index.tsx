@@ -165,100 +165,12 @@ const Index: React.FC<PageProps<DataProps>> = ({ data }) => {
             </Stack>
           </Stack>
         </FullWidthContainer>
-        {/* <Container>
-          <Flex alignItems="center" flexDirection="column" pb={space.paddingSmall}>
-          </Flex>
-        </Container> */}
       </SkipNavContent>
     </Layout>
   )
 }
 
 export default Index
-
-// export const query = graphql`
-//   {
-//     posts: allPost(filter: { published: { eq: true } }, sort: { date: DESC }, limit: 7) {
-//       nodes {
-//         title
-//         description
-//         slug
-//         locale
-//       }
-//     }
-//     garden: allGarden(
-//       limit: 3
-//       sort: { lastUpdated: DESC }
-//       filter: { slug: { ne: "/garden/what-is-a-digital-garden" } }
-//     ) {
-//       nodes {
-//         title
-//         slug
-//       }
-//     }
-//     locales: allLocales(filter: { default: { eq: true } }) {
-//       nodes {
-//         name
-//       }
-//     }
-//     repoGh1: github {
-//       repository(name: "go-bittrex", owner: "alexjorgef") {
-//         stargazerCount
-//         description
-//         name
-//         url
-//       }
-//     }
-//     repoGh2: github {
-//       repository(name: "cv", owner: "alexjorgef") {
-//         stargazerCount
-//         description
-//         name
-//         url
-//       }
-//     }
-//     repoGh3: github {
-//       repository(name: "website", owner: "alexjorgef") {
-//         stargazerCount
-//         description
-//         name
-//         url
-//       }
-//     }
-//     repoGh4: github {
-//       repository(name: "signalr", owner: "alexjorgef") {
-//         stargazerCount
-//         description
-//         name
-//         url
-//       }
-//     }
-//     repoGh5: github {
-//       repository(name: "telegram-git-bot", owner: "alexjorgef") {
-//         stargazerCount
-//         description
-//         name
-//         url
-//       }
-//     }
-//     repoGl1: gitlab {
-//       repository: project(fullPath: "alexjorgef/alexjorgef.gitlab.io") {
-//         stargazerCount: starCount
-//         description
-//         name
-//         url: webUrl
-//       }
-//     }
-//     repoGl2: gitlab {
-//       repository: project(fullPath: "alexjorgef/test") {
-//         stargazerCount: starCount
-//         description
-//         name
-//         url: webUrl
-//       }
-//     }
-//   }
-// `
 
 export const query = graphql`
   {
