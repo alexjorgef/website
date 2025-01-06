@@ -26,7 +26,6 @@ import {
   GridItem,
   Image,
   Flex,
-  Badge,
   Box,
   VStack,
   Link as ChakraLink,
@@ -145,7 +144,7 @@ const Portfolio: React.FC<PageProps<DataProps>> = ({ data }) => {
             <Stack spacing="3" align="center">
               <Heading as="h1">Portfolio</Heading>
               <Text variant="prominent" maxWidth="45ch" textAlign="center">
-                A compilation of my experiences
+                A compilation of my experiences, learnings and thoughts as a software developer
               </Text>
             </Stack>
             <Grid
@@ -186,16 +185,14 @@ const Portfolio: React.FC<PageProps<DataProps>> = ({ data }) => {
           </Stack>
           <Stack spacing="32" align="center" paddingTop="32">
             <Stack spacing="3" align="center">
-              <Heading as="h1">Open Source</Heading>
+              <Heading as="h1">Open Source Repositories</Heading>
               <Text variant="prominent" maxWidth="40ch" textAlign="center">
-                Highly motivated by the entire ecosystem, I love working with modern technologies, building, and
-                designing awesome projects.
+                Featured repositories across GitHub and GitLab
               </Text>
             </Stack>
             {isReposFetched ? (
               <Stack direction="column" width="100%" spacing={6}>
-                <Flex justifyContent="space-between" alignItems="center">
-                  <Badge variant="dark">Featured Projects</Badge>
+                <Flex justifyContent="flex-end" alignItems="center">
                   <SubtleButton isExternal to="https://www.github.com/alexjorgef">
                     GitHub
                   </SubtleButton>

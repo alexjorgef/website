@@ -61,8 +61,7 @@ const Writing: React.FC<PageProps<WritingProps>> = ({ data: { posts, locales } }
             <Stack spacing="3" align="center">
               <Heading as="h1">Writing</Heading>
               <Text variant="prominent" maxWidth="45ch" textAlign="center">
-                So far I’ve written {postsShow.length} longform tutorials & articles. For a shorter and more compact
-                content, see my <Link to="/notebook">notebook</Link>.
+                Articles, tutorials, and insights
               </Text>
             </Stack>
             <Grid
@@ -80,6 +79,10 @@ const Writing: React.FC<PageProps<WritingProps>> = ({ data: { posts, locales } }
                 />
               ))}
             </Grid>
+            <Text variant="prominent" maxWidth="45ch" textAlign="center">
+              So far I’ve written {postsShow.length} articles. For a shorter content, check out the{` `}
+              <Link to="/notebook">notebooks</Link>.
+            </Text>
           </Stack>
         </Container>
       </SkipNavContent>

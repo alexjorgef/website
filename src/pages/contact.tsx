@@ -97,15 +97,15 @@ const Contact: React.FC<PageProps<DataProps>> = () => {
         <Container py={space.paddingMedium}>
           <Grid templateColumns={[`repeat(1, 1fr)`, null, `repeat(2, 1fr)`]} gap={6}>
             <Container>
-              <Heading as="h1">Together we're stronger</Heading>
+              <Heading as="h1">Get in Touch</Heading>
               <Text mt={10} fontSize="lg">
-                I am constantly looking for challenging projects.
+                Innovation drives me, and I am constantly seeking new ways to push boundaries.
                 <br />
                 <br />
-                Connect with me via this form or just send me a email to{` `}
+                Do you have a question or something you'd like to share? You can reach me through the contact form or
+                email directly to{` `}
                 <u>hello@alexjorgef.com</u>
                 <br />
-                <br />I will be available from Monday to Friday from 10:00AM until 10:00PM UTC+0
               </Text>
             </Container>
             <Formik
@@ -164,7 +164,7 @@ const Contact: React.FC<PageProps<DataProps>> = () => {
                           {...field}
                           id="message"
                           size="md"
-                          placeholder="Hi..."
+                          placeholder="Enter your message"
                           variant="outline"
                           height={100}
                         />
@@ -201,7 +201,7 @@ const Contact: React.FC<PageProps<DataProps>> = () => {
                     spinnerPlacement="start"
                     type="submit"
                   >
-                    Submit
+                    Send
                   </Button>
                 </Form>
               )}

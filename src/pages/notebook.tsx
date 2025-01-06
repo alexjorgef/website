@@ -110,8 +110,7 @@ const Garden: React.FC<PageProps<DataProps>> = ({ data: { garden }, location }) 
         <Container py={space.paddingSmall}>
           <Heading as="h1">Notebook</Heading>
           <Text textStyle="prominent">
-            Here I will discuss problems, bugs and other quick information that I think relevant to share with you. How
-            exciting 😉
+            Here I will discuss problems, bugs and other quick informations that I think relevant.
           </Text>
           {/* <Spacer size={6} axis="vertical" />
           <Wrap>
