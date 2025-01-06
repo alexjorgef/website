@@ -14,11 +14,11 @@
     link: /lib
     isExternal: false
   items:
-    - name: Inspiration
-      link: /lib/inspiration
-      isExternal: false
     - name: Mixtapes
       link: /lib/mixtapes
+      isExternal: false
+    - name: Inspiration
+      link: /lib/inspiration
       isExternal: false
     - name: Generative Art
       link: /lib/generative

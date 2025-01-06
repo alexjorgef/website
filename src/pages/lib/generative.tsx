@@ -36,7 +36,7 @@ const Generative: React.FC<PageProps> = () => {
             <Stack spacing="3" align="center">
               <Heading as="h1">Generative Designs</Heading>
               <Text variant="prominent" maxWidth="45ch" textAlign="center">
-                Some of the experiments I'm doing.
+                Experiments in CGI and generative design
               </Text>
             </Stack>
             <Grid

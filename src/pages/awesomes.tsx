@@ -122,7 +122,7 @@ const Awesomes: React.FC<PageProps<DataProps>> = ({ data: { awesomes }, location
         <Container py={space.paddingSmall}>
           <Heading as="h1">Awesomes</Heading>
           <Text textStyle="prominent">
-            During my research time I usually write down some resources that I find useful. Here they are:
+            During my research time I usually write down resources that I find useful. Here they are.
           </Text>
           <Spacer size={6} axis="vertical" />
           <Wrap>
