@@ -102,7 +102,8 @@ const Contact: React.FC<PageProps<DataProps>> = () => {
                 Innovation drives me, and I am constantly seeking new ways to push boundaries.
                 <br />
                 <br />
-                Do you have a question or something you'd like to share? You can reach me through the contact form or email directly to{` `}
+                Do you have a question or something you'd like to share? You can reach me through the contact form or
+                email directly to{` `}
                 <u>hello@alexjorgef.com</u>
                 <br />
               </Text>

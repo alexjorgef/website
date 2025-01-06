@@ -26,7 +26,6 @@ import {
   GridItem,
   Image,
   Flex,
-  Badge,
   Box,
   VStack,
   Link as ChakraLink,

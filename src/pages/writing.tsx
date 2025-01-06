@@ -80,7 +80,7 @@ const Writing: React.FC<PageProps<WritingProps>> = ({ data: { posts, locales } }
               ))}
             </Grid>
             <Text variant="prominent" maxWidth="45ch" textAlign="center">
-              So far I’ve written {postsShow.length} articles. For a shorter content, check out the{" "}
+              So far I’ve written {postsShow.length} articles. For a shorter content, check out the{` `}
               <Link to="/notebook">notebooks</Link>.
             </Text>
           </Stack>
