@@ -6,6 +6,10 @@
   description: Small thoughts about the environment, including climate issues, energy sustainability, air pollution and more.
   gradient: linear(to-t, green.400, green.900)
   image: ./category-images/placeholder.jpg
+- name: Community
+  description: Community articles
+  gradient: linear(to-t, green.400, green.900)
+  image: ./category-images/placeholder.jpg
 - name: Mathematics
   description: Small thoughts about the environment, including climate issues, energy sustainability, air pollution and more.
   gradient: linear(to-t, green.400, green.900)
