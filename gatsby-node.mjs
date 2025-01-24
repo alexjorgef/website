@@ -426,7 +426,7 @@ export const onCreateNode = (
  * @typedef {{
  *   slug?: string
  *   image?: string
- *   category: "JavaScript" | "Environment" | "Mathematics" | "Artificial Intelligence"
+ *   category: "JavaScript" | "Environment" | "Mathematics" | "Artificial Intelligence" | "Community"
  *   date: string
  *   lastUpdated?: string
  *   description: string
