@@ -28,12 +28,12 @@ export const baseSizes = {
 
 export const navigation = {
   navigationHeight: `61px`,
-  navigationWithSubHeight: `111px`,
+  navigationWithSubHeight: `119px`,
 }
 
 export const negativeNavigation = {
   "-navigationHeight": `-61px`,
-  "-navigationWithSubHeight": `-111px`,
+  "-navigationWithSubHeight": `-119px`,
 }
 
 export const space = {
