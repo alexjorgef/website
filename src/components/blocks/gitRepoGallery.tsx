@@ -45,7 +45,7 @@ type GitRepoGalleryProps = {
 export const GitRepoGallery: React.FC<GitRepoGalleryProps> = ({ inverted = false, repositories = undefined }) => {
   const secondaryRepoBg = useColorModeValue(`blueGray.100`, `blueGray.800`)
   return (
-    <Grid gridTemplateColumns={[`1fr`, null, null, `repeat(3, 1fr)`]} gap={6} width={[`100%`]}>
+    <Grid gridTemplateColumns={[`1fr`, null, null, `repeat(3, 1fr)`]} gap={4} width={[`100%`]}>
       {repositories.map((repository, i) => {
         const rowIndex = i % 2 === 0 ? i / 2 : (i - 1) / 2
         const rowIndexEven = inverted ? (rowIndex + 1) % 2 === 0 : rowIndex % 2 === 0
@@ -70,22 +70,30 @@ export const GitRepoGallery: React.FC<GitRepoGalleryProps> = ({ inverted = false
         const linkColor = rowIndexEven ? linkColorDefault : linkColorInverted
         return (
           <GridItem colSpan={colSpan} colStart={colStart}>
-            <Box bg={boxBackground} p={6} borderRadius="lg" height="100%" color={boxColor}>
-              <Flex flexDirection="row" justifyContent="space-between" mb={6}>
+            <Box bg={boxBackground} p={4} borderRadius="lg" height="100%" color={boxColor}>
+              <Flex flexDirection="row" justifyContent="flex-start" mb={2}>
                 <ChakraLink
                   fontSize={[`lg`, null, null, null, `1.3125rem`]}
                   color={linkColor}
                   fontWeight="bold"
                   href={repository.url}
+                  textOverflow={"clip"}
                 >
-                  {repository.name}
+                  <Box overflow={"hidden"} maxWidth="100%">
+                    {repository.name}
+                  </Box>
+                  {/* <Text noOfLines={1}>
+
+                  </Text> */}
                 </ChakraLink>
-                <Tag variant="subtle" colorScheme={tagColor}>
+              </Flex>
+              <Flex flexDirection="row" justifyContent="flex-start" mb={6}>
+                <Tag variant="subtle" colorScheme={tagColor} height="100%" padding={2}>
                   <TagLeftIcon as={FaStar} />
                   <TagLabel>{repository.stargazerCount}</TagLabel>
                 </Tag>
               </Flex>
-              <Text>{repository.description}</Text>
+              <Text noOfLines={2}>{repository.description}</Text>
             </Box>
           </GridItem>
         )

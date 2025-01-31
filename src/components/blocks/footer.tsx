@@ -113,12 +113,13 @@ export const Footer: React.FC = () => {
               alignItems="center"
               justifyContent="space-between"
               mt="16px"
+              rowGap={2}
             >
-              <div>
+              <Box>
                 &copy; {new Date().getFullYear()}. <Link to="/privacy-policy">Privacy Policy</Link>.{` `}
                 <Link to="/legal-notice">Legal Notice</Link>.
-              </div>
-              <div>
+              </Box>
+              <Box>
                 <ExternalLink href={`https://www.linkedin.com/in/${meta.linkedin}`}>
                   <Icon fontSize="1.45rem" as={LinkedinIcon} />
                 </ExternalLink>
@@ -134,7 +135,7 @@ export const Footer: React.FC = () => {
                 <Link to="/rss.xml" ml="16px">
                   <Icon fontSize="1.45rem" as={RssIcon} />
                 </Link>
-              </div>
+              </Box>
             </Flex>
           </Flex>
         </Stack>
