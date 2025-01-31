@@ -77,14 +77,11 @@ export const GitRepoGallery: React.FC<GitRepoGalleryProps> = ({ inverted = false
                   color={linkColor}
                   fontWeight="bold"
                   href={repository.url}
-                  textOverflow={"clip"}
+                  textOverflow={`clip`}
                 >
-                  <Box overflow={"hidden"} maxWidth="100%">
+                  <Box overflow={`hidden`} maxWidth="100%">
                     {repository.name}
                   </Box>
-                  {/* <Text noOfLines={1}>
-
-                  </Text> */}
                 </ChakraLink>
               </Flex>
               <Flex flexDirection="row" justifyContent="flex-start" mb={6}>
