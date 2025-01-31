@@ -67,8 +67,10 @@ export const Footer: React.FC = () => {
                 . Respectfully inspired on{` `}
                 <ExternalLink href="https://github.com/LekoArts/portfolio-v2">LekoArts</ExternalLink> code.
               </Text>
-              <Flex justifyContent={[`center`, `flex-start`]} mt="16px">
-                <LangSwitcher mr={2} />
+              <Flex justifyContent={[`flex-start`, `flex-start`]} mt="16px" mb="16px">
+                <Box mr={2}>
+                  <LangSwitcher />
+                </Box>
                 <Toggle />
               </Flex>
             </Flex>

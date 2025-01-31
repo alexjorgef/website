@@ -33,7 +33,7 @@ const tagColorSwitch = (name) => {
       return `green`
     case `Community`:
       return `green`
-    case `Artificial Intelligence`:
+    case `AI`:
       return `green`
     case `Mathematics`:
       return `green`
