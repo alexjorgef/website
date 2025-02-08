@@ -24,7 +24,7 @@ import {
   FaGitlab as GitlabIcon,
   FaLinkedin as LinkedinIcon,
   FaRss as RssIcon,
-  FaStackOverflow as StackOverflowIcon
+  FaStackOverflow as StackOverflowIcon,
 } from "react-icons/fa"
 import { SiGatsby as GatsbyIcon } from "react-icons/si"
 import { useFooterNavigation } from "../../hooks/use-footer-navigation"
