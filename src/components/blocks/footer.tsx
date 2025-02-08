@@ -24,6 +24,7 @@ import {
   FaGitlab as GitlabIcon,
   FaLinkedin as LinkedinIcon,
   FaRss as RssIcon,
+  FaStackOverflow as StackOverflowIcon
 } from "react-icons/fa"
 import { SiGatsby as GatsbyIcon } from "react-icons/si"
 import { useFooterNavigation } from "../../hooks/use-footer-navigation"
@@ -130,6 +131,9 @@ export const Footer: React.FC = () => {
                 </ExternalLink>
                 <ExternalLink href={`https://gitlab.com/${meta.gitlab}`} ml="16px">
                   <Icon fontSize="1.45rem" as={GitlabIcon} />
+                </ExternalLink>
+                <ExternalLink href={`https://stackoverflow.com/users/${meta.stackoverflow}`} ml="16px">
+                  <Icon fontSize="1.45rem" as={StackOverflowIcon} />
                 </ExternalLink>
                 <ExternalLink href={`https://instagram.com/${meta.instagram}`} ml="16px">
                   <Icon fontSize="1.45rem" as={InstagramIcon} />
