@@ -1,6 +1,6 @@
+- name: Workfolio
+  link: /about/workfolio
 - name: Writing
   link: /writing
-- name: Portfolio
-  link: /about/portfolio
-- name: About
-  link: /about
+- name: Contact
+  link: /contact

@@ -50,7 +50,7 @@ type RepositoryInfo = {
 }
 
 type DataProps = {
-  portfolio: {
+  workfolio: {
     nodes: Array<{
       title: string
       date: string
@@ -122,7 +122,7 @@ const openSourceRepos = [
   },
 ]
 
-const Portfolio: React.FC<PageProps<DataProps>> = ({ data }) => {
+const Workfolio: React.FC<PageProps<DataProps>> = ({ data }) => {
   const imageDisplay = useBreakpointValue({ base: `none`, md: `block` }, `md`)
   const repoGh1 = data?.repoGh1?.repository ?? ({} as RepositoryInfo)
   const repoGh2 = data?.repoGh2?.repository ?? ({} as RepositoryInfo)
@@ -137,14 +137,14 @@ const Portfolio: React.FC<PageProps<DataProps>> = ({ data }) => {
 
   return (
     <Layout>
-      <SEO title="Portfolio" breadcrumbListItems={[{ name: `Portfolio`, url: `/portfolio` }]} />
+      <SEO title="Workfolio" breadcrumbListItems={[{ name: `Workfolio`, url: `/workfolio` }]} />
       <SkipNavContent>
         <Container py={space.paddingSmall}>
           <Stack spacing="32" align="center">
             <Stack spacing="3" align="center">
-              <Heading as="h1">Portfolio</Heading>
+              <Heading as="h1">Workfolio</Heading>
               <Text variant="prominent" maxWidth="45ch" textAlign="center">
-                A compilation of my experiences, learnings and thoughts as a software developer
+                A compilation of my experiences and projects as a software developer
               </Text>
             </Stack>
             <Grid
@@ -152,7 +152,7 @@ const Portfolio: React.FC<PageProps<DataProps>> = ({ data }) => {
               gap={8}
               width={[`100%`, null, null, `calc(100% + 3rem)`]}
             >
-              {data?.portfolio.nodes.map((project, i) => (
+              {data?.workfolio.nodes.map((project, i) => (
                 <Container key={project.slug}>
                   <GatsbyLink to={project.slug}>
                     <GridItem colSpan={1} colStart={i % 2 === 0 ? 0 : 1}>
@@ -224,11 +224,11 @@ const Portfolio: React.FC<PageProps<DataProps>> = ({ data }) => {
   )
 }
 
-export default Portfolio
+export default Workfolio
 
 export const query = graphql`
   {
-    portfolio: allProject(sort: { date: DESC }) {
+    workfolio: allProject(sort: { date: DESC }) {
       nodes {
         title
         date

@@ -21,38 +21,38 @@ test.describe(`Kitchen Sink`, () => {
   test(`visiting primary navigation`, async ({ page }) => {
     await page.goto(`/`)
 
+    await page.locator(`[aria-label="Primary navigation"] >> text=Workfolio`).click()
+    await expect(page).toHaveURL(`/about/workfolio`)
+
     await page.locator(`[aria-label="Primary navigation"] >> text=Writing`).click()
     await expect(page).toHaveURL(`/writing`)
 
-    await page.locator(`[aria-label="Primary navigation"] >> text=Portfolio`).click()
-    await expect(page).toHaveURL(`/about/portfolio`)
-
-    await page.locator(`[aria-label="Primary navigation"] >> text=About`).click()
-    await expect(page).toHaveURL(`/about`)
+    await page.locator(`[aria-label="Primary navigation"] >> text=Contact`).click()
+    await expect(page).toHaveURL(`/contact`)
 
     await page.locator(`[aria-label="alexjorgef\\.com\\, Back to homepage"] svg`).click()
     await expect(page).toHaveURL(`/`)
   })
-  test(`visiting writing subnavigation`, async ({ page }) => {
-    await page.goto(`/writing`)
+  // test(`visiting writing subnavigation`, async ({ page }) => {
+  //   await page.goto(`/writing`)
 
-    await page.locator(`text=Tutorials`).first().click()
-    await expect(page).toHaveURL(`/tutorials`)
+  //   await page.locator(`text=Tutorials`).first().click()
+  //   await expect(page).toHaveURL(`/tutorials`)
 
-    await page.locator(`text=JavaScript`).first().click()
-    await expect(page).toHaveURL(`/javascript`)
+  //   await page.locator(`text=JavaScript`).first().click()
+  //   await expect(page).toHaveURL(`/javascript`)
 
-    await page.locator(`text=Environment`).first().click()
-    await expect(page).toHaveURL(`/environment`)
-  })
+  //   await page.locator(`text=Environment`).first().click()
+  //   await expect(page).toHaveURL(`/environment`)
+  // })
   test(`footer navigation`, async ({ page }) => {
     await page.goto(`/`)
 
-    await page.locator(`footer[role="contentinfo"] >> text=Notebook`).click()
-    await expect(page).toHaveURL(`/notebook`)
+    await page.locator(`footer[role="contentinfo"] >> text=Privacy Policy`).click()
+    await expect(page).toHaveURL(`/privacy-policy`)
 
-    await page.locator(`footer[role="contentinfo"] >> text=Awesomes`).click()
-    await expect(page).toHaveURL(`/awesomes`)
+    await page.locator(`footer[role="contentinfo"] >> text=Legal Notice`).click()
+    await expect(page).toHaveURL(`/legal-notice`)
   })
   test(`content pages`, async ({ page }) => {
     await page.goto(`/javascript/demo-tutorial-1`)

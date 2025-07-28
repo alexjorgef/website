@@ -16,9 +16,8 @@
  */
 
 import * as React from "react"
-import { Box, Stack, Flex, Link as ExternalLink, Icon, useColorMode, Divider, Text } from "@chakra-ui/react"
+import { Box, Stack, Flex, Link as ExternalLink, Icon, Divider } from "@chakra-ui/react"
 import {
-  FaHeart as HeartIcon,
   FaInstagram as InstagramIcon,
   FaGithub as GithubIcon,
   FaGitlab as GitlabIcon,
@@ -26,8 +25,6 @@ import {
   FaRss as RssIcon,
   FaStackOverflow as StackOverflowIcon,
 } from "react-icons/fa"
-import { SiGatsby as GatsbyIcon } from "react-icons/si"
-import { useFooterNavigation } from "../../hooks/use-footer-navigation"
 import { Link } from "../link"
 import { FullWidthContainer } from "./full-width-container"
 import { LangSwitcher } from "./lang-switcher"
@@ -35,81 +32,13 @@ import { Toggle } from "./theme-toggle"
 import { useSiteMetadata } from "../../hooks/use-site-metadata"
 
 export const Footer: React.FC = () => {
-  const footerNavigation = useFooterNavigation()
-  const { colorMode } = useColorMode()
   const meta = useSiteMetadata()
-  const isLight = colorMode === `light`
 
   return (
     <FullWidthContainer variant="dark">
       <Box as="footer" py={16} role="contentinfo">
-        <Stack direction="column" spacing={16}>
-          <Flex flexDirection={[`column`, `row`]} flexWrap="wrap" justifyContent="space-between">
-            <Flex flexDirection="column" maxWidth="300px">
-              <Text fontSize={[`1.125rem`, null, `1.9125rem`]} mb={3}>
-                alexjorgef.com
-              </Text>
-              <Text>
-                This is my personal website made with{` `}
-                <Icon
-                  transition="all 0.4s"
-                  color={isLight ? `white` : `textMuted`}
-                  _hover={{ color: `#984de2` }}
-                  as={GatsbyIcon}
-                />
-                {` `}
-                and{` `}
-                <Icon
-                  transition="all 0.4s"
-                  color={isLight ? `white` : `textMuted`}
-                  _hover={{ color: `red` }}
-                  as={HeartIcon}
-                />
-                . Respectfully inspired on{` `}
-                <ExternalLink href="https://github.com/LekoArts/portfolio-v2">LekoArts</ExternalLink> code.
-              </Text>
-              <Flex justifyContent={[`flex-start`, `flex-start`]} mt="16px" mb="16px">
-                <Box mr={2}>
-                  <LangSwitcher />
-                </Box>
-                <Toggle />
-              </Flex>
-            </Flex>
-            {footerNavigation.map((section) => {
-              const { heading } = section
-              return (
-                <Flex key={heading.name} flexDirection="column" alignItems="flex-start" minWidth="150px" mb={[8, 0]}>
-                  {heading.link ? (
-                    <Link to={heading.link} p={1} color="white" fontSize={[`1.125rem`, null, `1.3125rem`]}>
-                      {heading.name}
-                    </Link>
-                  ) : (
-                    <Box color="white" p={1} fontSize={[`1.125rem`, null, `1.3125rem`]}>
-                      {heading.name}
-                    </Box>
-                  )}
-                  <Divider mb={[2, 3]} />
-                  <Flex flexDirection={[`row`, `column`]} alignItems="flex-start" flexWrap={[`wrap`, `nowrap`]}>
-                    {section.items.map((item) => (
-                      <React.Fragment key={item.link}>
-                        {item.isExternal ? (
-                          <ExternalLink mr={[2, 0]} p={1} href={item.link}>
-                            {item.name}
-                          </ExternalLink>
-                        ) : (
-                          <Link mr={[2, 0]} p={1} to={item.link}>
-                            {item.name}
-                          </Link>
-                        )}
-                      </React.Fragment>
-                    ))}
-                  </Flex>
-                </Flex>
-              )
-            })}
-          </Flex>
+        <Stack direction="column">
           <Flex flexDirection="column">
-            <Divider />
             <Flex
               flexDirection={[`column`, `row`]}
               textAlign="center"
@@ -119,7 +48,8 @@ export const Footer: React.FC = () => {
               rowGap={2}
             >
               <Box>
-                &copy; {new Date().getFullYear()}. <Link to="/privacy-policy">Privacy Policy</Link>.{` `}
+                &copy; {new Date().getFullYear()} Alexandre Ferreira. <Link to="/privacy-policy">Privacy Policy</Link>.
+                {` `}
                 <Link to="/legal-notice">Legal Notice</Link>.
               </Box>
               <Box>
@@ -144,6 +74,11 @@ export const Footer: React.FC = () => {
               </Box>
             </Flex>
           </Flex>
+          <Divider />
+          <Stack mt="6px" direction="row" spacing="8px">
+            <Toggle />
+            <LangSwitcher />
+          </Stack>
         </Stack>
       </Box>
     </FullWidthContainer>

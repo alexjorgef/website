@@ -114,7 +114,7 @@ const GardenTemplate: React.FC<PageProps<DataProps>> = ({ data: { garden }, loca
             <Flex flexWrap="wrap" justifyContent={[`flex-start`, null, `flex-end`]}>
               {garden.tags.map((tag) => (
                 <Box as="span" ml={2} _first={{ ml: 0 }} key={tag}>
-                  {tag}
+                  #{tag}
                 </Box>
               ))}
             </Flex>
