@@ -119,14 +119,6 @@ export const WritingView: React.FC<React.PropsWithChildren<WritingViewDataProps>
               >
                 Give feedback
               </ExternalLink>
-              {/* {` `}-{` `}
-              <ExternalLink
-                fontSize={[`md`, null, null, `1.125rem`]}
-                fontWeight="medium"
-                href={`https://www.twitter.com/search?q=${encodeURIComponent(`https://www.alexjorgef.com${pathname}`)}`}
-              >
-                Discuss on Twitter
-              </ExternalLink> */}
             </Box>
             {hasShareApi ? (
               <Stack direction={[`column`, `row`]}>

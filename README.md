@@ -1,19 +1,40 @@
 <div align="center">
-  <a href="https://alexjorgef.com/"><img src="https://gateway.pinata.cloud/ipfs/QmUQFG2KcNY6s7h1CaTM79pz5VKzzF23397MzMwvLWZnZB" alt="logo" width="250" /></a>
+  <a href="https://alexjorgef.com/">
+    <img src="https://gateway.pinata.cloud/ipfs/QmUQFG2KcNY6s7h1CaTM79pz5VKzzF23397MzMwvLWZnZB" alt="logo" width="250" />
+  </a>
 </div>
 
 ---
 
-Source code of my personal website, mainly inspired by [Lennart](https://github.com/LekoArts)'s [**portfolio-v2**](https://github.com/LekoArts/portfolio-v2) repository.
+Source code of my personal website.
 
 ## Development
 
 ```bash
-git clone git@github.com:alexjorgef/website.git
-cd website
 nvm use
 yarn
 yarn dev
+```
+
+## Testing
+
+Lint:
+
+```bash
+yarn lint
+```
+
+Unit tests:
+
+```bash
+yarn test:ci
+```
+
+End-to-end tests:
+
+```bash
+yarn playwright:init
+yarn e2e:build
 ```
 
 ## License
