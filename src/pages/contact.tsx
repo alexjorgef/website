@@ -94,7 +94,7 @@ const Contact: React.FC<PageProps<DataProps>> = () => {
         breadcrumbListItems={[{ name: `Contact`, url: `/contact` }]}
       />
       <SkipNavContent>
-        <Container py={space.paddingMedium}>
+        <Container py={space.paddingSmall}>
           <Grid templateColumns={[`repeat(1, 1fr)`, null, `repeat(2, 1fr)`]} gap={6}>
             <Container>
               <Heading as="h1">Get in Touch</Heading>

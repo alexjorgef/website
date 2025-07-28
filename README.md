@@ -18,7 +18,7 @@ yarn dev
 
 ## License
 
-All code is licensed under the [GPL-3.0-only](https://spdx.org/licenses/GPL-3.0-only.html), see full license [here](LICENSE).
+All code is licensed under the [GPL-3.0-only](https://spdx.org/licenses/GPL-3.0-only.html), see [full license](LICENSE).
 
 ```text
 This program is free software: you can redistribute it and/or modify

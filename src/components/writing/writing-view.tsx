@@ -17,9 +17,8 @@
 
 import React, { useEffect, useState } from "react"
 import { graphql } from "gatsby"
-import { Box, Container, Divider, Link as ExternalLink, Text, Stack, useColorMode } from "@chakra-ui/react"
+import { Box, Container, Divider, Link as ExternalLink, Text, Stack } from "@chakra-ui/react"
 import { MDXProvider } from "@mdx-js/react"
-import { DiscussionEmbed } from "disqus-react"
 import { Layout } from "../blocks/layout"
 import { SkipNavContent } from "../a11y/skip-nav"
 import { Spacer } from "../blocks/spacer"
@@ -28,7 +27,6 @@ import { components } from "../mdx"
 import { ShareAnywhereButton, TwitterButton } from "../buttons"
 import { site } from "../../constants/meta.mjs"
 import { TocItem, WithSidebarWrapper } from "./toc"
-import { useSiteMetadata } from "../../hooks/use-site-metadata"
 
 export type WritingViewDataProps = {
   post: {
@@ -85,17 +83,7 @@ export const WritingView: React.FC<React.PropsWithChildren<WritingViewDataProps>
     setHasShareApi(!!window.navigator.share)
   }, [])
 
-  const meta = useSiteMetadata()
-
-  const disqusConfig = {
-    url: `${meta.siteUrl + pathname}`,
-    identifier: post.slug,
-    title: post.title,
-  }
-
-  const { colorMode } = useColorMode()
-
-  const encoded = encodeURI(post.parent.rawBody)
+  const encoded = encodeURI(post.slug)
 
   return (
     <Layout>
@@ -131,14 +119,14 @@ export const WritingView: React.FC<React.PropsWithChildren<WritingViewDataProps>
               >
                 Give feedback
               </ExternalLink>
-              {` `}-{` `}
+              {/* {` `}-{` `}
               <ExternalLink
                 fontSize={[`md`, null, null, `1.125rem`]}
                 fontWeight="medium"
                 href={`https://www.twitter.com/search?q=${encodeURIComponent(`https://www.alexjorgef.com${pathname}`)}`}
               >
                 Discuss on Twitter
-              </ExternalLink>
+              </ExternalLink> */}
             </Box>
             {hasShareApi ? (
               <Stack direction={[`column`, `row`]}>
@@ -155,10 +143,6 @@ export const WritingView: React.FC<React.PropsWithChildren<WritingViewDataProps>
             </Text>
           )}
         </SkipNavContent>
-        <Spacer size={[16, null, null, 20]} axis="vertical" />
-        <div style={{ colorScheme: `normal` }}>
-          <DiscussionEmbed shortname={process.env.GATSBY_DISQUS_NAME} config={disqusConfig} fakeProp={colorMode} />
-        </div>
       </Container>
     </Layout>
   )

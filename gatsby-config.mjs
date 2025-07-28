@@ -35,7 +35,6 @@ const {
   GATSBY_GITLAB_TOKEN,
   GATSBY_FORMSPREE_ID,
   GATSBY_RECAPTCHA_V2_SITE_KEY,
-  GATSBY_DISQUS_NAME,
   GATSBY_DISCOGS_USERNAME,
   GATSBY_DISCOGS_TOKEN,
   GATSBY_MIXCLOUD_USERNAME,
@@ -64,11 +63,6 @@ if (!GATSBY_RECAPTCHA_V2_SITE_KEY || GATSBY_RECAPTCHA_V2_SITE_KEY.trim() === ``)
   A reCAPTCHA v2 site key as GATSBY_RECAPTCHA_V2_SITE_KEY is required to build some parts of the website.`)
 }
 
-if (!GATSBY_DISQUS_NAME || GATSBY_DISQUS_NAME.trim() === ``) {
-  throw Error(`Check the README https://github.com/alexjorgef/website#readme\n
-  A Disqus shortname as GATSBY_DISQUS_NAME is required to build some parts of the website.`)
-}
-
 if (!GATSBY_BANDCAMP_USERNAME || GATSBY_BANDCAMP_USERNAME.trim() === ``) {
   throw Error(`Check the README https://github.com/alexjorgef/website#readme\n
   A Bandcamp username as GATSBY_BANDCAMP_USERNAME is required to build some parts of the website.`)
@@ -76,15 +70,15 @@ if (!GATSBY_BANDCAMP_USERNAME || GATSBY_BANDCAMP_USERNAME.trim() === ``) {
 
 if (!GATSBY_DISCOGS_USERNAME || GATSBY_DISCOGS_USERNAME.trim() === ``) {
   console.warn(`Check the README https://github.com/alexjorgef/website#readme\n
-  A Disqus shortname as GATSBY_DISCOGS_USERNAME is required to build some parts of the website.`)
+  A Discogs username as GATSBY_DISCOGS_USERNAME is required to build some parts of the website.`)
 }
 if (!GATSBY_DISCOGS_TOKEN || GATSBY_DISCOGS_TOKEN.trim() === ``) {
   console.warn(`Check the README https://github.com/alexjorgef/website#readme\n
-  A Disqus token GATSBY_DISCOGS_TOKEN is required to build some parts of the website.`)
+  A Discogs token as GATSBY_DISCOGS_TOKEN is required to build some parts of the website.`)
 }
 if (!GATSBY_MIXCLOUD_USERNAME || GATSBY_MIXCLOUD_USERNAME.trim() === ``) {
   console.warn(`Check the README https://github.com/alexjorgef/website#readme\n
-  A Disqus token GATSBY_MIXCLOUD_USERNAME is required to build some parts of the website.`)
+  A Mixcloud username as GATSBY_MIXCLOUD_USERNAME is required to build some parts of the website.`)
 }
 
 const options = withDefaults({})
