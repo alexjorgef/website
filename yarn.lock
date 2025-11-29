@@ -7005,13 +7005,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"async@npm:~0.9.0":
-  version: 0.9.2
-  resolution: "async@npm:0.9.2"
-  checksum: 87dbf129292b8a6c32a4e07f43f462498162aa86f404a7e11f978dbfdf75cfb163c26833684bb07b9d436083cd604cbbf730a57bfcbe436c6ae1ed266cdc56bb
-  languageName: node
-  linkType: hard
-
 "asynckit@npm:^0.4.0":
   version: 0.4.0
   resolution: "asynckit@npm:0.4.0"
@@ -8355,21 +8348,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"combined-stream@npm:^1.0.6, combined-stream@npm:^1.0.8, combined-stream@npm:~1.0.6":
+"combined-stream@npm:^1.0.8, combined-stream@npm:~1.0.6":
   version: 1.0.8
   resolution: "combined-stream@npm:1.0.8"
   dependencies:
     delayed-stream: ~1.0.0
   checksum: 49fa4aeb4916567e33ea81d088f6584749fc90c7abec76fd516bf1c5aa5c79f3584b5ba3de6b86d26ddd64bae5329c4c7479343250cfe71c75bb366eae53bb7c
-  languageName: node
-  linkType: hard
-
-"combined-stream@npm:~0.0.4":
-  version: 0.0.7
-  resolution: "combined-stream@npm:0.0.7"
-  dependencies:
-    delayed-stream: 0.0.5
-  checksum: 312bce22547da11c63cef1be38db208f71c05daf6b903b8b5d46038fa820a584852e0cef15a21b492726fbcffa91ce444001ca6a2f79a2159ce5589fd183b135
   languageName: node
   linkType: hard
 
@@ -9361,13 +9345,6 @@ __metadata:
     has-property-descriptors: ^1.0.0
     object-keys: ^1.1.1
   checksum: b4ccd00597dd46cb2d4a379398f5b19fca84a16f3374e2249201992f36b30f6835949a9429669ee6b41b6e837205a163eadd745e472069e70dfc10f03e5fcc12
-  languageName: node
-  linkType: hard
-
-"delayed-stream@npm:0.0.5":
-  version: 0.0.5
-  resolution: "delayed-stream@npm:0.0.5"
-  checksum: 6fcd0961ac3315fff5d5a6c2ba9a4e92cfd00043499eb83b3c38d94531c611121e3f37181849a84d8cb4777750e560b0c1711efb6303ec289544ec2d3a46771f
   languageName: node
   linkType: hard
 
@@ -11926,36 +11903,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"form-data@npm:^0.2.0":
-  version: 0.2.0
-  resolution: "form-data@npm:0.2.0"
-  dependencies:
-    async: ~0.9.0
-    combined-stream: ~0.0.4
-    mime-types: ~2.0.3
-  checksum: b4bf6cd3be824bf393e2be0ec190bddf4f19f8134b106f7838e400daee3056a564f87423048a437744e6268ae0eeb9634b0022281d98a96f616b155dc4ce28a3
-  languageName: node
-  linkType: hard
-
-"form-data@npm:^4.0.0":
-  version: 4.0.1
-  resolution: "form-data@npm:4.0.1"
+"form-data@npm:^4.0.4":
+  version: 4.0.5
+  resolution: "form-data@npm:4.0.5"
   dependencies:
     asynckit: ^0.4.0
     combined-stream: ^1.0.8
+    es-set-tostringtag: ^2.1.0
+    hasown: ^2.0.2
     mime-types: ^2.1.12
-  checksum: ccee458cd5baf234d6b57f349fe9cc5f9a2ea8fd1af5ecda501a18fd1572a6dd3bf08a49f00568afd995b6a65af34cb8dec083cf9d582c4e621836499498dd84
-  languageName: node
-  linkType: hard
-
-"form-data@npm:~2.3.2":
-  version: 2.3.3
-  resolution: "form-data@npm:2.3.3"
-  dependencies:
-    asynckit: ^0.4.0
-    combined-stream: ^1.0.6
-    mime-types: ^2.1.12
-  checksum: 10c1780fa13dbe1ff3100114c2ce1f9307f8be10b14bf16e103815356ff567b6be39d70fc4a40f8990b9660012dc24b0f5e1dde1b6426166eb23a445ba068ca3
+  checksum: af8328413c16d0cded5fccc975a44d227c5120fd46a9e81de8acf619d43ed838414cc6d7792195b30b248f76a65246949a129a4dadd148721948f90cd6d4fb69
   languageName: node
   linkType: hard
 
@@ -17116,13 +17073,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mime-db@npm:~1.12.0":
-  version: 1.12.0
-  resolution: "mime-db@npm:1.12.0"
-  checksum: 6506c87a45592fac34f7d92eac42209eb79c9ead06a2d2c5b863beb5de5d242c9af5d4671d99b35c24be7b85bdd17dcecd742df4fe5ede5fe20a4e35cd129648
-  languageName: node
-  linkType: hard
-
 "mime-db@npm:~1.25.0":
   version: 1.25.0
   resolution: "mime-db@npm:1.25.0"
@@ -17145,15 +17095,6 @@ __metadata:
   dependencies:
     mime-db: 1.52.0
   checksum: 89a5b7f1def9f3af5dad6496c5ed50191ae4331cc5389d7c521c8ad28d5fdad2d06fd81baf38fed813dc4e46bb55c8145bb0ff406330818c9cf712fb2e9b3836
-  languageName: node
-  linkType: hard
-
-"mime-types@npm:~2.0.3":
-  version: 2.0.14
-  resolution: "mime-types@npm:2.0.14"
-  dependencies:
-    mime-db: ~1.12.0
-  checksum: 635b319cc7f7a323c57abf9eb284e7cab496b2e633a1b6568c02f3e678bb07516aaefd9d0c94703b143b543408aded3a7a83ec4e4c2f50661eb1752233737d73
   languageName: node
   linkType: hard
 
@@ -23536,9 +23477,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^5.0.0":
-  version: 5.4.11
-  resolution: "vite@npm:5.4.11"
+"vite@npm:^5.4.21":
+  version: 5.4.21
+  resolution: "vite@npm:5.4.21"
   dependencies:
     esbuild: ^0.21.3
     fsevents: ~2.3.3
@@ -23575,7 +23516,7 @@ __metadata:
       optional: true
   bin:
     vite: bin/vite.js
-  checksum: 8c5b31d17487b69c40a30419dc0ade9f33360eb6893dbfa33a90980271bd74d35ae550b5cbb2a9e640f0df41ea36fd1bb4f222c98f6d02e607080f20832e69e8
+  checksum: 7177fa03cff6a382f225290c9889a0d0e944d17eab705bcba89b58558a6f7adfa1f47e469b88f42a044a0eb40c12a1bf68b3cb42abb5295d04f9d7d4dd320837
   languageName: node
   linkType: hard
 

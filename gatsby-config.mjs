@@ -377,10 +377,11 @@ const gatsbyConfig = {
         ],
       },
     },
-    ANALYSE_BUNDLE && {
-      resolve: `gatsby-plugin-perf-budgets`,
-      options: {},
-    },
+    // WIP: gatsby-plugin-perf-budgets 0.0.18 -> ejs 2.7.4: ejs template injection vulnerability CVE-2022-29078 FIXED at 3.1.10
+    // ANALYSE_BUNDLE && {
+    //   resolve: `gatsby-plugin-perf-budgets`,
+    //   options: {},
+    // },
     ANALYSE_BUNDLE && {
       resolve: `gatsby-plugin-webpack-bundle-analyser-v2`,
       options: {},
