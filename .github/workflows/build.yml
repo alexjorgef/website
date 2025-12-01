@@ -81,7 +81,7 @@ jobs:
           rm -rf website-data/
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           include-hidden-files: true
           name: injected
@@ -220,7 +220,7 @@ jobs:
           GATSBY_BANDCAMP_USERNAME: ${{ secrets.GATSBY_BANDCAMP_USERNAME }}
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: github.ref == 'refs/heads/main'
         with:
           include-hidden-files: true
@@ -253,7 +253,7 @@ jobs:
         run: yarn dlx vercel@latest build --yes --prod --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: github.ref == 'refs/heads/main'
         with:
           include-hidden-files: true
