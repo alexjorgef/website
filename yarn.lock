@@ -66,14 +66,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@alexjorgef/gatsby-source-mixcloud@npm:^0.0.2":
-  version: 0.0.2
-  resolution: "@alexjorgef/gatsby-source-mixcloud@npm:0.0.2"
+"@alexjorgef/gatsby-source-mixcloud@npm:^0.0.4":
+  version: 0.0.4
+  resolution: "@alexjorgef/gatsby-source-mixcloud@npm:0.0.4"
   dependencies:
-    mixjar: ^0.1.2
+    "@alexjorgef/mixjar": ^0.1.3
   peerDependencies:
     gatsby: ^5.0.0-next.0
-  checksum: 0302f43c9ba27545e66a76f5710cd28b301289cf4b25b9698d24f29d684402a71ea1b0375e4dbea8a617b576567edee08aa3a40132c54e9e1f3e48f3eb0293ba
+  checksum: b972547068f198ccaf08078038dac71092425ff1cb6aea513d123c1ea73ad57e6c8e27d8f3cea91e3384348f284dd2f0936a67052e4ad725b1c86f717d2f4498
+  languageName: node
+  linkType: hard
+
+"@alexjorgef/mixjar@npm:^0.1.3":
+  version: 0.1.3
+  resolution: "@alexjorgef/mixjar@npm:0.1.3"
+  checksum: 52868cf36fbe6ea954b9bbc5669f9c041714b5e8b0166473e5ee872e413f97f8608b11b2950302ed1e23266cf4e4de2a07a80469c437cf58973beae61c6b27d3
   languageName: node
   linkType: hard
 
@@ -8370,7 +8377,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"combined-stream@npm:^1.0.8, combined-stream@npm:~1.0.6":
+"combined-stream@npm:^1.0.6, combined-stream@npm:^1.0.8, combined-stream@npm:~1.0.6":
   version: 1.0.8
   resolution: "combined-stream@npm:1.0.8"
   dependencies:
@@ -11911,20 +11918,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"form-data@npm:^2.5.5":
-  version: 2.5.5
-  resolution: "form-data@npm:2.5.5"
-  dependencies:
-    asynckit: ^0.4.0
-    combined-stream: ^1.0.8
-    es-set-tostringtag: ^2.1.0
-    hasown: ^2.0.2
-    mime-types: ^2.1.35
-    safe-buffer: ^5.2.1
-  checksum: ba6d8467f959c9bf36a52e423256c1e8055a8e650416760f54fa5db261529c3de698a4ce8378dd4fdb71b44be190906d6b73446556cc74e58de8bda01d09e9e7
-  languageName: node
-  linkType: hard
-
 "form-data@npm:^4.0.0, form-data@npm:^4.0.4":
   version: 4.0.5
   resolution: "form-data@npm:4.0.5"
@@ -11935,6 +11928,17 @@ __metadata:
     hasown: ^2.0.2
     mime-types: ^2.1.12
   checksum: af8328413c16d0cded5fccc975a44d227c5120fd46a9e81de8acf619d43ed838414cc6d7792195b30b248f76a65246949a129a4dadd148721948f90cd6d4fb69
+  languageName: node
+  linkType: hard
+
+"form-data@npm:~2.3.2":
+  version: 2.3.3
+  resolution: "form-data@npm:2.3.3"
+  dependencies:
+    asynckit: ^0.4.0
+    combined-stream: ^1.0.6
+    mime-types: ^2.1.12
+  checksum: 10c1780fa13dbe1ff3100114c2ce1f9307f8be10b14bf16e103815356ff567b6be39d70fc4a40f8990b9660012dc24b0f5e1dde1b6426166eb23a445ba068ca3
   languageName: node
   linkType: hard
 
@@ -17072,7 +17076,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mime-types@npm:^2.1.12, mime-types@npm:^2.1.27, mime-types@npm:^2.1.31, mime-types@npm:^2.1.35, mime-types@npm:~2.1.19, mime-types@npm:~2.1.24, mime-types@npm:~2.1.34":
+"mime-types@npm:^2.1.12, mime-types@npm:^2.1.27, mime-types@npm:^2.1.31, mime-types@npm:~2.1.19, mime-types@npm:~2.1.24, mime-types@npm:~2.1.34":
   version: 2.1.35
   resolution: "mime-types@npm:2.1.35"
   dependencies:
@@ -17090,7 +17094,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mime@npm:^2.4.0, mime@npm:^2.5.2":
+"mime@npm:^2.5.2":
   version: 2.6.0
   resolution: "mime@npm:2.6.0"
   bin:
@@ -17303,15 +17307,6 @@ __metadata:
   version: 1.2.0
   resolution: "mitt@npm:1.2.0"
   checksum: 53abb94c6203250e2498e152ae096288c4866c6aab1dc093922084a7414af4aa6cda5a51d480267a8f0bd7908b0e896099bc953317aca8a18672dc67ee7e923d
-  languageName: node
-  linkType: hard
-
-"mixjar@npm:^0.1.2":
-  version: 0.1.2
-  resolution: "mixjar@npm:0.1.2"
-  dependencies:
-    unirest: ^0.6.0
-  checksum: 92c868333baa06eeb4a13638c507427c6dff6d0979d0197823fde7bfbc401f005d4a598051a46df62aa3b12440093afd8dd75e06371502beef74a2419a0144f9
   languageName: node
   linkType: hard
 
@@ -20219,7 +20214,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"request@npm:^2.55.0, request@npm:^2.88.0":
+"request@npm:^2.55.0":
   version: 2.88.2
   resolution: "request@npm:2.88.2"
   dependencies:
@@ -20648,7 +20643,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"safe-buffer@npm:5.2.1, safe-buffer@npm:^5.0.1, safe-buffer@npm:^5.1.0, safe-buffer@npm:^5.1.2, safe-buffer@npm:^5.2.1, safe-buffer@npm:~5.2.0":
+"safe-buffer@npm:5.2.1, safe-buffer@npm:^5.0.1, safe-buffer@npm:^5.1.0, safe-buffer@npm:^5.1.2, safe-buffer@npm:~5.2.0":
   version: 5.2.1
   resolution: "safe-buffer@npm:5.2.1"
   checksum: b99c4b41fdd67a6aaf280fcd05e9ffb0813654894223afb78a31f14a19ad220bba8aba1cb14eddce1fcfb037155fe6de4e861784eb434f7d11ed58d1e70dd491
@@ -22868,17 +22863,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"unirest@npm:^0.6.0":
-  version: 0.6.0
-  resolution: "unirest@npm:0.6.0"
-  dependencies:
-    form-data: ^0.2.0
-    mime: ^2.4.0
-    request: ^2.88.0
-  checksum: 7a6406be049bc74936f1313a3e14063bf2ea5044df92b42084489b15c373c3a8cd1b9ec469206381b5dbfaad10f5326b6a583cc8e8220dec2b0250df5af3554f
-  languageName: node
-  linkType: hard
-
 "unist-builder@npm:^2.0.0":
   version: 2.0.3
   resolution: "unist-builder@npm:2.0.3"
@@ -23724,7 +23708,7 @@ __metadata:
     "@alexjorgef/gatsby-plugin-feed": 5.12.4
     "@alexjorgef/gatsby-source-bandcamp": ^0.0.1
     "@alexjorgef/gatsby-source-discogs": ^0.0.1
-    "@alexjorgef/gatsby-source-mixcloud": ^0.0.2
+    "@alexjorgef/gatsby-source-mixcloud": ^0.0.4
     "@chakra-ui/gatsby-plugin": 3.1.3
     "@chakra-ui/react": ^2.10.9
     "@chakra-ui/system": ^2.6.2
