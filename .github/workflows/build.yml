@@ -24,9 +24,9 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.actor == 'dependabot[bot]' }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
           node-version: "24.11.1"
 
@@ -35,7 +35,7 @@ jobs:
         run: echo "::set-output name=dir::$(yarn cache dir)"
 
       - name: Cache node modules
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         id: yarn-cache
         with:
           path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
@@ -43,7 +43,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-demo-
 
-      - uses: actions/cache@v4
+      - uses: actions/cache@v5
         id: gatsby-cache
         env:
           files: >-
@@ -65,10 +65,10 @@ jobs:
   inject-data:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Checkout private data 🔨
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: alexjorgef/website-data
           token: ${{ secrets.DATA_GITHUB_TOKEN }}
@@ -81,7 +81,7 @@ jobs:
           rm -rf website-data/
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           include-hidden-files: true
           name: injected
@@ -94,13 +94,13 @@ jobs:
     steps:
 
       - name: Download artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: injected
           path: ./
 
       - name: Install Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: "24.11.1"
 
@@ -109,7 +109,7 @@ jobs:
       #   run: echo "::set-output name=dir::$(yarn cache dir)"
 
       # - name: Cache node modules
-      #   uses: actions/cache@v4
+      #   uses: actions/cache@v5
       #   id: yarn-cache
       #   with:
       #     path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
@@ -117,7 +117,7 @@ jobs:
       #     restore-keys: |
       #       ${{ runner.os }}-yarn-
 
-      # - uses: actions/cache@v4
+      # - uses: actions/cache@v5
       #   id: playwright-cache
       #   with:
       #     path: |
@@ -126,7 +126,7 @@ jobs:
       #     restore-keys: |
       #       ${{ runner.os }}-playwright-
 
-      # - uses: actions/cache@v4
+      # - uses: actions/cache@v5
       #   id: gatsby-cache
       #   env:
       #     files: >-
@@ -190,13 +190,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: injected
           path: ./
 
       - name: Install Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: "24.11.1"
 
@@ -220,7 +220,7 @@ jobs:
           GATSBY_BANDCAMP_USERNAME: ${{ secrets.GATSBY_BANDCAMP_USERNAME }}
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         if: github.ref == 'refs/heads/main'
         with:
           include-hidden-files: true
@@ -233,13 +233,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: injected
           path: ./
 
       - name: Install Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: "24.11.1"
 
@@ -253,7 +253,7 @@ jobs:
         run: yarn dlx vercel@latest build --yes --prod --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         if: github.ref == 'refs/heads/main'
         with:
           include-hidden-files: true
@@ -266,16 +266,16 @@ jobs:
     if: success() && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Download artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: build-vercel
           path: .vercel/output/
 
       - name: Install Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: "24.11.1"
 
@@ -288,10 +288,10 @@ jobs:
     if: success() && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Download artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: build
           path: public
