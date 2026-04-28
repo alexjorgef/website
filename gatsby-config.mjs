@@ -391,7 +391,7 @@ const gatsbyConfig = {
                 login
               }
             }
-          }`
+          }`,
         ],
       },
     },
@@ -417,7 +417,7 @@ const gatsbyConfig = {
               url: webUrl
               avatar: avatarUrl
             }
-          }`
+          }`,
         ],
       },
     },

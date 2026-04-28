@@ -47,55 +47,56 @@ export const GitRepoGallery: React.FC<GitRepoGalleryProps> = ({ inverted = false
   const linkColorInvertedThemed = useColorModeValue(`black`, `white`)
   return (
     <Grid gridTemplateColumns={[`1fr`, null, null, `repeat(3, 1fr)`]} gap={4} width={[`100%`]}>
-      {repositories && repositories.map((repository, i) => {
-        const rowIndex = i % 2 === 0 ? i / 2 : (i - 1) / 2
-        const rowIndexEven = inverted ? (rowIndex + 1) % 2 === 0 : rowIndex % 2 === 0
-        const indexEven = i % 2 === 0
-        const colSpanDefault = indexEven ? 2 : 1
-        const colSpanInverted = indexEven ? 1 : 2
-        const colSpan = rowIndexEven ? colSpanDefault : colSpanInverted
-        const colStartDefault = indexEven ? 1 : 3
-        const colStartInverted = indexEven ? 1 : 2
-        const colStart = rowIndexEven ? colStartDefault : colStartInverted
-        const boxBackgroundDefault = indexEven ? secondaryRepoBg : `primaryBg`
-        const boxBackgroundInverted = indexEven ? `primaryBg` : secondaryRepoBg
-        const boxBackground = rowIndexEven ? boxBackgroundDefault : boxBackgroundInverted
-        const boxColorDefault = indexEven ? {} : `#e7f1ff`
-        const boxColorInverted = indexEven ? `#e7f1ff` : {}
-        const boxColor = rowIndexEven ? boxColorDefault : boxColorInverted
-        const tagColorDefault = indexEven ? `gray` : `blue`
-        const tagColorInverted = indexEven ? `gray` : `blue`
-        const tagColor = rowIndexEven ? tagColorDefault : tagColorInverted
-        const linkColorDefault = indexEven ? {} : `white`
-        const linkColorInverted = indexEven ? {} : linkColorInvertedThemed
-        const linkColor = rowIndexEven ? linkColorDefault : linkColorInverted
-        return (
-          <GridItem colSpan={colSpan} colStart={colStart}>
-            <Box bg={boxBackground} p={4} borderRadius="lg" height="100%" color={boxColor}>
-              <Flex flexDirection="row" justifyContent="flex-start" mb={2}>
-                <ChakraLink
-                  fontSize={[`lg`, null, null, null, `1.3125rem`]}
-                  color={linkColor}
-                  fontWeight="bold"
-                  href={repository.url}
-                  textOverflow={`clip`}
-                >
-                  <Box overflow={`hidden`} maxWidth="100%">
-                    {repository.name}
-                  </Box>
-                </ChakraLink>
-              </Flex>
-              <Flex flexDirection="row" justifyContent="flex-start" mb={2}>
-                <Tag variant="subtle" colorScheme={tagColor} height="100%" padding={2}>
-                  <TagLeftIcon as={FaStar} />
-                  <TagLabel>{repository.stargazerCount}</TagLabel>
-                </Tag>
-              </Flex>
-              <Text noOfLines={2}>{repository.description}</Text>
-            </Box>
-          </GridItem>
-        )
-      })}
+      {repositories &&
+        repositories.map((repository, i) => {
+          const rowIndex = i % 2 === 0 ? i / 2 : (i - 1) / 2
+          const rowIndexEven = inverted ? (rowIndex + 1) % 2 === 0 : rowIndex % 2 === 0
+          const indexEven = i % 2 === 0
+          const colSpanDefault = indexEven ? 2 : 1
+          const colSpanInverted = indexEven ? 1 : 2
+          const colSpan = rowIndexEven ? colSpanDefault : colSpanInverted
+          const colStartDefault = indexEven ? 1 : 3
+          const colStartInverted = indexEven ? 1 : 2
+          const colStart = rowIndexEven ? colStartDefault : colStartInverted
+          const boxBackgroundDefault = indexEven ? secondaryRepoBg : `primaryBg`
+          const boxBackgroundInverted = indexEven ? `primaryBg` : secondaryRepoBg
+          const boxBackground = rowIndexEven ? boxBackgroundDefault : boxBackgroundInverted
+          const boxColorDefault = indexEven ? {} : `#e7f1ff`
+          const boxColorInverted = indexEven ? `#e7f1ff` : {}
+          const boxColor = rowIndexEven ? boxColorDefault : boxColorInverted
+          const tagColorDefault = indexEven ? `gray` : `blue`
+          const tagColorInverted = indexEven ? `gray` : `blue`
+          const tagColor = rowIndexEven ? tagColorDefault : tagColorInverted
+          const linkColorDefault = indexEven ? {} : `white`
+          const linkColorInverted = indexEven ? {} : linkColorInvertedThemed
+          const linkColor = rowIndexEven ? linkColorDefault : linkColorInverted
+          return (
+            <GridItem colSpan={colSpan} colStart={colStart}>
+              <Box bg={boxBackground} p={4} borderRadius="lg" height="100%" color={boxColor}>
+                <Flex flexDirection="row" justifyContent="flex-start" mb={2}>
+                  <ChakraLink
+                    fontSize={[`lg`, null, null, null, `1.3125rem`]}
+                    color={linkColor}
+                    fontWeight="bold"
+                    href={repository.url}
+                    textOverflow={`clip`}
+                  >
+                    <Box overflow={`hidden`} maxWidth="100%">
+                      {repository.name}
+                    </Box>
+                  </ChakraLink>
+                </Flex>
+                <Flex flexDirection="row" justifyContent="flex-start" mb={2}>
+                  <Tag variant="subtle" colorScheme={tagColor} height="100%" padding={2}>
+                    <TagLeftIcon as={FaStar} />
+                    <TagLabel>{repository.stargazerCount}</TagLabel>
+                  </Tag>
+                </Flex>
+                <Text noOfLines={2}>{repository.description}</Text>
+              </Box>
+            </GridItem>
+          )
+        })}
     </Grid>
   )
 }

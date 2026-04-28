@@ -77,46 +77,36 @@ type DataProps = {
   }
   reposGhFethed?: {
     totalCount: number
-    edges: {
+    edges: Array<{
       node: RepositoryGithubInfoFethed
-    }[]
+    }>
   }
   reposGlFethed?: {
-    totalCount: number;
-    edges: {
+    totalCount: number
+    edges: Array<{
       node: RepositoryGitlabInfoFethed
-    }[]
+    }>
   }
 }
 
 const Workfolio: React.FC<PageProps<DataProps>> = ({ data }) => {
   const imageDisplay = useBreakpointValue({ base: `none`, md: `block` }, `md`)
-  const reposGithub = data?.reposGhFethed ?? ({ totalCount: 0, edges: [] as { node: RepositoryGithubInfoFethed }[]})
-  const reposGitLab = data?.reposGlFethed ?? ({ totalCount: 0, edges: [] as { node: RepositoryGitlabInfoFethed }[]})
-  const isReposFetched = (reposGithub.totalCount > 0 || reposGitLab.totalCount > 0)
+  const reposGithub = data?.reposGhFethed ?? { totalCount: 0, edges: [] as Array<{ node: RepositoryGithubInfoFethed }> }
+  const reposGitLab = data?.reposGlFethed ?? { totalCount: 0, edges: [] as Array<{ node: RepositoryGitlabInfoFethed }> }
+  const isReposFetched = reposGithub.totalCount > 0 || reposGitLab.totalCount > 0
 
-  const reposGh: RepositoryInfo[] = []
-  if (reposGithub.totalCount > 0) {
-    for (const repoGithubFethed of reposGithub.edges) {
-      reposGh.push({
-        name: repoGithubFethed.node.name,
-        description: repoGithubFethed.node.description ?? "",
-        url: `https://github.com/${repoGithubFethed.node.owner.login}/${repoGithubFethed.node.name}`,
-        stargazerCount: repoGithubFethed.node.stargazerCount
-      })
-    }
-  }
-  const reposGl: RepositoryInfo[] = []
-  if (reposGitLab.totalCount > 0) {
-    for (const repoGitlabFethed of reposGitLab.edges) {
-      reposGl.push({
-        name: repoGitlabFethed.node.name,
-        description: repoGitlabFethed.node.description ?? "",
-        url: repoGitlabFethed.node.url,
-        stargazerCount: repoGitlabFethed.node.stargazerCount
-      })
-    }
-  }
+  const reposGh: Array<RepositoryInfo> = reposGithub.edges.map(({ node }) => ({
+    name: node.name,
+    description: node.description ?? ``,
+    url: `https://github.com/${node.owner.login}/${node.name}`,
+    stargazerCount: node.stargazerCount,
+  }))
+  const reposGl: Array<RepositoryInfo> = reposGitLab.edges.map(({ node }) => ({
+    name: node.name,
+    description: node.description ?? ``,
+    url: node.url,
+    stargazerCount: node.stargazerCount,
+  }))
 
   return (
     <Layout>
