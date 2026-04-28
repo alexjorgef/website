@@ -157,27 +157,268 @@ const gatsbyConfig = {
       },
     },
     GATSBY_GITHUB_TOKEN && {
-      resolve: `gatsby-source-graphql`,
+      resolve: `@alexjorgef/gatsby-source-github`,
       options: {
-        typeName: `GitHub`,
-        fieldName: `github`,
-        url: `https://api.github.com/graphql`,
-        headers: {
-          Authorization: `Bearer ${GATSBY_GITHUB_TOKEN}`,
-        },
-        fetchOptions: {},
+        accessToken: GATSBY_GITHUB_TOKEN,
+        queries: [
+          `{
+            repository(owner: "alexjorgef", name: "website") {
+              url
+              name
+              stargazerCount
+              description
+              owner {
+                login
+              }
+            }
+          }`,
+          `{
+            repository(owner: "alexjorgef", name: "go-bittrex") {
+              url
+              name
+              stargazerCount
+              description
+              owner {
+                login
+              }
+            }
+          }`,
+          `{
+            repository(owner: "alexjorgef", name: "diatestsuite") {
+              url
+              name
+              stargazerCount
+              description
+              owner {
+                login
+              }
+            }
+          }`,
+          `{
+            repository(owner: "alexjorgef", name: "node-rss") {
+              url
+              name
+              stargazerCount
+              description
+              owner {
+                login
+              }
+            }
+          }`,
+          `{
+            repository(owner: "alexjorgef", name: "test") {
+              url
+              name
+              stargazerCount
+              description
+              owner {
+                login
+              }
+            }
+          }`,
+          `{
+            repository(owner: "alexjorgef", name: "cv") {
+              url
+              name
+              stargazerCount
+              description
+              owner {
+                login
+              }
+            }
+          }`,
+          `{
+            repository(owner: "alexjorgef", name: "signalr") {
+              url
+              name
+              stargazerCount
+              description
+              owner {
+                login
+              }
+            }
+          }`,
+          `{
+            repository(owner: "alexjorgef", name: "mixjar") {
+              url
+              name
+              stargazerCount
+              description
+              owner {
+                login
+              }
+            }
+          }`,
+          `{
+            repository(owner: "alexjorgef", name: "bandcamp-scraper") {
+              url
+              name
+              stargazerCount
+              description
+              owner {
+                login
+              }
+            }
+          }`,
+          `{
+            repository(owner: "alexjorgef", name: "gatsby-source-github") {
+              url
+              name
+              stargazerCount
+              description
+              owner {
+                login
+              }
+            }
+          }`,
+          `{
+            repository(owner: "alexjorgef", name: "gatsby-source-gitlab") {
+              url
+              name
+              stargazerCount
+              description
+              owner {
+                login
+              }
+            }
+          }`,
+          `{
+            repository(owner: "alexjorgef", name: "gatsby-source-bandcamp") {
+              url
+              name
+              stargazerCount
+              description
+              owner {
+                login
+              }
+            }
+          }`,
+          `{
+            repository(owner: "alexjorgef", name: "gatsby-source-mixcloud") {
+              url
+              name
+              stargazerCount
+              description
+              owner {
+                login
+              }
+            }
+          }`,
+          `{
+            repository(owner: "alexjorgef", name: "gatsby-source-discogs") {
+              url
+              name
+              stargazerCount
+              description
+              owner {
+                login
+              }
+            }
+          }`,
+          `{
+            repository(owner: "alexjorgef", name: "gatsby-plugin-feed") {
+              url
+              name
+              stargazerCount
+              description
+              owner {
+                login
+              }
+            }
+          }`,
+          `{
+            repository(owner: "alexjorgef", name: "sliverbot") {
+              url
+              name
+              stargazerCount
+              description
+              owner {
+                login
+              }
+            }
+          }`,
+          `{
+            repository(owner: "alexjorgef", name: "invisiblespider") {
+              url
+              name
+              stargazerCount
+              description
+              owner {
+                login
+              }
+            }
+          }`,
+          `{
+            repository(owner: "alexjorgef", name: "website-v3") {
+              url
+              name
+              stargazerCount
+              description
+              owner {
+                login
+              }
+            }
+          }`,
+          `{
+            repository(owner: "alexjorgef", name: "website-v4") {
+              url
+              name
+              stargazerCount
+              description
+              owner {
+                login
+              }
+            }
+          }`,
+          `{
+            repository(owner: "alexjorgef", name: "website-costalanparty2010") {
+              url
+              name
+              stargazerCount
+              description
+              owner {
+                login
+              }
+            }
+          }`,
+          `{
+            repository(owner: "alexjorgef", name: "website-costalanparty2011") {
+              url
+              name
+              stargazerCount
+              description
+              owner {
+                login
+              }
+            }
+          }`
+        ],
       },
     },
     GATSBY_GITLAB_TOKEN && {
-      resolve: `gatsby-source-graphql`,
+      resolve: `@alexjorgef/gatsby-source-gitlab`,
       options: {
-        typeName: `GitLab`,
-        fieldName: `gitlab`,
-        url: `https://gitlab.com/api/graphql`,
-        headers: {
-          Authorization: `Bearer ${GATSBY_GITLAB_TOKEN}`,
-        },
-        fetchOptions: {},
+        accessToken: GATSBY_GITLAB_TOKEN,
+        queries: [
+          `{
+            repository: project(fullPath: "alexjorgef/test") {
+              stargazerCount: starCount
+              description
+              name
+              url: webUrl
+              avatar: avatarUrl
+            }
+          }`,
+          `{
+            repository: project(fullPath: "alexjorgef/alexjorgef.gitlab.io") {
+              stargazerCount: starCount
+              description
+              name
+              url: webUrl
+              avatar: avatarUrl
+            }
+          }`
+        ],
       },
     },
     GATSBY_MIXCLOUD_USERNAME && {

@@ -29,9 +29,7 @@ import {
   Box,
   VStack,
   Link as ChakraLink,
-  // Tag,
   Heading as ChakraHeading,
-  // TagLabel,
   useBreakpointValue,
 } from "@chakra-ui/react"
 import { Layout } from "../../components/blocks/layout"
@@ -49,6 +47,23 @@ type RepositoryInfo = {
   url: string
 }
 
+type RepositoryGithubInfoFethed = {
+  id: string
+  name: string
+  stargazerCount: number
+  description: string | null
+  owner: {
+    login: string
+  }
+}
+type RepositoryGitlabInfoFethed = {
+  id: string
+  name: string
+  stargazerCount: number
+  description: string | null
+  url: string
+}
+
 type DataProps = {
   workfolio: {
     nodes: Array<{
@@ -60,80 +75,48 @@ type DataProps = {
       image: string
     }>
   }
-  repoGh1?: {
-    repository?: RepositoryInfo
+  reposGhFethed?: {
+    totalCount: number
+    edges: {
+      node: RepositoryGithubInfoFethed
+    }[]
   }
-  repoGh2?: {
-    repository?: RepositoryInfo
-  }
-  repoGh3?: {
-    repository?: RepositoryInfo
-  }
-  repoGh4?: {
-    repository?: RepositoryInfo
-  }
-  repoGh5?: {
-    repository?: RepositoryInfo
-  }
-  repoGl1?: {
-    repository?: RepositoryInfo
-  }
-  repoGl2?: {
-    repository?: RepositoryInfo
+  reposGlFethed?: {
+    totalCount: number;
+    edges: {
+      node: RepositoryGitlabInfoFethed
+    }[]
   }
 }
 
-const openSourceRepos = [
-  {
-    name: `sliverbot`,
-    url: `https://github.com/alexjorgef/sliverbot`,
-  },
-  {
-    name: `invisiblespider`,
-    url: `https://github.com/alexjorgef/invisiblespider`,
-  },
-  {
-    name: `website-v3`,
-    url: `https://github.com/alexjorgef/website-v3`,
-  },
-  {
-    name: `website-v4`,
-    url: `https://github.com/alexjorgef/website-v4`,
-  },
-  {
-    name: `website-costalanparty2010`,
-    url: `https://github.com/alexjorgef/website-costalanparty2010`,
-  },
-  {
-    name: `website-costalanparty2011`,
-    url: `https://github.com/alexjorgef/website-costalanparty2011`,
-  },
-  {
-    name: `test`,
-    url: `https://github.com/alexjorgef/test`,
-  },
-  {
-    name: `alexjorgef.github.io`,
-    url: `https://github.com/alexjorgef/alexjorgef.github.io`,
-  },
-  {
-    name: `alexjorgef`,
-    url: `https://github.com/alexjorgef/alexjorgef`,
-  },
-]
-
 const Workfolio: React.FC<PageProps<DataProps>> = ({ data }) => {
   const imageDisplay = useBreakpointValue({ base: `none`, md: `block` }, `md`)
-  const repoGh1 = data?.repoGh1?.repository ?? ({} as RepositoryInfo)
-  const repoGh2 = data?.repoGh2?.repository ?? ({} as RepositoryInfo)
-  const repoGh3 = data?.repoGh3?.repository ?? ({} as RepositoryInfo)
-  const repoGh4 = data?.repoGh4?.repository ?? ({} as RepositoryInfo)
-  const repoGh5 = data?.repoGh5?.repository ?? ({} as RepositoryInfo)
-  const repoGl1 = data?.repoGl1?.repository ?? ({} as RepositoryInfo)
-  const repoGl2 = data?.repoGl2?.repository ?? ({} as RepositoryInfo)
-  const isReposFetched = repoGh1 && repoGh2 && repoGh3 && repoGh4 && repoGh5 && repoGl1 && repoGl2
-  const reposGh = [repoGh1, repoGh2, repoGh3, repoGh4, repoGh5]
-  const reposGl = [repoGl1, repoGl2]
+  const reposGithub = data?.reposGhFethed ?? ({ totalCount: 0, edges: [] as { node: RepositoryGithubInfoFethed }[]})
+  const reposGitLab = data?.reposGlFethed ?? ({ totalCount: 0, edges: [] as { node: RepositoryGitlabInfoFethed }[]})
+  const isReposFetched = (reposGithub.totalCount > 0 || reposGitLab.totalCount > 0)
+
+  const reposGh: RepositoryInfo[] = []
+  if (reposGithub.totalCount > 0) {
+    for (const repoGithubFethed of reposGithub.edges) {
+      reposGh.push({
+        name: repoGithubFethed.node.name,
+        description: repoGithubFethed.node.description ?? "",
+        url: `https://github.com/${repoGithubFethed.node.owner.login}/${repoGithubFethed.node.name}`,
+        stargazerCount: repoGithubFethed.node.stargazerCount
+      })
+    }
+  }
+  const reposGl: RepositoryInfo[] = []
+  if (reposGitLab.totalCount > 0) {
+    for (const repoGitlabFethed of reposGitLab.edges) {
+      reposGl.push({
+        name: repoGitlabFethed.node.name,
+        description: repoGitlabFethed.node.description ?? "",
+        url: repoGitlabFethed.node.url,
+        stargazerCount: repoGitlabFethed.node.stargazerCount
+      })
+    }
+  }
 
   return (
     <Layout>
@@ -178,7 +161,6 @@ const Workfolio: React.FC<PageProps<DataProps>> = ({ data }) => {
                       <Text mt={4}>{project.description}</Text>
                     </GridItem>
                   </GatsbyLink>
-                  {/* {i + 1 !== portfolioMapped.length && <Divider mt={4} orientation="horizontal" />} */}
                 </Container>
               ))}
             </Grid>
@@ -197,15 +179,15 @@ const Workfolio: React.FC<PageProps<DataProps>> = ({ data }) => {
                     GitHub
                   </SubtleButton>
                 </Flex>
-                <GitRepoGallery repositories={reposGh} />
+                <GitRepoGallery repositories={reposGh.slice(0, 5)} />
                 <Flex justifyContent="flex-end" alignItems="center">
                   <SubtleButton isExternal to="https://www.gitlab.com/alexjorgef">
                     GitLab
                   </SubtleButton>
                 </Flex>
-                <GitRepoGallery repositories={reposGl} inverted />
+                <GitRepoGallery repositories={reposGl.slice(0, 5)} inverted />
                 <Flex justifyContent="space-between" flexWrap="wrap">
-                  {openSourceRepos.map((repo) => (
+                  {[...reposGh.slice(5), ...reposGl.slice(5)].map((repo) => (
                     <ChakraLink key={repo.url} href={repo.url} p={2}>
                       {repo.name}
                     </ChakraLink>
@@ -214,7 +196,7 @@ const Workfolio: React.FC<PageProps<DataProps>> = ({ data }) => {
               </Stack>
             ) : (
               <Box p={2} borderRadius="lg">
-                <strong>GATSBY_GITHUB_TOKEN</strong> for gatsby-source-graphql necessary.
+                Repositories are <strong>not</strong> fetched.
               </Box>
             )}
           </Stack>
@@ -237,60 +219,30 @@ export const query = graphql`
         image
       }
     }
-    repoGh1: github {
-      repository(name: "go-bittrex", owner: "alexjorgef") {
-        stargazerCount
-        description
-        name
-        url
+    reposGhFethed: allGithubRepository {
+      totalCount
+      edges {
+        node {
+          id
+          name
+          stargazerCount
+          description
+          owner {
+            login
+          }
+        }
       }
     }
-    repoGh2: github {
-      repository(name: "cv", owner: "alexjorgef") {
-        stargazerCount
-        description
-        name
-        url
-      }
-    }
-    repoGh3: github {
-      repository(name: "website", owner: "alexjorgef") {
-        stargazerCount
-        description
-        name
-        url
-      }
-    }
-    repoGh4: github {
-      repository(name: "signalr", owner: "alexjorgef") {
-        stargazerCount
-        description
-        name
-        url
-      }
-    }
-    repoGh5: github {
-      repository(name: "telegram-git-bot", owner: "alexjorgef") {
-        stargazerCount
-        description
-        name
-        url
-      }
-    }
-    repoGl1: gitlab {
-      repository: project(fullPath: "alexjorgef/alexjorgef.gitlab.io") {
-        stargazerCount: starCount
-        description
-        name
-        url: webUrl
-      }
-    }
-    repoGl2: gitlab {
-      repository: project(fullPath: "alexjorgef/test") {
-        stargazerCount: starCount
-        description
-        name
-        url: webUrl
+    reposGlFethed: allGitlabRepository {
+      totalCount
+      edges {
+        node {
+          id
+          name
+          stargazerCount
+          description
+          url
+        }
       }
     }
   }

@@ -8,6 +8,7 @@ concurrency:
 
 jobs:
   e2e-testing:
+    if: github.event.pull_request.user.login == github.repository_owner
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6

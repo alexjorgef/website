@@ -44,9 +44,10 @@ type GitRepoGalleryProps = {
 
 export const GitRepoGallery: React.FC<GitRepoGalleryProps> = ({ inverted = false, repositories = undefined }) => {
   const secondaryRepoBg = useColorModeValue(`blueGray.100`, `blueGray.800`)
+  const linkColorInvertedThemed = useColorModeValue(`black`, `white`)
   return (
     <Grid gridTemplateColumns={[`1fr`, null, null, `repeat(3, 1fr)`]} gap={4} width={[`100%`]}>
-      {repositories.map((repository, i) => {
+      {repositories && repositories.map((repository, i) => {
         const rowIndex = i % 2 === 0 ? i / 2 : (i - 1) / 2
         const rowIndexEven = inverted ? (rowIndex + 1) % 2 === 0 : rowIndex % 2 === 0
         const indexEven = i % 2 === 0
@@ -66,7 +67,7 @@ export const GitRepoGallery: React.FC<GitRepoGalleryProps> = ({ inverted = false
         const tagColorInverted = indexEven ? `gray` : `blue`
         const tagColor = rowIndexEven ? tagColorDefault : tagColorInverted
         const linkColorDefault = indexEven ? {} : `white`
-        const linkColorInverted = indexEven ? {} : `white`
+        const linkColorInverted = indexEven ? {} : linkColorInvertedThemed
         const linkColor = rowIndexEven ? linkColorDefault : linkColorInverted
         return (
           <GridItem colSpan={colSpan} colStart={colStart}>
@@ -84,7 +85,7 @@ export const GitRepoGallery: React.FC<GitRepoGalleryProps> = ({ inverted = false
                   </Box>
                 </ChakraLink>
               </Flex>
-              <Flex flexDirection="row" justifyContent="flex-start" mb={6}>
+              <Flex flexDirection="row" justifyContent="flex-start" mb={2}>
                 <Tag variant="subtle" colorScheme={tagColor} height="100%" padding={2}>
                   <TagLeftIcon as={FaStar} />
                   <TagLabel>{repository.stargazerCount}</TagLabel>

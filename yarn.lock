@@ -68,6 +68,32 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@alexjorgef/gatsby-source-github@npm:^0.0.2":
+  version: 0.0.2
+  resolution: "@alexjorgef/gatsby-source-github@npm:0.0.2"
+  dependencies:
+    "@alexjorgef/mixjar": ^0.1.3
+    graphql-request: ~7.4.0
+    lodash: 4.17.21
+  peerDependencies:
+    gatsby: ^5.0.0-next.0
+  checksum: c74ba4e2f5fa09d113cf744987ecd89a680ea17625842062fca334eeca45653901d418e5900654c55f6a3ef7c8317a0cf06f6cdb8f652fda77cfa327af4969cc
+  languageName: node
+  linkType: hard
+
+"@alexjorgef/gatsby-source-gitlab@npm:^0.0.1":
+  version: 0.0.1
+  resolution: "@alexjorgef/gatsby-source-gitlab@npm:0.0.1"
+  dependencies:
+    "@alexjorgef/mixjar": ^0.1.3
+    graphql-request: ~7.4.0
+    lodash: 4.17.21
+  peerDependencies:
+    gatsby: ^5.0.0-next.0
+  checksum: 1d9f1f231f5f9d527521152e4ff252763c201d13a7ecd3122d0cbc8e064d4bdd94169983349329b68045e774d48adad6383c79ccded673d2587de37e5ec1e479
+  languageName: node
+  linkType: hard
+
 "@alexjorgef/gatsby-source-mixcloud@npm:^0.0.4":
   version: 0.0.4
   resolution: "@alexjorgef/gatsby-source-mixcloud@npm:0.0.4"
@@ -3357,7 +3383,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-typed-document-node/core@npm:3.2.0, @graphql-typed-document-node/core@npm:^3.1.1":
+"@graphql-typed-document-node/core@npm:3.2.0, @graphql-typed-document-node/core@npm:^3.1.1, @graphql-typed-document-node/core@npm:^3.2.0":
   version: 3.2.0
   resolution: "@graphql-typed-document-node/core@npm:3.2.0"
   peerDependencies:
@@ -13321,6 +13347,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"graphql-request@npm:~7.4.0":
+  version: 7.4.0
+  resolution: "graphql-request@npm:7.4.0"
+  dependencies:
+    "@graphql-typed-document-node/core": ^3.2.0
+  peerDependencies:
+    graphql: 14 - 16
+  checksum: 68a3b3882b462fae80d8fa88ae63b338bdc20b14601fbf5c495497939d810a971319a06965a5143f20a8063765eb137c1e1c309c6e7b26a48eb2aa8d11d9aea0
+  languageName: node
+  linkType: hard
+
 "graphql-tag@npm:^2.11.0, graphql-tag@npm:^2.12.6":
   version: 2.12.6
   resolution: "graphql-tag@npm:2.12.6"
@@ -15552,7 +15589,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash@npm:^4.17.10, lodash@npm:^4.17.15, lodash@npm:^4.17.19, lodash@npm:^4.17.20, lodash@npm:^4.17.21, lodash@npm:~4.17.0":
+"lodash@npm:4.17.21, lodash@npm:^4.17.10, lodash@npm:^4.17.15, lodash@npm:^4.17.19, lodash@npm:^4.17.20, lodash@npm:^4.17.21, lodash@npm:~4.17.0":
   version: 4.17.21
   resolution: "lodash@npm:4.17.21"
   checksum: eb835a2e51d381e561e508ce932ea50a8e5a68f4ebdd771ea240d3048244a8d13658acbd502cd4829768c56f2e16bdd4340b9ea141297d472517b83868e677f7
@@ -23135,6 +23172,8 @@ __metadata:
     "@alexjorgef/gatsby-plugin-feed": 5.12.4
     "@alexjorgef/gatsby-source-bandcamp": ^0.0.4
     "@alexjorgef/gatsby-source-discogs": ^0.0.1
+    "@alexjorgef/gatsby-source-github": ^0.0.2
+    "@alexjorgef/gatsby-source-gitlab": ^0.0.1
     "@alexjorgef/gatsby-source-mixcloud": ^0.0.4
     "@chakra-ui/gatsby-plugin": 3.1.3
     "@chakra-ui/react": ^2.10.9
